@@ -4,6 +4,7 @@ type Theme = {
 
 export const theme: Theme = {
   colors: {
+    bgColor: "#202329",
     mainBgColor: "#272B33",
     mainTextColor: "#F5F5F5",
     buttonsBgColor: "#F5F5F5",
@@ -11,6 +12,5 @@ export const theme: Theme = {
     accentColor: "#9E9E9E",
     titleColor: "#202329",
     cardBgColor: "#3C3E44",
-    footerBgColor: "#202329",
   },
 };
