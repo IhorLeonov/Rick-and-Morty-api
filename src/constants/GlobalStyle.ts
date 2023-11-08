@@ -68,7 +68,7 @@ body {
   min-height: 100vh;
   
   font-family: Roboto;
-  background-color: ${({ theme }) => theme.colors.bgColor};
+  /* background-color: ${({ theme }) => theme.colors.bgColor}; */
 
 }
 

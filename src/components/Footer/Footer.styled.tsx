@@ -7,6 +7,7 @@ export const Footer = styled.footer`
   align-items: center;
   height: 393px;
   color: ${({ theme }) => theme.colors.accentColor};
+  background-color: ${({ theme }) => theme.colors.bgColor};
 `;
 
 export const Caption = styled.p`

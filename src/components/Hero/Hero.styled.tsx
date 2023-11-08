@@ -7,7 +7,7 @@ export const Hero = styled.section`
   justify-content: center;
   align-items: center;
   /* height: calc(50vh - 60px); */
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
 `;
 
 export const Title = styled.h1`

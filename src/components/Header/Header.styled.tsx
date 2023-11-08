@@ -5,5 +5,5 @@ export const Header = styled.div`
   align-items: center;
   width: 100%;
   height: 60px;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
 `;

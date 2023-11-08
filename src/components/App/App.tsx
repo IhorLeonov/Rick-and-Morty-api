@@ -1,20 +1,17 @@
-import { FooterSection } from "../Footer/Footer";
-import { HeaderSection } from "../Header/Header";
-import { HeroSection } from "../Hero/Hero";
-import { MainSection } from "../Main/Main";
-import { Wrapper } from "./App.styled";
+import { Routes, Route } from "react-router-dom";
+import { lazy } from "react";
+import { Layout } from "../Layout/Layout";
 
-function App() {
+const Home = lazy(() => import("../../pages/Home/Home"));
+const Details = lazy(() => import("../../pages/Details/Details"));
+
+export const App = () => {
   return (
-    <Wrapper>
-      <HeaderSection />
-      <main>
-        <HeroSection />
-        <MainSection />
-      </main>
-      <FooterSection />
-    </Wrapper>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="details" element={<Details />} />
+      </Route>
+    </Routes>
   );
-}
-
-export default App;
+};
