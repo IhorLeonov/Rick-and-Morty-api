@@ -16,7 +16,7 @@ html {
 
 @font-face {
   src: url("/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
- 
+  
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
@@ -68,7 +68,7 @@ body {
   min-height: 100vh;
   
   font-family: Roboto;
-  background-color: ${(props) => props.theme.colors.bgColor};
+  background-color: ${({ theme }) => theme.colors.bgColor};
 
 }
 

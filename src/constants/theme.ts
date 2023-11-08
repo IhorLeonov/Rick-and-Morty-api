@@ -12,5 +12,6 @@ export const theme: Theme = {
     accentColor: "#9E9E9E",
     titleColor: "#202329",
     cardBgColor: "#3C3E44",
+    hoverColor: "rgb(255, 152, 0)",
   },
 };
