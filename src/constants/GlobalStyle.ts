@@ -15,7 +15,7 @@ html {
 }
 
 @font-face {
-  src: url("public/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+  src: url("/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
  
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -24,7 +24,7 @@ html {
 }
 
 @font-face {
-  src: url("public/fonts/Roboto/Roboto-Medium.ttf") format("truetype");
+  src: url("/fonts/Roboto/Roboto-Medium.ttf") format("truetype");
  
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -33,7 +33,7 @@ html {
 }
 
 @font-face {
-  src: url("public/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
+  src: url("/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
  
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -42,7 +42,7 @@ html {
 }
 
 @font-face {
-  src: url("public/fonts/Roboto/Roboto-Black.ttf") format("truetype");
+  src: url("/fonts/Roboto/Roboto-Black.ttf") format("truetype");
 
   font-family: "Roboto", sans-serif;
   font-style: normal;
