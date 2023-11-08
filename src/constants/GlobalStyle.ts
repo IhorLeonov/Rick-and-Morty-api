@@ -4,10 +4,6 @@ import "modern-normalize";
 export const GlobalStyle = createGlobalStyle`
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,16 +11,64 @@ export const GlobalStyle = createGlobalStyle`
   -webkit-text-size-adjust: 100%;
 }
 
+@font-face {
+  src: url("public/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+ 
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-display: fallback;
+}
+
+@font-face {
+  src: url("public/fonts/Roboto/Roboto-Medium.ttf") format("truetype");
+ 
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-display: fallback;
+}
+
+@font-face {
+  src: url("public/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
+ 
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-display: fallback;
+}
+
+@font-face {
+  src: url("public/fonts/Roboto/Roboto-Black.ttf") format("truetype");
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 900;
+  font-display: fallback;
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
 body {
-  margin: 0;
-  display: flex;
-
+  /* display: flex;
+  
   margin-left: auto;
-  margin-right: auto;
-
+  margin-right: auto; */
+  
   min-width: 320px;
-  min-height: 100vh;
   max-width: 1440px;
+  min-height: 100vh;
+  
+  font-family: "Roboto";
 }
 
 h1,

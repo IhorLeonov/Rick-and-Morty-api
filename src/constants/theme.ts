@@ -4,12 +4,13 @@ type Theme = {
 
 export const theme: Theme = {
   colors: {
-    // backgroundColor: "#12232f",
-    // firstMainColor: "#007369",
-    // secondMainColor: "#00bbb3",
-    // thirdMainColor: "#00d58b",
-    // accentColor: "#18d685",
-    // secondAccentColor: "#e8e041",
-    // hederFontColor: "#8fa5a2",
+    mainBgColor: "#272B33",
+    mainTextColor: "#F5F5F5",
+    buttonsBgColor: "#F5F5F5",
+    buttonsTextColor: "#272B33",
+    accentColor: "#9E9E9E",
+    titleColor: "#202329",
+    cardBgColor: "#3C3E44",
+    footerBgColor: "#202329",
   },
 };
