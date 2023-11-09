@@ -68,8 +68,7 @@ body {
   min-height: 100vh;
   
   font-family: Roboto;
-  /* background-color: ${({ theme }) => theme.colors.bgColor}; */
-
+  font-weight: 400;
 }
 
 h1,
@@ -103,7 +102,8 @@ a {
 }
 
 button {
-  border: 1px solid transparent;
+  /* border: 1px solid transparent; */
+  border: none;
   border-radius: 8px;
   /* padding: 0.6em 1.2em;
   font-size: 1em;
