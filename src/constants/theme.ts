@@ -7,7 +7,7 @@ export const theme: Theme = {
     bgColor: "#202329",
     mainBgColor: "#272B33",
     mainTextColor: "#F5F5F5",
-    buttonsBgColor: "#F5F5F5",
+    lightColor: "#F5F5F5",
     buttonsTextColor: "#272B33",
     accentColor: "#9E9E9E",
     titleColor: "#202329",

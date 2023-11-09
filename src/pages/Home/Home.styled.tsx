@@ -6,6 +6,7 @@ export const FilterBox = styled.div`
 `;
 
 export const FormikForm = styled.form`
+  position: relative;
   display: flex;
   margin-left: 161px;
   gap: 28px;
@@ -13,11 +14,11 @@ export const FormikForm = styled.form`
 
 export const Button = styled.button`
   padding: 0 16px;
-  min-width: 143px;
+  width: 143px;
   height: 57px;
 
   color: "#272B33";
-  background-color: "#F5F5F5";
+  background-color: ${({ theme }) => theme.colors.lightColor};
   line-height: 1.5;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -38,17 +39,3 @@ export const SelectBtn = styled(Button)`
 export const FilterBtn = styled(Button)``;
 
 export const SubmitBtn = styled(Button)``;
-
-export const Input = styled.input`
-  width: 260px;
-  padding: 8px 12px;
-  border: none;
-  outline: none;
-  height: 57;
-
-  line-height: 1.5;
-  letter-spacing: 0.5px;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
-  border-bottom: 1px solid black;
-`;

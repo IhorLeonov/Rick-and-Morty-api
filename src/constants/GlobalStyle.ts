@@ -104,7 +104,7 @@ a {
 button {
   /* border: 1px solid transparent; */
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   /* padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500; */
