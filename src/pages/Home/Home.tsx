@@ -1,8 +1,10 @@
 import { FC } from "react";
+import Icon from "@mui/material/Icon";
 
 const Home: FC = () => {
   return (
     <>
+      <Icon>star</Icon>
       <button>Filter</button>
       <form action="">
         <select name="" id="">
