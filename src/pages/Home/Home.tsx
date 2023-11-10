@@ -21,7 +21,7 @@ const Home: FC = () => {
           {isListOpen && <CheckboxList filters={checkboxFilters} setFilters={setCheckboxFilters} />}
 
           {/* <Input type="text" placeholder="Add key words to find" /> */}
-          <InputList isListOpen={isListOpen} filters={checkboxFilters} />
+          <InputList filters={checkboxFilters} />
           <SubmitBtn type="submit">Find</SubmitBtn>
         </FormikForm>
         {/* </Formik> */}

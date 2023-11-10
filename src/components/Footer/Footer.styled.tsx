@@ -6,8 +6,8 @@ export const Footer = styled.footer`
   justify-content: center;
   align-items: center;
   height: 393px;
-  color: ${({ theme }) => theme.colors.accentColor};
-  background-color: ${({ theme }) => theme.colors.bgColor};
+  color: ${({ theme }) => theme.colors.lightGrey};
+  background-color: ${({ theme }) => theme.colors.darkerGrey};
 `;
 
 export const Caption = styled.p`
@@ -35,13 +35,13 @@ export const LinkBox = styled.div`
 `;
 
 export const Link = styled.a`
-  fill: ${({ theme }) => theme.colors.accentColor};
+  fill: ${({ theme }) => theme.colors.lightGrey};
 
   &:hover,
   &:focus {
     svg {
       scale: 1.2;
-      fill: ${({ theme }) => theme.colors.hoverColor};
+      fill: ${({ theme }) => theme.colors.orange};
     }
   }
 `;

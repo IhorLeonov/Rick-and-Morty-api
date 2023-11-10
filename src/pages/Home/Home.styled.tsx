@@ -17,11 +17,15 @@ export const Button = styled.button`
   width: 143px;
   height: 57px;
 
-  color: "#272B33";
-  background-color: ${({ theme }) => theme.colors.lightColor};
+  color: ${({ theme }) => theme.colors.darkGrey};
+  background-color: ${({ theme }) => theme.colors.white};
   line-height: 1.5;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.blue};
+  }
 `;
 
 export const SelectBtn = styled(Button)`
@@ -34,6 +38,13 @@ export const SelectBtn = styled(Button)`
   border-bottom-left-radius: 0;
   border-bottom: 1px solid black;
   text-transform: none;
+
+  &:hover {
+    svg {
+      fill: ${({ theme }) => theme.colors.blue};
+    }
+    color: ${({ theme }) => theme.colors.darkGrey};
+  }
 `;
 
 export const FilterBtn = styled(Button)``;

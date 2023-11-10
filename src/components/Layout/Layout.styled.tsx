@@ -8,6 +8,6 @@ export const MainSection = styled.section`
   padding: 24px 106px 11px 107px;
 
   height: 903px;
-  background-color: ${({ theme }) => theme.colors.mainBgColor};
-  color: ${({ theme }) => theme.colors.mainTextColor};
+  background-color: ${({ theme }) => theme.colors.darkGrey};
+  color: ${({ theme }) => theme.colors.white};
 `;

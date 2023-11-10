@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
 export const List = styled.ul`
-  :first-child > input {
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-  }
-  :last-child > input {
+  :last-child input {
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
+  }
+
+  :first-child input {
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
   }
 `;
 

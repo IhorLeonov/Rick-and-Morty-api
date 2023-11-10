@@ -1,5 +1,5 @@
 import { Checkbox, FormControlLabel } from "@mui/material";
-import { FilterList } from "./CheckboxList.styled";
+import { FilterList, FilterItem } from "./CheckboxList.styled";
 import { FC, Dispatch, SetStateAction } from "react";
 
 interface CheckboxListProps {
@@ -23,7 +23,7 @@ export const CheckboxList: FC<CheckboxListProps> = ({ filters, setFilters }) => 
     <FilterList>
       {filterList.map((filter) => {
         return (
-          <li key={filter}>
+          <FilterItem key={filter}>
             <FormControlLabel
               control={
                 <Checkbox
@@ -44,7 +44,7 @@ export const CheckboxList: FC<CheckboxListProps> = ({ filters, setFilters }) => 
                 padding: "8px 16px",
               }}
             />
-          </li>
+          </FilterItem>
         );
       })}
     </FilterList>

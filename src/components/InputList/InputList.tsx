@@ -2,28 +2,30 @@ import { FC } from "react";
 import { Input, List } from "./InputList.styled";
 
 interface InputListProps {
-  isListOpen: boolean;
   filters: string[];
 }
 
-export const InputList: FC<InputListProps> = ({ isListOpen, filters }) => {
+export const InputList: FC<InputListProps> = ({ filters }) => {
   const character = filters.includes("Character");
   const location = filters.includes("Location");
   const episodes = filters.includes("Episodes");
 
+  const condition = character || location || episodes;
+  const typeCondition = character || location;
+
   return (
     <List>
-      {!isListOpen && (
+      {!condition && (
         <li>
           <Input type="text" placeholder="Add key words to find" />
         </li>
       )}
-      {isListOpen && (
+      {condition && (
         <li>
           <Input type="text" placeholder="Add Name" />
         </li>
       )}
-      {character && (
+      {typeCondition && (
         <li>
           <Input type="text" placeholder="Add Type" />
         </li>

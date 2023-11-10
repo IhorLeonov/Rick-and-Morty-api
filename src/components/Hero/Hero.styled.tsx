@@ -7,7 +7,6 @@ export const Hero = styled.section`
   justify-content: center;
   align-items: center;
   /* height: calc(50vh - 60px); */
-  /* background-color: #ffffff; */
 `;
 
 export const Title = styled.h1`
@@ -18,7 +17,7 @@ export const Title = styled.h1`
   line-height: 111px;
   z-index: 1;
 
-  color: ${({ theme }) => theme.colors.titleColor};
+  color: ${({ theme }) => theme.colors.darkerGrey};
 `;
 
 export const Image = styled.img`

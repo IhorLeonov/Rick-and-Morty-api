@@ -20,7 +20,7 @@ html {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
-  font-display: fallback;
+  font-display: swap;
 }
 
 @font-face {
@@ -29,7 +29,7 @@ html {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
-  font-display: fallback;
+  font-display: swap;
 }
 
 @font-face {
@@ -38,7 +38,7 @@ html {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
-  font-display: fallback;
+  font-display: swap;
 }
 
 @font-face {
@@ -47,7 +47,7 @@ html {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 900;
-  font-display: fallback;
+  font-display: swap;
 }
 
 :root {
