@@ -1,12 +1,16 @@
 import styled from "styled-components";
+import { Field } from "formik";
 
-export const List = styled.ul`
-  :last-child input {
+export const InputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  :last-child {
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
   }
 
-  :first-child input {
+  :first-child {
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
     border-bottom-right-radius: 0;
@@ -14,7 +18,7 @@ export const List = styled.ul`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled(Field)`
   width: 260px;
   padding: 8px 12px;
   border: none;

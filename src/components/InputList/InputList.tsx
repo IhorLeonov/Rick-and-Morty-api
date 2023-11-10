@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Input, List } from "./InputList.styled";
+import { Input, InputBox } from "./InputList.styled";
 
 interface InputListProps {
   filters: string[];
@@ -14,47 +14,15 @@ export const InputList: FC<InputListProps> = ({ filters }) => {
   const typeCondition = character || location;
 
   return (
-    <List>
-      {!condition && (
-        <li>
-          <Input type="text" placeholder="Add key words to find" />
-        </li>
-      )}
-      {condition && (
-        <li>
-          <Input type="text" placeholder="Add Name" />
-        </li>
-      )}
-      {typeCondition && (
-        <li>
-          <Input type="text" placeholder="Add Type" />
-        </li>
-      )}
-      {character && (
-        <li>
-          <Input type="text" placeholder="Add Status" />
-        </li>
-      )}
-      {character && (
-        <li>
-          <Input type="text" placeholder="Add Species" />
-        </li>
-      )}
-      {character && (
-        <li>
-          <Input type="text" placeholder="Add Gender" />
-        </li>
-      )}
-      {location && (
-        <li>
-          <Input type="text" placeholder="Add Dimension" />
-        </li>
-      )}
-      {episodes && (
-        <li>
-          <Input type="text" placeholder="Add Episodes" />
-        </li>
-      )}
-    </List>
+    <InputBox>
+      {!condition && <Input name="keywords" type="text" placeholder="Add key words to find" />}
+      {condition && <Input name="name" type="text" placeholder="Add Name" />}
+      {typeCondition && <Input name="type" type="text" placeholder="Add Type" />}
+      {character && <Input name="status" type="text" placeholder="Add Status" />}
+      {character && <Input name="species" type="text" placeholder="Add Species" />}
+      {character && <Input name="gender" type="text" placeholder="Add Gender" />}
+      {location && <Input name="dimension" type="text" placeholder="Add Dimension" />}
+      {episodes && <Input name="episod" type="text" placeholder="Add Episodes" />}
+    </InputBox>
   );
 };
