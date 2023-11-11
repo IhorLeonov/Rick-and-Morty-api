@@ -22,7 +22,7 @@ export const InputList: FC<InputListProps> = ({ filters }) => {
       {character && <Input name="species" type="text" placeholder="Add Species" />}
       {character && <Input name="gender" type="text" placeholder="Add Gender" />}
       {location && <Input name="dimension" type="text" placeholder="Add Dimension" />}
-      {episodes && <Input name="episod" type="text" placeholder="Add Episodes" />}
+      {episodes && <Input name="episode" type="text" placeholder="Add Episodes" />}
     </InputBox>
   );
 };

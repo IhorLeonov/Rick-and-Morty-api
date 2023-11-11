@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-const getAllCharacters = gql`
-  {
-    characters(page: 2) {
+const GET_All_CHARACTERS = gql`
+  query Character($page: Int) {
+    characters(page: $page) {
       results {
         id
         name
@@ -12,9 +12,23 @@ const getAllCharacters = gql`
         location {
           name
         }
+        episode {
+          name
+        }
       }
+    }
+    episodesByIds(ids: [1, 2]) {
+      id
     }
   }
 `;
 
-export { getAllCharacters };
+const GET_EPISODES = gql`
+  {
+    episodesByIds(ids: [1, 2]) {
+      id
+    }
+  }
+`;
+
+export { GET_All_CHARACTERS, GET_EPISODES };

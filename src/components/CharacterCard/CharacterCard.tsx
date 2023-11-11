@@ -11,7 +11,7 @@ import {
 import { FC } from "react";
 import { Card } from "../CardList/CardList";
 
-export const CharacterCard: FC<Card> = ({ name, image, status, species, location }) => {
+export const CharacterCard: FC<Card> = ({ name, image, status, species, location, episode }) => {
   return (
     <CardItem>
       <Image src={image} alt="Character picture" />
@@ -23,8 +23,8 @@ export const CharacterCard: FC<Card> = ({ name, image, status, species, location
         </Status>
         <Label style={{ fontSize: 15 }}>Last known location:</Label>
         <Caption>{location.name}</Caption>
-        {/* <Label>First seen in:</Label> */}
-        {/* <Caption>{episod}</Caption> */}
+        <Label>First seen in:</Label>
+        <Caption>{episode[0].name}</Caption>
       </Wrapper>
     </CardItem>
   );

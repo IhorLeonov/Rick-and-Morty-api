@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { FilterBox, FormikForm, FilterBtn, SelectBtn, SubmitBtn } from "./Home.styled";
 import { Icon } from "../../helpers/IconSelector";
 import { CheckboxList } from "../../components/CheckboxList/CheckboxList";
@@ -7,7 +7,7 @@ import { Backdrop } from "@mui/material";
 import { Formik } from "formik";
 import { CardList } from "../../components/CardList/CardList";
 import { useQuery } from "@apollo/client";
-import { getAllCharacters } from "../../helpers/queries";
+import { GET_All_CHARACTERS, GET_EPISODES } from "../../helpers/queries";
 
 interface InitialValues {
   [k: string]: string;
@@ -21,15 +21,24 @@ const initialValues = {
   species: "",
   gender: "",
   dimension: "",
-  episod: "",
+  episode: "",
 };
 
 const Home: FC = () => {
   const [openFilter, setOpenFilter] = useState<boolean>(false);
   const [isListOpen, setIsListOpen] = useState<boolean>(false);
   const [checkboxFilters, setCheckboxFilters] = useState<string[]>([]);
+  // const [episodes, setEpisodes] = useState<string[]>([]);
 
-  const { data } = useQuery(getAllCharacters);
+  const { loading, error, data } = useQuery(GET_All_CHARACTERS, {
+    variables: { page: 2 },
+  });
+
+  // const { data: episodes } = useQuery(GET_EPISODES);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Something wrong</p>;
+  // if (data) console.log(data.characters);
+  // if (episodes) console.log(episodes);
 
   const handleCloseFilter = () => {
     setOpenFilter(!openFilter);
@@ -74,7 +83,7 @@ const Home: FC = () => {
         </Formik>
         <Backdrop sx={{ zIndex: 1 }} open={isListOpen} onClick={handleCloseList}></Backdrop>
       </FilterBox>
-      {<CardList allCharacters={data?.characters.results} />}
+      {<CardList allCharacters={data?.characters?.results} />}
     </>
   );
 };
