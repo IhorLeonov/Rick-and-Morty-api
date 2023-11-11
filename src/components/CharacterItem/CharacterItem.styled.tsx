@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link as RouterLink } from "react-router-dom";
 
 export const CardItem = styled.li`
   display: flex;
@@ -19,6 +20,12 @@ export const Wrapper = styled.div`
   border-top-right-radius: 9px;
 `;
 
+export const Link = styled(RouterLink)`
+  &:hover h2 {
+    color: ${({ theme }) => theme.colors.orange};
+  }
+`;
+
 export const Name = styled.h2`
   font-size: 27px;
   font-weight: 800;
@@ -30,10 +37,10 @@ export const Indicator = styled.div`
   width: 9px;
   height: 9px;
   border-radius: 4.5px;
-  background: #9e9e9e;
+  background-color: ${({ theme }) => theme.colors.lightGrey};
 `;
 
-export const Status = styled.p`
+export const Status = styled.div`
   display: flex;
   align-items: center;
   font-size: 16px;

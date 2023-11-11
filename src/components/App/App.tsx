@@ -1,16 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import { lazy } from "react";
+import { FC, lazy } from "react";
 import { Layout } from "../Layout/Layout";
 
 const Home = lazy(() => import("../../pages/Home/Home"));
-const Character = lazy(() => import("../../pages/Character/Character"));
+const CharacterDetails = lazy(() => import("../../pages/CharacterDetails/CharacterDetails"));
 
-export const App = () => {
+export const App: FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/:id" element={<Character />} />
+        <Route path="/:id" element={<CharacterDetails />} />
       </Route>
     </Routes>
   );
