@@ -6,39 +6,25 @@ import {
   Status,
   Label,
   Caption,
-  Indicator,
+  // Indicator,
 } from "./CharacterCard.styled";
-import capImage from "../../assets/images/cap.jpg";
 import { FC } from "react";
+import { Card } from "../CardList/CardList";
 
-interface CharacterCardProps {
-  name: string;
-  status: string;
-  species: string;
-  location: string;
-  episod: string;
-}
-
-export const CharacterCard: FC<CharacterCardProps> = ({
-  name,
-  status,
-  species,
-  location,
-  episod,
-}) => {
+export const CharacterCard: FC<Card> = ({ name, image, status, species, location }) => {
   return (
     <CardItem>
-      <Image src={capImage} alt="Character picture" />
+      <Image src={image} alt="Character picture" />
       <Wrapper>
         <Name>{name}</Name>
         <Status>
-          <Indicator />
+          {/* <Indicator /> */}
           <span>{status}</span>&nbsp;-&nbsp;<span>{species}</span>
         </Status>
         <Label style={{ fontSize: 15 }}>Last known location:</Label>
-        <Caption>{location}</Caption>
-        <Label>First seen in:</Label>
-        <Caption>{episod}</Caption>
+        <Caption>{location.name}</Caption>
+        {/* <Label>First seen in:</Label> */}
+        {/* <Caption>{episod}</Caption> */}
       </Wrapper>
     </CardItem>
   );

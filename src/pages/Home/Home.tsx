@@ -6,7 +6,8 @@ import { InputList } from "../../components/InputList/InputList";
 import { Backdrop } from "@mui/material";
 import { Formik } from "formik";
 import { CardList } from "../../components/CardList/CardList";
-// import { CharacterCard } from "../../components/CharacterCard/CharacterCard";
+import { useQuery } from "@apollo/client";
+import { getAllCharacters } from "../../helpers/queries";
 
 interface InitialValues {
   [k: string]: string;
@@ -27,6 +28,8 @@ const Home: FC = () => {
   const [openFilter, setOpenFilter] = useState<boolean>(false);
   const [isListOpen, setIsListOpen] = useState<boolean>(false);
   const [checkboxFilters, setCheckboxFilters] = useState<string[]>([]);
+
+  const { data } = useQuery(getAllCharacters);
 
   const handleCloseFilter = () => {
     setOpenFilter(!openFilter);
@@ -71,16 +74,7 @@ const Home: FC = () => {
         </Formik>
         <Backdrop sx={{ zIndex: 1 }} open={isListOpen} onClick={handleCloseList}></Backdrop>
       </FilterBox>
-      <CardList />
-
-      {/* <CharacterCard
-        name={"Aqua Rick"}
-        status={"unknown"}
-        species={"Humanoid"}
-        location={"Citadel of Ricks"}
-        episod={"Close Rick-counters of the Rick Kind"}
-      /> */}
-      {/* <div>Pagination</div> */}
+      {<CardList allCharacters={data?.characters.results} />}
     </>
   );
 };
