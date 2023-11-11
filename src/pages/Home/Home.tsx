@@ -5,6 +5,8 @@ import { CheckboxList } from "../../components/CheckboxList/CheckboxList";
 import { InputList } from "../../components/InputList/InputList";
 import { Backdrop } from "@mui/material";
 import { Formik } from "formik";
+import { CardList } from "../../components/CardList/CardList";
+// import { CharacterCard } from "../../components/CharacterCard/CharacterCard";
 
 interface InitialValues {
   [k: string]: string;
@@ -69,9 +71,16 @@ const Home: FC = () => {
         </Formik>
         <Backdrop sx={{ zIndex: 1 }} open={isListOpen} onClick={handleCloseList}></Backdrop>
       </FilterBox>
+      <CardList />
 
-      {/* <div>Cards</div>
-      <div>Pagination</div> */}
+      {/* <CharacterCard
+        name={"Aqua Rick"}
+        status={"unknown"}
+        species={"Humanoid"}
+        location={"Citadel of Ricks"}
+        episod={"Close Rick-counters of the Rick Kind"}
+      /> */}
+      {/* <div>Pagination</div> */}
     </>
   );
 };
