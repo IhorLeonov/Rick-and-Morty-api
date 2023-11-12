@@ -2,7 +2,7 @@ import { FC } from "react";
 import { CharacterItem } from "../CharacterItem/CharacterItem";
 import { CharacterList } from "./CardList.styled";
 
-export interface CharacterCard {
+export interface Character {
   id?: string;
   name: string;
   image: string;
@@ -14,13 +14,13 @@ export interface CharacterCard {
 }
 
 interface CardListProps {
-  allCharacters: CharacterCard[];
+  characters: Character[];
 }
 
-export const CardList: FC<CardListProps> = ({ allCharacters }) => {
+export const CardList: FC<CardListProps> = ({ characters }) => {
   return (
     <CharacterList>
-      {allCharacters?.map(({ id, name, image, status, species, location, episode }) => (
+      {characters?.map(({ id, name, image, status, species, location, episode }) => (
         <CharacterItem
           key={id}
           id={id}

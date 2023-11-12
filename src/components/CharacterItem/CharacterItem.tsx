@@ -11,9 +11,9 @@ import {
 } from "./CharacterItem.styled";
 
 import { FC } from "react";
-import { CharacterCard } from "../CardList/CardList";
+import { Character } from "../CardList/CardList";
 
-export const CharacterItem: FC<CharacterCard> = ({
+export const CharacterItem: FC<Character> = ({
   id,
   name,
   image,

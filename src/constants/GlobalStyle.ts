@@ -20,7 +20,6 @@ html {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
 }
 
 @font-face {
@@ -29,7 +28,6 @@ html {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
-  font-display: swap;
 }
 
 @font-face {
@@ -38,7 +36,6 @@ html {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
 }
 
 @font-face {
@@ -47,7 +44,6 @@ html {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 900;
-  font-display: swap;
 }
 
 :root {
@@ -59,14 +55,8 @@ html {
 }
 
 body {
-  /* display: flex;
-  margin-left: auto;
-  margin-right: auto; */
-  
-  min-width: 320px;
   max-width: 1440px;
   min-height: 100vh;
-  
   font-family: Roboto;
   font-weight: 400;
 }
@@ -103,12 +93,8 @@ a {
 }
 
 button {
-  /* border: 1px solid transparent; */
   border: none;
   border-radius: 4px;
-  /* padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500; */
   font-family: inherit;
   cursor: pointer;
 }
