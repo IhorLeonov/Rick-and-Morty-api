@@ -1,16 +1,12 @@
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { FilterList, FilterItem } from "./CheckboxList.styled";
-import { FC, Dispatch, SetStateAction } from "react";
-
-interface CheckboxListProps {
-  filters: string[];
-  setFilters: Dispatch<SetStateAction<string[]>>;
-}
+import { FC, ChangeEvent } from "react";
+import { CheckboxListProps } from "../../constants/types";
 
 export const CheckboxList: FC<CheckboxListProps> = ({ filters, setFilters }) => {
   const filterList = ["Character", "Location", "Episodes"];
 
-  const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
     const index = filters.indexOf(event.target.value);
     if (index === -1) {
       setFilters([...filters, event.target.value]);

@@ -1,9 +1,6 @@
 import { FC } from "react";
 import { Input, InputBox } from "./InputList.styled";
-
-interface InputListProps {
-  filters: string[];
-}
+import { InputListProps } from "../../constants/types";
 
 export const InputList: FC<InputListProps> = ({ filters }) => {
   const character = filters.includes("Character");

@@ -1,21 +1,7 @@
 import { FC } from "react";
 import { CharacterItem } from "../CharacterItem/CharacterItem";
 import { CharacterList } from "./CardList.styled";
-
-export interface Character {
-  id?: string;
-  name: string;
-  image: string;
-  status: string;
-  species: string;
-  info?: string;
-  location: { name: string };
-  episode: [{ name: string }];
-}
-
-interface CardListProps {
-  characters: Character[];
-}
+import { CardListProps } from "../../constants/types";
 
 export const CardList: FC<CardListProps> = ({ characters }) => {
   return (

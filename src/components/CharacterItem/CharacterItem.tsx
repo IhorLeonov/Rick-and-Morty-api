@@ -1,3 +1,4 @@
+import { Character } from "../../constants/types";
 import {
   CardItem,
   Image,
@@ -9,9 +10,7 @@ import {
   Caption,
   Indicator,
 } from "./CharacterItem.styled";
-
 import { FC } from "react";
-import { Character } from "../CardList/CardList";
 
 export const CharacterItem: FC<Character> = ({
   id,

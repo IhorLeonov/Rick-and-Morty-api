@@ -1,25 +1,15 @@
 import { FC, useEffect, useState } from "react";
-import {
-  FilterBox,
-  FormikForm,
-  FilterBtn,
-  SelectBtn,
-  SubmitBtn,
-  Wrapper,
-  HomePage,
-} from "./Home.styled";
+import { FilterBox, FormikForm, FilterBtn, SelectBtn, SubmitBtn, HomePage } from "./Home.styled";
 
 import { Icon } from "../../helpers/IconSelector";
 import { CheckboxList } from "../../components/CheckboxList/CheckboxList";
 import { InputList } from "../../components/InputList/InputList";
-import { Backdrop, Pagination } from "@mui/material";
+import { Backdrop } from "@mui/material";
 import { Formik } from "formik";
-import { CardList, Character } from "../../components/CardList/CardList";
+import { CardList } from "../../components/CardList/CardList";
 import { useAllCharacters } from "../../hooks/useGetAllCharacters";
-
-interface InitialValues {
-  [k: string]: string;
-}
+import { PagePagination } from "../../components/PagePagination/PagePagination";
+import { Character, FormInitialValues } from "../../constants/types";
 
 const initialValues = {
   keywords: "",
@@ -61,7 +51,7 @@ const Home: FC = () => {
     setIsFilterListOpen(!isFilterListOpen);
   };
 
-  const handleSubmit = (values: InitialValues) => {
+  const handleSubmit = (values: FormInitialValues) => {
     console.log(values);
   };
 
@@ -95,48 +85,9 @@ const Home: FC = () => {
         </Formik>
         <Backdrop sx={{ zIndex: 1 }} open={isFilterListOpen} onClick={handleCloseList}></Backdrop>
       </FilterBox>
-      {loading && <p>Loading...</p>}
+      {/* {loading && <p>Loading...</p>} */}
       {!loading && data && <CardList characters={characters} />}
-      <Wrapper>
-        <Pagination
-          count={pageQuantity}
-          page={page}
-          onChange={(_, num) => setPage(num)}
-          variant="outlined"
-          shape="rounded"
-          sx={{
-            marginTop: "auto",
-            button: {
-              backgroundColor: "#3C3E44",
-              color: "#F5F5F5",
-            },
-            ".css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-disabled": {
-              backgroundColor: "#9E9E9E",
-              color: "#202329",
-            },
-            ".css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
-              backgroundColor: "#F5F5F5",
-              color: "#202329",
-            },
-            ".css-2gftvx.Mui-selected": {
-              backgroundColor: "#F5F5F5 !important",
-              color: "#202329",
-            },
-            "button:hover": {
-              backgroundColor: "#FF9800",
-              color: "#202329",
-            },
-            "li:first-child button": {
-              backgroundColor: "#F5F5F5",
-              color: "#202329",
-            },
-            "li:last-child button": {
-              backgroundColor: "#F5F5F5",
-              color: "#202329",
-            },
-          }}
-        />
-      </Wrapper>
+      <PagePagination pageQuantity={pageQuantity} page={page} setPage={setPage} />
     </HomePage>
   );
 };
