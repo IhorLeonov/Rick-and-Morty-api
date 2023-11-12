@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 export const MainSection = styled.section`
   padding: 24px 106px 15px 107px;
 
-  height: 918px;
+  min-height: 918px;
   background-color: ${({ theme }) => theme.colors.darkGrey};
   color: ${({ theme }) => theme.colors.white};
 `;

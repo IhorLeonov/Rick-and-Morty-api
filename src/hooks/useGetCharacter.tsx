@@ -18,7 +18,7 @@ const GET_CHARACTER = gql`
   }
 `;
 
-export const useCharacter = (id: string | undefined) => {
+export const useGetCharacter = (id: string | undefined) => {
   const { data, error, loading } = useQuery(GET_CHARACTER, {
     variables: { id },
   });

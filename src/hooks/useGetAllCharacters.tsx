@@ -25,9 +25,11 @@ const GET_All_CHARACTERS = gql`
 `;
 
 export const useAllCharacters = (page: number) => {
-  const { data, error, loading, fetchMore } = useQuery(GET_All_CHARACTERS, {
-    variables: { page, pageSize: 10 },
+  const { data, error, loading } = useQuery(GET_All_CHARACTERS, {
+    variables: { page },
   });
 
-  return { data, error, loading, fetchMore };
+  const allCharacters = { data, error, loading };
+
+  return allCharacters;
 };

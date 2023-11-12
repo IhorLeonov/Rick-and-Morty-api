@@ -4,6 +4,7 @@ import { Pagination } from "@mui/material";
 import { PagePaginationProps } from "../../constants/types";
 
 export const PagePagination: FC<PagePaginationProps> = ({ pageQuantity, page, setPage }) => {
+  if (pageQuantity < 1) return <p>No data for your request</p>; // добавить ошибку что ничего не найдено
   return (
     <Wrapper>
       <Pagination

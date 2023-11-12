@@ -14,10 +14,12 @@ export const Image = styled.img`
 
 export const Wrapper = styled.div`
   width: 371px;
+  height: 220px;
   padding: 12.5px 13.5px 13.51px 13.5px;
   background-color: ${({ theme }) => theme.colors.grey};
   border-bottom-right-radius: 9px;
   border-top-right-radius: 9px;
+  overflow: scroll;
 `;
 
 export const Link = styled(RouterLink)`

@@ -10,6 +10,7 @@ import { CardList } from "../../components/CardList/CardList";
 import { useAllCharacters } from "../../hooks/useGetAllCharacters";
 import { PagePagination } from "../../components/PagePagination/PagePagination";
 import { Character, FormInitialValues } from "../../constants/types";
+import { useGetFilteredData } from "../../hooks/useGetFilteredData";
 
 const initialValues = {
   keywords: "",
@@ -26,39 +27,77 @@ const Home: FC = () => {
   const [checkboxFilters, setCheckboxFilters] = useState<string[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
   const [isFilterListOpen, setIsFilterListOpen] = useState<boolean>(false);
-
-  const [characters, setCharacters] = useState<Character[]>([]);
+  //redux state
   const [page, setPage] = useState<number>(1);
   const [pageQuantity, setPageQuantity] = useState<number>(0);
+  const [dataArray, setDataArray] = useState<Character[]>([]);
+  const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  //filter slice
+  const [isFilterApplied, setIsFilterApplied] = useState<boolean>(false);
+  const [name, setName] = useState<string>("");
+  const [status, setStatus] = useState<string>("");
+  const [type, setType] = useState<string>("");
+  const [species, setSpecies] = useState<string>("");
+  const [gender, setGender] = useState<string>("");
+  // const [dimension, setDimension] = useState<string>("");
+  // const [episodeCode, setEpisodeCode] = useState<string>("");
 
-  const { loading, error, data } = useAllCharacters(page);
+  const allCharacters = useAllCharacters(page);
+  const filtredCharacters = useGetFilteredData(page, name, status, type, species, gender);
 
   useEffect(() => {
-    if (data) {
-      setPageQuantity(data.characters.info.pages);
-      setCharacters(data.characters.results);
+    if (allCharacters.data && !isFilterApplied) {
+      const { data, error, loading } = allCharacters;
+      if (error) return setError(error?.message);
+      setPageQuantity(data.characters.info?.pages);
+      setDataArray(data.characters?.results);
+      setIsLoading(loading);
     }
-  }, [data, page]);
+    if (filtredCharacters.data && isFilterApplied) {
+      const { data, error, loading } = filtredCharacters;
+      if (error) return setError(error?.message);
+      setPageQuantity(data.characters.info?.pages);
+      setDataArray(data.characters?.results);
+      setIsLoading(loading);
+    }
+    if (page > 1) {
+      window.scroll({
+        top: 400,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [allCharacters, filtredCharacters, isFilterApplied, page]);
 
-  if (error) return <p>Something wrong</p>;
-  // if (data) console.log(data);
-
-  const handleCloseFilter = () => {
+  const handleRemoveFilter = () => {
     setIsFilterOpen(!isFilterOpen);
+    setIsFilterApplied(false);
+    setPage(1);
   };
 
   const handleCloseList = () => {
     setIsFilterListOpen(!isFilterListOpen);
+    setCheckboxFilters([]);
   };
 
   const handleSubmit = (values: FormInitialValues) => {
+    setName(values.name);
+    setStatus(values.status);
+    setType(values.type);
+    setSpecies(values.species);
+    setGender(values.gender);
+    // setDimension(values.dimension);
+    // setEpisodeCode(values.episode);
+    filtredCharacters.getFilterdData();
     console.log(values);
   };
 
+  if (error) return <p>Something wrong</p>;
   return (
     <HomePage>
       <FilterBox>
-        <FilterBtn type="button" onClick={handleCloseFilter}>
+        <FilterBtn type="button" onClick={handleRemoveFilter}>
           {isFilterOpen ? "Remove filter" : "Filter"}
         </FilterBtn>
         <Formik
@@ -68,6 +107,8 @@ const Home: FC = () => {
             // const { name, number } = values;
             handleSubmit(values);
             actions.resetForm();
+            handleCloseList();
+            setIsFilterApplied(true);
           }}
         >
           {isFilterOpen && (
@@ -85,8 +126,8 @@ const Home: FC = () => {
         </Formik>
         <Backdrop sx={{ zIndex: 1 }} open={isFilterListOpen} onClick={handleCloseList}></Backdrop>
       </FilterBox>
-      {/* {loading && <p>Loading...</p>} */}
-      {!loading && data && <CardList characters={characters} />}
+      {isLoading && <p>Loading...</p>}
+      {!isLoading && dataArray && <CardList characters={dataArray} />}
       <PagePagination pageQuantity={pageQuantity} page={page} setPage={setPage} />
     </HomePage>
   );

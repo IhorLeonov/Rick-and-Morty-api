@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useCharacter } from "../../hooks/useCharacter";
+import { useGetCharacter } from "../../hooks/useGetCharacter";
 import {
   CardItem,
   Image,
@@ -13,7 +13,7 @@ import {
 
 const Character = () => {
   const { id } = useParams();
-  const { data, loading, error } = useCharacter(id);
+  const { data, loading, error } = useGetCharacter(id);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Something wrong</p>;
@@ -24,7 +24,7 @@ const Character = () => {
     return (
       <CardItem style={{ paddingTop: 56 }}>
         <Image style={{ width: 595, height: 572 }} src={image} alt="Character picture" />
-        <Wrapper style={{ width: "100%", paddingLeft: 42, paddingRight: 42 }}>
+        <Wrapper style={{ width: "100%", height: 572, paddingLeft: 42, paddingRight: 42 }}>
           <Name>{name}</Name>
           <Status>
             <Indicator />

@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+// import { LazyQueryHookExecOptions, OperationVariables } from "@apollo/client";
 
 export interface FormInitialValues {
   [k: string]: string;
@@ -24,6 +25,7 @@ export interface CheckboxListProps {
 }
 
 export interface InputListProps {
+  // filters: Partial<LazyQueryHookExecOptions<any, OperationVariables>>[];
   filters: string[];
 }
 
