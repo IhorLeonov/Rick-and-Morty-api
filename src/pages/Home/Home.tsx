@@ -107,8 +107,8 @@ const Home: FC = () => {
           sx={{
             marginTop: "auto",
             ".css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
-              backgroundColor: "#F5F5F5",
-              color: "#202329",
+              backgroundColor: "#F5F5F5 !important",
+              color: "#202329 !important",
             },
             ".css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-disabled": {
               backgroundColor: "#9E9E9E",
