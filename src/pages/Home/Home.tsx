@@ -119,7 +119,7 @@ const Home: FC = () => {
               color: "#202329",
             },
             ".css-2gftvx.Mui-selected": {
-              backgroundColor: "#F5F5F5",
+              backgroundColor: "#F5F5F5 !important",
               color: "#202329",
             },
             "button:hover": {
