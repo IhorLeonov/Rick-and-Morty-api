@@ -22,7 +22,7 @@ export const PagePagination: FC<PagePaginationProps> = ({ pageQuantity, page, se
             color: "#202329",
           },
           ".css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
-            backgroundColor: "#F5F5F5",
+            backgroundColor: "#F5F5F5 !important",
             color: "#202329",
           },
           ".css-2gftvx.Mui-selected": {
@@ -33,7 +33,7 @@ export const PagePagination: FC<PagePaginationProps> = ({ pageQuantity, page, se
             backgroundColor: "#FF9800",
             color: "#202329",
           },
-          "li:first-child button": {
+          "li:first-of-type button": {
             backgroundColor: "#F5F5F5",
             color: "#202329",
           },
