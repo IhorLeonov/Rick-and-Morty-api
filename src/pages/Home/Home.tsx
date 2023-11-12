@@ -106,9 +106,13 @@ const Home: FC = () => {
           shape="rounded"
           sx={{
             marginTop: "auto",
+            button: {
+              backgroundColor: "#3C3E44",
+              color: "#F5F5F5",
+            },
             ".css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
-              backgroundColor: "#F5F5F5 !important",
-              color: "#202329 !important",
+              backgroundColor: "#F5F5F5",
+              color: "#202329",
             },
             ".css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-disabled": {
               backgroundColor: "#9E9E9E",

@@ -66,8 +66,6 @@ export const Wrapper = styled.div`
 
   & nav button {
     border: none;
-    background-color: ${({ theme }) => theme.colors.grey};
-    color: ${({ theme }) => theme.colors.white};
     box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
       0px 1px 1px 0px rgba(0, 0, 0, 0.2);
   }
