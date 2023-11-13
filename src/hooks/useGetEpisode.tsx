@@ -22,7 +22,7 @@ export const useGetEpisode = (page: number, name: string, episodeCode: string) =
     variables: {
       name,
       page,
-      episodeCode,
+      episode: episodeCode,
     },
   });
 

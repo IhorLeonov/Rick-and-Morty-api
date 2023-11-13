@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import { FilterBox, FormikForm, FilterBtn, SelectBtn, SubmitBtn, HomePage } from "./Home.styled";
-
 import { Icon } from "../../helpers/IconSelector";
 import { CheckboxList } from "../../components/CheckboxList/CheckboxList";
 import { InputList } from "../../components/InputList/InputList";
@@ -9,13 +8,21 @@ import { Formik } from "formik";
 import { CardList } from "../../components/CardList/CardList";
 import { useAllCharacters } from "../../hooks/useGetAllCharacters";
 import { PagePagination } from "../../components/PagePagination/PagePagination";
-import { Character, FormInitialValues } from "../../constants/types";
+import { Character, FormInitialValues, Location, Episode } from "../../constants/types";
 import { useGetFilteredData } from "../../hooks/useGetFilteredData";
+import { useGetLocation } from "../../hooks/useGetLocation";
+import { useGetEpisode } from "../../hooks/useGetEpisode";
+import { ListToggle } from "../../components/ListToggle/ListToggle";
+import { LocationList } from "../../components/LocationList/LocationList";
+import { EpisodeList } from "../../components/EpisodeList/EpisodeList";
 
 const initialValues = {
   keywords: "",
-  name: "",
-  type: "",
+  charName: "",
+  locationName: "",
+  episodeName: "",
+  charType: "",
+  locationType: "",
   status: "",
   species: "",
   gender: "",
@@ -27,38 +34,64 @@ const Home: FC = () => {
   const [checkboxFilters, setCheckboxFilters] = useState<string[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
   const [isFilterListOpen, setIsFilterListOpen] = useState<boolean>(false);
+  const [listViewing, setListViewing] = useState<string>("char");
+
   //redux state
   const [page, setPage] = useState<number>(1);
-  const [pageQuantity, setPageQuantity] = useState<number>(0);
-  const [dataArray, setDataArray] = useState<Character[]>([]);
+  const [pageAmount, setPageAmount] = useState<number>(0);
+  const [pageLocAmount, setPageLocAmount] = useState<number>(0);
+  const [pageEpiAmount, setPageEpiAmount] = useState<number>(0);
+  const [charData, setCharData] = useState<Character[]>([]);
+  const [locationData, setLocationData] = useState<Location[]>([]);
+  const [episodeData, setEpisodeData] = useState<Episode[]>([]);
+
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   //filter slice
   const [isFilterApplied, setIsFilterApplied] = useState<boolean>(false);
-  const [name, setName] = useState<string>("");
+  const [charName, setCharName] = useState<string>("");
+  const [charType, setCharType] = useState<string>("");
   const [status, setStatus] = useState<string>("");
-  const [type, setType] = useState<string>("");
   const [species, setSpecies] = useState<string>("");
   const [gender, setGender] = useState<string>("");
-  // const [dimension, setDimension] = useState<string>("");
-  // const [episodeCode, setEpisodeCode] = useState<string>("");
+  const [locationName, setLocationName] = useState<string>("");
+  const [locationType, setLocationType] = useState<string>("");
+  const [dimension, setDimension] = useState<string>("");
+  const [episodeName, setEpisodeName] = useState<string>("");
+  const [episodeCode, setEpisodeCode] = useState<string>("");
 
-  const allCharacters = useAllCharacters(page);
-  const filtredCharacters = useGetFilteredData(page, name, status, type, species, gender);
+  const characters = useAllCharacters(page);
+  const filtredCharacters = useGetFilteredData(page, charName, status, charType, species, gender);
+  const location = useGetLocation(1, locationName, locationType, dimension);
+  const episodes = useGetEpisode(1, episodeName, episodeCode);
 
   useEffect(() => {
-    if (allCharacters.data && !isFilterApplied) {
-      const { data, error, loading } = allCharacters;
+    if (characters.data && !isFilterApplied) {
+      const { data, error, loading } = characters;
       if (error) return setError(error?.message);
-      setPageQuantity(data.characters.info?.pages);
-      setDataArray(data.characters?.results);
+      setPageAmount(data.characters.info?.pages);
+      setCharData(data.characters?.results);
       setIsLoading(loading);
     }
     if (filtredCharacters.data && isFilterApplied) {
       const { data, error, loading } = filtredCharacters;
       if (error) return setError(error?.message);
-      setPageQuantity(data.characters.info?.pages);
-      setDataArray(data.characters?.results);
+      setPageAmount(data.characters.info?.pages);
+      setCharData(data.characters?.results);
+      setIsLoading(loading);
+    }
+    if (location.data && isFilterApplied) {
+      const { data, error, loading } = location;
+      if (error) return setError(error?.message);
+      setPageLocAmount(data.locations.info?.pages);
+      setLocationData(data.locations?.results);
+      setIsLoading(loading);
+    }
+    if (episodes.data && isFilterApplied) {
+      const { data, error, loading } = episodes;
+      if (error) return setError(error?.message);
+      setPageEpiAmount(data.episodes.info?.pages);
+      setEpisodeData(data.episodes?.results);
       setIsLoading(loading);
     }
     if (page > 1) {
@@ -68,12 +101,14 @@ const Home: FC = () => {
         behavior: "smooth",
       });
     }
-  }, [allCharacters, filtredCharacters, isFilterApplied, page]);
+  }, [characters, filtredCharacters, location, episodes, isFilterApplied, page]);
 
   const handleRemoveFilter = () => {
     setIsFilterOpen(!isFilterOpen);
     setIsFilterApplied(false);
     setPage(1);
+    setLocationData([]);
+    setEpisodeData([]);
   };
 
   const handleCloseList = () => {
@@ -82,18 +117,26 @@ const Home: FC = () => {
   };
 
   const handleSubmit = (values: FormInitialValues) => {
-    setName(values.name);
+    setCharName(values.charName);
     setStatus(values.status);
-    setType(values.type);
+    setCharType(values.charType);
     setSpecies(values.species);
     setGender(values.gender);
-    // setDimension(values.dimension);
-    // setEpisodeCode(values.episode);
+    setDimension(values.dimension);
+    setLocationName(values.locationName);
+    setLocationType(values.locationType);
+    setEpisodeName(values.episodeName);
+    setEpisodeCode(values.episode);
     filtredCharacters.getFilterdData();
+    location.getLocation();
+    episodes.getEpisode();
     console.log(values);
+    console.log(pageLocAmount);
+    console.log(pageEpiAmount);
   };
 
   if (error) return <p>Something wrong</p>;
+  const condition = locationData.length > 0 || episodeData.length > 0;
   return (
     <HomePage>
       <FilterBox>
@@ -124,11 +167,20 @@ const Home: FC = () => {
             </FormikForm>
           )}
         </Formik>
-        <Backdrop sx={{ zIndex: 1 }} open={isFilterListOpen} onClick={handleCloseList}></Backdrop>
       </FilterBox>
       {isLoading && <p>Loading...</p>}
-      {!isLoading && dataArray && <CardList characters={dataArray} />}
-      <PagePagination pageQuantity={pageQuantity} page={page} setPage={setPage} />
+      {condition && <ListToggle setListViewing={setListViewing} />}
+      {!isLoading && locationData.length > 0 && listViewing === "loc" && (
+        <LocationList data={locationData} />
+      )}
+      {!isLoading && episodeData.length > 0 && listViewing === "epi" && (
+        <EpisodeList data={episodeData} />
+      )}
+      {!isLoading && charData.length > 0 && listViewing === "char" && (
+        <CardList characters={charData} />
+      )}
+      <PagePagination pageQuantity={pageAmount} page={page} setPage={setPage} />
+      <Backdrop sx={{ zIndex: 1 }} open={isFilterListOpen} onClick={handleCloseList} />
     </HomePage>
   );
 };

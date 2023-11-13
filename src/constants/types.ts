@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from "react";
-// import { LazyQueryHookExecOptions, OperationVariables } from "@apollo/client";
 
 export interface FormInitialValues {
   [k: string]: string;
@@ -15,6 +14,20 @@ export interface Character {
   episode: [{ name: string }];
 }
 
+export interface Location {
+  id: number;
+  name: string;
+  type: string;
+  dimension: string;
+}
+
+export interface Episode {
+  id: number;
+  name: string;
+  episode: string;
+  air_date: string;
+}
+
 export interface CardListProps {
   characters: Character[];
 }
@@ -25,7 +38,6 @@ export interface CheckboxListProps {
 }
 
 export interface InputListProps {
-  // filters: Partial<LazyQueryHookExecOptions<any, OperationVariables>>[];
   filters: string[];
 }
 

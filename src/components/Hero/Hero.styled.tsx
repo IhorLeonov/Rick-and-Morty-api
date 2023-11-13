@@ -6,7 +6,6 @@ export const Hero = styled.section`
   height: 345px;
   justify-content: center;
   align-items: center;
-  /* height: calc(50vh - 60px); */
 `;
 
 export const Title = styled.h1`
