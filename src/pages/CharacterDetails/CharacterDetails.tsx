@@ -17,7 +17,6 @@ const Character = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Something wrong</p>;
-  if (data) console.log(data);
 
   if (data && !loading) {
     const { name, image, status, species, location, episode } = data.character;

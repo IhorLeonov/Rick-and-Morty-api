@@ -29,7 +29,12 @@ export interface Episode {
 }
 
 export interface CardListProps {
-  characters: Character[];
+  charData?: Character[];
+  locData?: Location[];
+  epiData?: Episode[];
+  pages: number;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
 }
 
 export interface CheckboxListProps {

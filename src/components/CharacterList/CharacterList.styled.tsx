@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CharacterList = styled.ul`
+export const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 27px;

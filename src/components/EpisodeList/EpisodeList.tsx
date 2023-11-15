@@ -1,26 +1,18 @@
 import { FC } from "react";
+import { CardListProps } from "../../constants/types";
+import { PagePagination } from "../PagePagination/PagePagination";
 
-interface Episode {
-  id: number;
-  name: string;
-  episode: string;
-  air_date: string;
-}
-
-export interface EpisodeListProps {
-  data: Episode[];
-}
-
-export const EpisodeList: FC<EpisodeListProps> = ({ data }) => {
+export const EpisodeList: FC<CardListProps> = ({ epiData, pages, page, setPage }) => {
   return (
     <>
-      {data.map(({ id, name, episode, air_date }) => (
+      {epiData?.map(({ id, name, episode, air_date }) => (
         <div key={id} style={{ display: "flex" }}>
           <p style={{ color: "tomato" }}>{name}</p>
           <p style={{ color: "orange" }}> {episode}</p>
           <p style={{ color: "purple" }}>{air_date}</p>
         </div>
       ))}
+      <PagePagination pageQuantity={pages} page={page} setPage={setPage} />
     </>
   );
 };

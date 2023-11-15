@@ -1,13 +1,14 @@
 import { FC } from "react";
 import { CharacterItem } from "../CharacterItem/CharacterItem";
-import { CharacterList } from "./CardList.styled";
+import { List } from "./CharacterList.styled";
 import { CardListProps } from "../../constants/types";
+import { PagePagination } from "../PagePagination/PagePagination";
 
-export const CardList: FC<CardListProps> = ({ characters }) => {
+export const CharacterList: FC<CardListProps> = ({ charData, pages, page, setPage }) => {
   return (
     <>
-      <CharacterList>
-        {characters?.map(({ id, name, image, status, species, location, episode }) => (
+      <List>
+        {charData?.map(({ id, name, image, status, species, location, episode }) => (
           <CharacterItem
             key={id}
             id={id}
@@ -19,7 +20,8 @@ export const CardList: FC<CardListProps> = ({ characters }) => {
             episode={episode}
           />
         ))}
-      </CharacterList>
+      </List>
+      <PagePagination pageQuantity={pages} page={page} setPage={setPage} />
     </>
   );
 };
