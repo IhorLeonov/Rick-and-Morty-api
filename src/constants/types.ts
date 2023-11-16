@@ -51,3 +51,13 @@ export interface PagePaginationProps {
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
 }
+
+type ListViewing = "all" | "char" | "loc" | "epi";
+
+export interface ListToggleProps {
+  listViewing: ListViewing;
+  setListViewing: React.Dispatch<React.SetStateAction<ListViewing>>;
+  filtredCharData: Character[];
+  locationData: Location[];
+  episodesData: Episode[];
+}

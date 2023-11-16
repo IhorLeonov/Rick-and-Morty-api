@@ -1,30 +1,49 @@
 import { FC } from "react";
 import { ListToggler, ToggleButton } from "./ListToggle.styled";
-import { Episode, Location } from "../../constants/types";
+import { ListToggleProps } from "../../constants/types";
 
-interface ListToggleProps {
-  setListViewing: React.Dispatch<React.SetStateAction<string>>;
-  locationData: Location[];
-  episodeData: Episode[];
-}
+export const ListToggle: FC<ListToggleProps> = ({
+  listViewing,
+  setListViewing,
+  filtredCharData,
+  locationData,
+  episodesData,
+}) => {
+  const conditionChar = locationData.length > 0 || episodesData.length > 0;
+  const conditionLoc = filtredCharData.length > 0 || episodesData.length > 0;
+  const conditionEpi = locationData.length > 0 || filtredCharData.length > 0;
 
-export const ListToggle: FC<ListToggleProps> = ({ setListViewing, locationData, episodeData }) => {
-  const condition = locationData.length > 0 || episodeData.length > 0;
+  const checkIsActive = (list: string) => {
+    if (listViewing === list) return "#FF9800";
+    return "#272B33";
+  };
 
   return (
     <ListToggler>
-      {condition && (
-        <ToggleButton type="button" onClick={() => setListViewing("char")}>
+      {filtredCharData.length > 0 && conditionChar && (
+        <ToggleButton
+          style={{ color: checkIsActive("char") }}
+          type="button"
+          onClick={() => setListViewing("char")}
+        >
           Characters
         </ToggleButton>
       )}
-      {locationData.length > 0 && (
-        <ToggleButton type="button" onClick={() => setListViewing("loc")}>
+      {locationData.length > 0 && conditionLoc && (
+        <ToggleButton
+          style={{ color: checkIsActive("loc") }}
+          type="button"
+          onClick={() => setListViewing("loc")}
+        >
           Locations
         </ToggleButton>
       )}
-      {episodeData.length > 0 && (
-        <ToggleButton type="button" onClick={() => setListViewing("epi")}>
+      {episodesData.length > 0 && conditionEpi && (
+        <ToggleButton
+          style={{ color: checkIsActive("epi") }}
+          type="button"
+          onClick={() => setListViewing("epi")}
+        >
           Episodes
         </ToggleButton>
       )}
