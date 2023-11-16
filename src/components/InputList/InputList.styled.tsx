@@ -18,6 +18,20 @@ export const InputBox = styled.div`
   }
 `;
 
+export const Title = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  width: 260px;
+  height: 57px;
+
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid black;
+  background-color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.darkGrey};
+`;
+
 export const Input = styled(Field)`
   width: 260px;
   padding: 8px 12px;

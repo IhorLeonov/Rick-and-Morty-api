@@ -1,11 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
-
-export interface FormInitialValues {
-  [k: string]: string;
-}
+import { ApolloError, LazyQueryExecFunction, OperationVariables } from "@apollo/client";
 
 export interface Character {
-  id?: string;
+  id: string;
   name: string;
   image: string;
   status: string;
@@ -26,6 +23,12 @@ export interface Episode {
   name: string;
   episode: string;
   air_date: string;
+}
+
+export interface CharData {
+  page: number;
+  pages: number;
+  data: Character[];
 }
 
 export interface CardListProps {
@@ -56,8 +59,52 @@ type ListViewing = "all" | "char" | "loc" | "epi";
 
 export interface ListToggleProps {
   listViewing: ListViewing;
-  setListViewing: React.Dispatch<React.SetStateAction<ListViewing>>;
+  setListViewing: Dispatch<SetStateAction<ListViewing>>;
   filtredCharData: Character[];
   locationData: Location[];
   episodesData: Episode[];
+}
+
+export interface FormInputValues {
+  [k: string]: string;
+}
+
+type LazyQueryFunc = LazyQueryExecFunction<unknown, OperationVariables>;
+
+interface LazyQueryData {
+  loading: boolean;
+  error: ApolloError | undefined;
+  data: unknown;
+  called: boolean;
+}
+
+interface FilteredLazyQueryData {
+  getFilterdData: LazyQueryFunc;
+  data: LazyQueryData;
+}
+
+interface LocationLazyQueryData {
+  getLocation: LazyQueryFunc;
+  data: LazyQueryData;
+}
+
+interface EpisodesLazyQueryData {
+  getEpisode: LazyQueryFunc;
+  data: LazyQueryData;
+}
+
+export interface FilterProps {
+  filtredChars: FilteredLazyQueryData;
+  location: LocationLazyQueryData;
+  episodes: EpisodesLazyQueryData;
+  setIsFilterApplied: Dispatch<SetStateAction<boolean>>;
+  setListViewing: Dispatch<SetStateAction<ListViewing>>;
+  setInpValues: Dispatch<SetStateAction<FormInputValues>>;
+  setCharactersPage: Dispatch<SetStateAction<number>>;
+  setFiltredCharPage: Dispatch<SetStateAction<number>>;
+  setLocationPage: Dispatch<SetStateAction<number>>;
+  setEpisodesPage: Dispatch<SetStateAction<number>>;
+  setFiltredCharData: Dispatch<SetStateAction<Character[]>>;
+  setLocationData: Dispatch<SetStateAction<Location[]>>;
+  setEpisodesData: Dispatch<SetStateAction<Episode[]>>;
 }

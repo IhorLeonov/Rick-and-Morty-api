@@ -61,4 +61,5 @@ export const Label = styled.p`
 export const Caption = styled.p`
   font-size: 18px;
   line-height: 1.6;
+  text-transform: capitalize;
 `;
