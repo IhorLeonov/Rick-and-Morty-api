@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 
-const GET_All_CHARACTERS = gql`
+export const GET_All_CHARACTERS = gql`
   query GetAllCharacters($page: Int) {
     characters(page: $page) {
       info {
@@ -30,6 +30,5 @@ export const useAllCharacters = (page: number) => {
   });
 
   const allCharacters = { data, error, loading };
-
   return allCharacters;
 };

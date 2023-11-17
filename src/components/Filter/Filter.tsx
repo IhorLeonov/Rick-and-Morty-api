@@ -2,20 +2,21 @@ import { Formik } from "formik";
 import { Icon } from "../../helpers/IconSelector";
 import { CheckboxList } from "../CheckboxList/CheckboxList";
 import { InputList } from "../InputList/InputList";
-import { FilterBox, FilterBtn, FormikForm, SelectBtn, SubmitBtn } from "./Filter.styled";
+import { FilterBox, FilterBtn, FormikForm, SelectBtn, SubmitBtn, Title } from "./Filter.styled";
 import { FilterProps, FormInputValues } from "../../constants/types";
 import { FC, useState } from "react";
 import { initialValues } from "../../constants/values";
 import { Backdrop } from "@mui/material";
+import { setCharactersPage } from "../../redux/mainSlice";
 
 export const Filter: FC<FilterProps> = ({
-  setInpValues,
+  setInputValues,
   filtredChars,
   setListViewing,
   location,
   episodes,
   setIsFilterApplied,
-  setCharactersPage,
+  // setCharactersPage,
   setFiltredCharPage,
   setLocationPage,
   setEpisodesPage,
@@ -29,7 +30,6 @@ export const Filter: FC<FilterProps> = ({
 
   const handleCloseList = () => {
     setIsFilterListOpen(!isFilterListOpen);
-    setCheckboxFilters([]);
   };
 
   const handleRemoveFilter = () => {
@@ -43,24 +43,25 @@ export const Filter: FC<FilterProps> = ({
     setLocationData([]);
     setEpisodesData([]);
     setListViewing("all");
-    setInpValues(initialValues);
+    setInputValues(initialValues);
+    setCheckboxFilters([]);
   };
 
   const handleSubmit = (values: FormInputValues) => {
-    setInpValues(values);
+    setInputValues(values);
     handleCloseList();
 
-    if (values.charName || values.status || values.charType || values.species || values.gender) {
-      filtredChars.getFilterdData();
-      setListViewing("char");
+    if (values.epiName || values.epiCode) {
+      episodes.getEpisode();
+      setListViewing("epi");
     }
     if (values.locName || values.locType || values.dimension) {
       location.getLocation();
       setListViewing("loc");
     }
-    if (values.epiName || values.epiCode) {
-      episodes.getEpisode();
-      setListViewing("epi");
+    if (values.charName || values.status || values.charType || values.species || values.gender) {
+      filtredChars.getFilterdData();
+      setListViewing("char");
     }
   };
 
@@ -87,7 +88,8 @@ export const Filter: FC<FilterProps> = ({
               {isFilterListOpen && (
                 <CheckboxList filters={checkboxFilters} setFilters={setCheckboxFilters} />
               )}
-              <InputList filters={checkboxFilters} />
+              <Title>Add key words to find</Title>
+              {isFilterListOpen && <InputList filters={checkboxFilters} />}
               <SubmitBtn type="submit">Find</SubmitBtn>
             </FormikForm>
           )}

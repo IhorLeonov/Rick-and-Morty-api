@@ -1,6 +1,6 @@
 import { gql, useLazyQuery } from "@apollo/client";
 
-const GET_EPISODE = gql`
+export const GET_EPISODE = gql`
   query GetEpisode($page: Int, $name: String!, $episode: String!) {
     episodes(page: $page, filter: { name: $name, episode: $episode }) {
       info {

@@ -13,7 +13,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     // for mui
-    "noImplicitAny": true,
+    // "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
     // "allowJs": true,

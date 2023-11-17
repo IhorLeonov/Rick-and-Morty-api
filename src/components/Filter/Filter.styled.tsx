@@ -1,6 +1,23 @@
 import styled from "styled-components";
 import { Form } from "formik";
 
+export const Title = styled.p`
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  width: 260px;
+  height: 57px;
+
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid black;
+  background-color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.darkGrey};
+
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+`;
+
 export const FilterBox = styled.div`
   position: relative;
   display: flex;

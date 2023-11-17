@@ -3,12 +3,24 @@ import { CharacterItem } from "../CharacterItem/CharacterItem";
 import { List } from "./CharacterList.styled";
 import { CardListProps } from "../../constants/types";
 import { PagePagination } from "../PagePagination/PagePagination";
+import { useAppSelector } from "../../redux/store";
+import {
+  selectCharactersData,
+  selectCharactersPages,
+  selectCharactersPage,
+} from "../../redux/selectors";
+import { setCharactersPage } from "../../redux/mainSlice";
 
-export const CharacterList: FC<CardListProps> = ({ charData, pages, page, setPage }) => {
+const CharacterList: FC<CardListProps> = () => {
+  const charactersData = useAppSelector(selectCharactersData);
+  const charactersPages = useAppSelector(selectCharactersPages);
+  const charactersPage = useAppSelector(selectCharactersPage);
+  // console.log("page", charactersPage);
+
   return (
     <>
       <List>
-        {charData?.map(({ id, name, image, status, species, location, episode }) => (
+        {charactersData?.map(({ id, name, image, status, species, location, episode }) => (
           <CharacterItem
             key={id}
             id={id}
@@ -21,7 +33,13 @@ export const CharacterList: FC<CardListProps> = ({ charData, pages, page, setPag
           />
         ))}
       </List>
-      <PagePagination pageQuantity={pages} page={page} setPage={setPage} />
+      <PagePagination
+        pageQuantity={charactersPages}
+        page={charactersPage}
+        setPage={setCharactersPage}
+      />
     </>
   );
 };
+
+export { CharacterList };

@@ -1,6 +1,6 @@
 import { gql, useLazyQuery } from "@apollo/client";
 
-const GET_LOCATION = gql`
+export const GET_LOCATION = gql`
   query GetLocation($page: Int, $name: String!, $type: String!, $dimension: String!) {
     locations(page: $page, filter: { name: $name, type: $type, dimension: $dimension }) {
       info {

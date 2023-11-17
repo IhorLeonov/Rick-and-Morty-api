@@ -1,8 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { HomePage } from "./Home.styled";
-
 import { CharacterList } from "../../components/CharacterList/CharacterList";
-import { useAllCharacters } from "../../hooks/useGetAllCharacters";
+// import { useAllCharacters } from "../../hooks/useGetAllCharacters";
 import { Character, FormInputValues, Location, Episode } from "../../constants/types";
 import { useGetFilteredData } from "../../hooks/useGetFilteredData";
 import { useGetLocation } from "../../hooks/useGetLocation";
@@ -12,14 +11,13 @@ import { LocationList } from "../../components/LocationList/LocationList";
 import { EpisodeList } from "../../components/EpisodeList/EpisodeList";
 import { Filter } from "../../components/Filter/Filter";
 import { initialValues } from "../../constants/values";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { getAllCharacters } from "../../redux/operations";
+import { selectCharactersPage } from "../../redux/selectors";
 
 const Home: FC = () => {
-  const [listViewing, setListViewing] = useState<"all" | "char" | "loc" | "epi">("all");
-
-  //redux state
-  const [charactersPage, setCharactersPage] = useState<number>(1);
-  const [charactersPages, setCharactersPages] = useState<number>(0);
-  const [charData, setCharData] = useState<Character[]>([]);
+  const dispatch = useAppDispatch();
+  const charactersPage = useAppSelector(selectCharactersPage);
 
   const [filtredCharPage, setFiltredCharPage] = useState<number>(1);
   const [filtredCharPages, setFiltredCharPages] = useState<number>(0);
@@ -33,37 +31,38 @@ const Home: FC = () => {
   const [episodesPages, setEpisodesPages] = useState<number>(0);
   const [episodesData, setEpisodesData] = useState<Episode[]>([]);
 
+  const [listViewing, setListViewing] = useState<"all" | "char" | "loc" | "epi">("all");
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isFilterApplied, setIsFilterApplied] = useState<boolean>(false);
-  const [inpValues, setInpValues] = useState<FormInputValues>(initialValues);
+  const [inputValues, setInputValues] = useState<FormInputValues>(initialValues);
 
-  const characters = useAllCharacters(charactersPage);
-  const location = useGetLocation(
-    locationPage,
-    inpValues.locName,
-    inpValues.locType,
-    inpValues.dimension
-  );
-  const episodes = useGetEpisode(episodesPage, inpValues.epiName, inpValues.epiCode);
+  // const hedleGetAllCharacters = () => {
+  //   dispatch(getAllCharacters(charactersPage));
+  // };
+
+  // const characters = useAllCharacters(charactersPage);
   const filtredChars = useGetFilteredData(
     filtredCharPage,
-    inpValues.charName,
-    inpValues.status,
-    inpValues.charType,
-    inpValues.species,
-    inpValues.gender
+    inputValues.charName,
+    inputValues.status,
+    inputValues.charType,
+    inputValues.species,
+    inputValues.gender
   );
+  const location = useGetLocation(
+    locationPage,
+    inputValues.locName,
+    inputValues.locType,
+    inputValues.dimension
+  );
+  const episodes = useGetEpisode(episodesPage, inputValues.epiName, inputValues.epiCode);
 
   useEffect(() => {
-    if (characters.data && !isFilterApplied) {
-      const { data, error, loading } = characters;
-      if (error) return setError(error?.message);
-      setCharactersPages(data.characters.info?.pages);
-      setCharData(data.characters?.results);
-      setIsLoading(loading);
+    if (!isFilterApplied) {
+      dispatch(getAllCharacters(charactersPage));
     }
-  }, [characters, isFilterApplied, charactersPage]);
+  }, [isFilterApplied, charactersPage, dispatch]);
 
   useEffect(() => {
     if (filtredChars.data && isFilterApplied) {
@@ -105,13 +104,13 @@ const Home: FC = () => {
   return (
     <HomePage>
       <Filter
-        setInpValues={setInpValues}
+        setInputValues={setInputValues}
         filtredChars={filtredChars}
         setListViewing={setListViewing}
         location={location}
         episodes={episodes}
         setIsFilterApplied={setIsFilterApplied}
-        setCharactersPage={setCharactersPage}
+        // setCharactersPage={setCharactersPage}
         setFiltredCharPage={setFiltredCharPage}
         setLocationPage={setLocationPage}
         setEpisodesPage={setEpisodesPage}
@@ -128,10 +127,10 @@ const Home: FC = () => {
       />
       {listViewing === "all" && !isLoading && (
         <CharacterList
-          charData={charData}
-          pages={charactersPages}
-          page={charactersPage}
-          setPage={setCharactersPage}
+        // charData={charData}
+        // pages={charactersPages}
+        // page={charactersPage}
+        // setPage={setCharactersPage}
         /> // all characters
       )}
       {listViewing === "char" && !isLoading && (

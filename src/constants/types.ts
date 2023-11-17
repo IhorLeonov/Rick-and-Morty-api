@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { ApolloError, LazyQueryExecFunction, OperationVariables } from "@apollo/client";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
 export interface Character {
   id: string;
@@ -35,9 +36,9 @@ export interface CardListProps {
   charData?: Character[];
   locData?: Location[];
   epiData?: Episode[];
-  pages: number;
-  page: number;
-  setPage: Dispatch<SetStateAction<number>>;
+  pages?: number;
+  page?: number;
+  setPage?: Dispatch<SetStateAction<number>>;
 }
 
 export interface CheckboxListProps {
@@ -52,7 +53,8 @@ export interface InputListProps {
 export interface PagePaginationProps {
   pageQuantity: number;
   page: number;
-  setPage: Dispatch<SetStateAction<number>>;
+  // setPage: Dispatch<SetStateAction<number>>;
+  setPage: ActionCreatorWithPayload<number, "main/setCharactersPage">;
 }
 
 type ListViewing = "all" | "char" | "loc" | "epi";
@@ -99,8 +101,8 @@ export interface FilterProps {
   episodes: EpisodesLazyQueryData;
   setIsFilterApplied: Dispatch<SetStateAction<boolean>>;
   setListViewing: Dispatch<SetStateAction<ListViewing>>;
-  setInpValues: Dispatch<SetStateAction<FormInputValues>>;
-  setCharactersPage: Dispatch<SetStateAction<number>>;
+  setInputValues: Dispatch<SetStateAction<FormInputValues>>;
+  // setCharactersPage: Dispatch<SetStateAction<number>>;
   setFiltredCharPage: Dispatch<SetStateAction<number>>;
   setLocationPage: Dispatch<SetStateAction<number>>;
   setEpisodesPage: Dispatch<SetStateAction<number>>;

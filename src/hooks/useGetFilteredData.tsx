@@ -1,6 +1,6 @@
 import { gql, useLazyQuery } from "@apollo/client";
 
-const GET_FILTERED_INFO = gql`
+export const GET_FILTERED_INFO = gql`
   query GetFilteredInfo(
     $page: Int
     $name: String!

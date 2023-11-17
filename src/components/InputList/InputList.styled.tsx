@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { Field } from "formik";
 
-export const InputBox = styled.div`
+export const List = styled.div`
+  position: absolute;
+  left: 241px;
   display: flex;
   flex-direction: column;
 
@@ -13,23 +15,7 @@ export const InputBox = styled.div`
   :first-child {
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
   }
-`;
-
-export const Title = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 8px 12px;
-  width: 260px;
-  height: 57px;
-
-  line-height: 1.5;
-  letter-spacing: 0.5px;
-  border-bottom: 1px solid black;
-  background-color: ${({ theme }) => theme.colors.white};
-  color: ${({ theme }) => theme.colors.darkGrey};
 `;
 
 export const Input = styled(Field)`
