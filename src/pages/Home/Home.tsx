@@ -66,10 +66,44 @@ const Home: FC = () => {
   useEffect(() => {
     if (!isFilterApplied) {
       dispatch(getAllCharacters(charactersPage));
-      console.log("я хук getAllCharacters");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFilterApplied, charactersPage]);
+
+  // getting filtered episodes
+  useEffect(() => {
+    const { epiName, epiCode } = inputValues;
+    const condition = epiName || epiCode;
+    if (isFilterApplied && condition) {
+      dispatch(
+        getEpisodes({
+          page: episodesPage,
+          name: inputValues.epiName,
+          episode: inputValues.epiCode,
+        })
+      );
+      setListViewing("epi");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFilterApplied, episodesPage]);
+
+  // getting filtered locations
+  useEffect(() => {
+    const { locName, locType, dimension } = inputValues;
+    const condition = locName || locType || dimension;
+    if (isFilterApplied && condition) {
+      dispatch(
+        getLocations({
+          page: locationsPage,
+          name: inputValues.locName,
+          type: inputValues.locType,
+          dimension: inputValues.dimension,
+        })
+      );
+      setListViewing("loc");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFilterApplied, locationsPage]);
 
   // getting filtered characters
   useEffect(() => {
@@ -87,47 +121,10 @@ const Home: FC = () => {
           gender: inputValues.gender,
         })
       );
-      console.log("я хук getFilteredChars");
       setListViewing("char");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFilterApplied, filteredCharPage, inputValues]);
-
-  // getting filtered locations
-  useEffect(() => {
-    const { locName, locType, dimension } = inputValues;
-    const condition = locName || locType || dimension;
-    if (isFilterApplied && condition) {
-      dispatch(
-        getLocations({
-          page: locationsPage,
-          name: inputValues.locName,
-          type: inputValues.locType,
-          dimension: inputValues.dimension,
-        })
-      );
-      setListViewing("loc"); ///
-      console.log("я хук getLocations");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFilterApplied, locationsPage]);
-
-  useEffect(() => {
-    const { epiName, epiCode } = inputValues;
-    const condition = epiName || epiCode;
-    if (isFilterApplied && condition) {
-      dispatch(
-        getEpisodes({
-          page: episodesPage,
-          name: inputValues.epiName,
-          episode: inputValues.epiCode,
-        })
-      );
-      console.log("я хук getEpisodes");
-      setListViewing("epi"); ///
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFilterApplied, episodesPage]);
 
   useEffect(() => {
     window.scroll({

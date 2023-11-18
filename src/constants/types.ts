@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
 export interface Character {
-  id: string;
+  id?: string;
   name: string;
   image: string;
   status: string;
@@ -77,4 +77,26 @@ export interface FormInputValues {
 export interface FilterProps {
   setIsFilterApplied: Dispatch<SetStateAction<boolean>>;
   setListViewing: Dispatch<SetStateAction<ListViewing>>;
+}
+
+export interface MainState {
+  isLoading: boolean;
+  error: string | null;
+  inputValues: FormInputValues;
+  listViewing: ListViewing;
+  data: {
+    charactersData: Character[];
+    characterData: Character | null;
+    filteredCharData: Character[];
+    locationsData: Location[];
+    episodesData: Episode[];
+    charactersPage: number;
+    filteredCharPage: number;
+    locationsPage: number;
+    episodesPage: number;
+    charactersPages: number;
+    filteredCharPages: number;
+    locationsPages: number;
+    episodesPages: number;
+  };
 }

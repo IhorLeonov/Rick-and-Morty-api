@@ -3,6 +3,7 @@ import { RootState } from "./store";
 export const selectError = (state: RootState) => state.main.error;
 export const selectIsLoading = (state: RootState) => state.main.isLoading;
 export const selectInputValues = (state: RootState) => state.main.inputValues;
+export const selectCharacterData = (state: RootState) => state.main.data.characterData;
 
 export const selectCharactersData = (state: RootState) => state.main.data.charactersData;
 export const selectCharactersPage = (state: RootState) => state.main.data.charactersPage;

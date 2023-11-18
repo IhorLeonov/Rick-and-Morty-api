@@ -1,30 +1,13 @@
 import { PayloadAction, isAnyOf, createSlice } from "@reduxjs/toolkit";
-import { initialValues } from "../constants/values";
-import { Character, Episode, FormInputValues, Location } from "../constants/types";
-import { getAllCharacters, getEpisodes, getFilteredChars, getLocations } from "./operations";
-
-type ListViewing = "all" | "char" | "loc" | "epi";
-
-interface MainState {
-  isLoading: boolean;
-  error: string | null;
-  inputValues: FormInputValues;
-  listViewing: ListViewing;
-  data: {
-    charactersData: Character[];
-    charactersPage: number;
-    charactersPages: number;
-    filteredCharData: Character[];
-    filteredCharPage: number;
-    filteredCharPages: number;
-    locationsData: Location[];
-    locationsPage: number;
-    locationsPages: number;
-    episodesData: Episode[];
-    episodesPage: number;
-    episodesPages: number;
-  };
-}
+import { initialValues, initialDataState } from "../constants/values";
+import { MainState, ListViewing, FormInputValues } from "../constants/types";
+import {
+  getAllCharacters,
+  getCharacter,
+  getEpisodes,
+  getFilteredChars,
+  getLocations,
+} from "./operations";
 
 const handleSameFulfilled = (state: MainState) => {
   state.isLoading = false;
@@ -34,25 +17,9 @@ const handleSameFulfilled = (state: MainState) => {
 const initialState = {
   isLoading: false,
   error: null,
-  inputValues: initialValues,
   listViewing: "all",
-  data: {
-    charactersData: [],
-    charactersPage: 1,
-    charactersPages: 0,
-    //
-    filteredCharData: [],
-    filteredCharPage: 1,
-    filteredCharPages: 0,
-    //
-    locationsData: [],
-    locationsPage: 1,
-    locationsPages: 0,
-    //
-    episodesData: [],
-    episodesPage: 1,
-    episodesPages: 0,
-  },
+  inputValues: initialValues,
+  data: initialDataState,
 } as MainState;
 
 const mainSlice = createSlice({
@@ -113,12 +80,18 @@ const mainSlice = createSlice({
         state.data.episodesData = episodes.results;
         state.data.episodesPages = episodes.info.pages;
       })
+      .addCase(getCharacter.fulfilled, (state, action) => {
+        const { character } = action.payload.data;
+        handleSameFulfilled(state);
+        state.data.characterData = character;
+      })
       .addMatcher(
         isAnyOf(
           getAllCharacters.pending,
           getFilteredChars.pending,
           getLocations.pending,
-          getEpisodes.pending
+          getEpisodes.pending,
+          getCharacter.pending
         ),
         (state) => {
           state.isLoading = true;
@@ -129,7 +102,8 @@ const mainSlice = createSlice({
           getAllCharacters.rejected,
           getFilteredChars.rejected,
           getLocations.rejected,
-          getEpisodes.rejected
+          getEpisodes.rejected,
+          getCharacter.rejected
         ),
         (state, action) => {
           state.isLoading = false;

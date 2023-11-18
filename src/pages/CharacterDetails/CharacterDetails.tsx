@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useGetCharacter } from "../../hooks/useGetCharacter";
+import { useEffect } from "react";
 import {
   CardItem,
   Image,
@@ -10,16 +10,23 @@ import {
   Label,
   Caption,
 } from "../../components/CharacterItem/CharacterItem.styled";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { getCharacter } from "../../redux/operations";
+import { selectCharacterData, selectIsLoading } from "../../redux/selectors";
 
 const Character = () => {
   const { id } = useParams();
-  const { data, loading, error } = useGetCharacter(id);
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(selectIsLoading);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Something wrong</p>;
+  useEffect(() => {
+    if (id) dispatch(getCharacter(id));
+  }, [id, dispatch]);
 
-  if (data && !loading) {
-    const { name, image, status, species, location, episode } = data.character;
+  const characterData = useAppSelector(selectCharacterData);
+
+  if (characterData !== null && !isLoading) {
+    const { name, image, status, species, location, episode } = characterData;
     return (
       <CardItem style={{ paddingTop: 56 }}>
         <Image style={{ width: 595, height: 572 }} src={image} alt="Character picture" />
