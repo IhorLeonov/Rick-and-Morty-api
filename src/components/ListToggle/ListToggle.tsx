@@ -1,17 +1,21 @@
 import { FC } from "react";
 import { ListToggler, ToggleButton } from "./ListToggle.styled";
 import { ListToggleProps } from "../../constants/types";
+import { useAppSelector } from "../../redux/store";
+import {
+  selectFilteredCharData,
+  selectLocationsData,
+  selectEpisodesData,
+} from "../../redux/selectors";
 
-export const ListToggle: FC<ListToggleProps> = ({
-  listViewing,
-  setListViewing,
-  filtredCharData,
-  locationData,
-  episodesData,
-}) => {
-  const conditionChar = locationData.length > 0 || episodesData.length > 0;
+export const ListToggle: FC<ListToggleProps> = ({ listViewing, setListViewing }) => {
+  const filtredCharData = useAppSelector(selectFilteredCharData);
+  const locationsData = useAppSelector(selectLocationsData);
+  const episodesData = useAppSelector(selectEpisodesData);
+
+  const conditionChar = locationsData.length > 0 || episodesData.length > 0;
   const conditionLoc = filtredCharData.length > 0 || episodesData.length > 0;
-  const conditionEpi = locationData.length > 0 || filtredCharData.length > 0;
+  const conditionEpi = locationsData.length > 0 || filtredCharData.length > 0;
 
   const checkIsActive = (list: string) => {
     if (listViewing === list) return "#FF9800";
@@ -29,7 +33,7 @@ export const ListToggle: FC<ListToggleProps> = ({
           Characters
         </ToggleButton>
       )}
-      {locationData.length > 0 && conditionLoc && (
+      {locationsData.length > 0 && conditionLoc && (
         <ToggleButton
           style={{ color: checkIsActive("loc") }}
           type="button"

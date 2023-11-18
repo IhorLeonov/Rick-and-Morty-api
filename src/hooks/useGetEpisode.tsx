@@ -20,8 +20,8 @@ export const GET_EPISODE = gql`
 export const useGetEpisode = (page: number, name: string, episodeCode: string) => {
   const [getEpisode, { loading, error, data, called }] = useLazyQuery(GET_EPISODE, {
     variables: {
-      name,
       page,
+      name,
       episode: episodeCode,
     },
   });

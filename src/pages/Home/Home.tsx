@@ -1,159 +1,174 @@
 import { FC, useEffect, useState } from "react";
 import { HomePage } from "./Home.styled";
 import { CharacterList } from "../../components/CharacterList/CharacterList";
-// import { useAllCharacters } from "../../hooks/useGetAllCharacters";
-import { Character, FormInputValues, Location, Episode } from "../../constants/types";
-import { useGetFilteredData } from "../../hooks/useGetFilteredData";
-import { useGetLocation } from "../../hooks/useGetLocation";
-import { useGetEpisode } from "../../hooks/useGetEpisode";
 import { ListToggle } from "../../components/ListToggle/ListToggle";
 import { LocationList } from "../../components/LocationList/LocationList";
 import { EpisodeList } from "../../components/EpisodeList/EpisodeList";
 import { Filter } from "../../components/Filter/Filter";
-import { initialValues } from "../../constants/values";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { getAllCharacters } from "../../redux/operations";
-import { selectCharactersPage } from "../../redux/selectors";
+import { ListViewing } from "../../constants/types";
+import {
+  getAllCharacters,
+  getEpisodes,
+  getFilteredChars,
+  getLocations,
+} from "../../redux/operations";
+import {
+  selectCharactersPage,
+  selectFilteredCharPage,
+  selectLocationsPage,
+  selectEpisodesPage,
+  selectInputValues,
+  selectError,
+  selectIsLoading,
+  selectCharactersData,
+  selectCharactersPages,
+  selectFilteredCharData,
+  selectFilteredCharPages,
+  selectLocationsData,
+  selectLocationsPages,
+  selectEpisodesData,
+  selectEpisodesPages,
+} from "../../redux/selectors";
+import {
+  setCharactersPage,
+  setFilteredCharPage,
+  setLocationsPage,
+  setEpisodesPage,
+} from "../../redux/mainSlice";
 
 const Home: FC = () => {
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(selectIsLoading);
+  const error = useAppSelector(selectError);
+  const inputValues = useAppSelector(selectInputValues);
+
+  const charactersData = useAppSelector(selectCharactersData);
   const charactersPage = useAppSelector(selectCharactersPage);
+  const charactersPages = useAppSelector(selectCharactersPages);
 
-  const [filtredCharPage, setFiltredCharPage] = useState<number>(1);
-  const [filtredCharPages, setFiltredCharPages] = useState<number>(0);
-  const [filtredCharData, setFiltredCharData] = useState<Character[]>([]);
+  const filteredCharData = useAppSelector(selectFilteredCharData);
+  const filteredCharPage = useAppSelector(selectFilteredCharPage);
+  const filteredCharPages = useAppSelector(selectFilteredCharPages);
 
-  const [locationPage, setLocationPage] = useState<number>(1);
-  const [locationPages, setLocationPages] = useState<number>(0);
-  const [locationData, setLocationData] = useState<Location[]>([]);
+  const locationsData = useAppSelector(selectLocationsData);
+  const locationsPage = useAppSelector(selectLocationsPage);
+  const locationsPages = useAppSelector(selectLocationsPages);
 
-  const [episodesPage, setEpisodesPage] = useState<number>(1);
-  const [episodesPages, setEpisodesPages] = useState<number>(0);
-  const [episodesData, setEpisodesData] = useState<Episode[]>([]);
+  const episodesData = useAppSelector(selectEpisodesData);
+  const episodesPage = useAppSelector(selectEpisodesPage);
+  const episodesPages = useAppSelector(selectEpisodesPages);
 
-  const [listViewing, setListViewing] = useState<"all" | "char" | "loc" | "epi">("all");
-  const [error, setError] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [listViewing, setListViewing] = useState<ListViewing>("all");
   const [isFilterApplied, setIsFilterApplied] = useState<boolean>(false);
-  const [inputValues, setInputValues] = useState<FormInputValues>(initialValues);
 
-  // const hedleGetAllCharacters = () => {
-  //   dispatch(getAllCharacters(charactersPage));
-  // };
-
-  // const characters = useAllCharacters(charactersPage);
-  const filtredChars = useGetFilteredData(
-    filtredCharPage,
-    inputValues.charName,
-    inputValues.status,
-    inputValues.charType,
-    inputValues.species,
-    inputValues.gender
-  );
-  const location = useGetLocation(
-    locationPage,
-    inputValues.locName,
-    inputValues.locType,
-    inputValues.dimension
-  );
-  const episodes = useGetEpisode(episodesPage, inputValues.epiName, inputValues.epiCode);
-
+  // getting all characters
   useEffect(() => {
     if (!isFilterApplied) {
       dispatch(getAllCharacters(charactersPage));
+      console.log("я хук getAllCharacters");
     }
-  }, [isFilterApplied, charactersPage, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFilterApplied, charactersPage]);
+
+  // getting filtered characters
+  useEffect(() => {
+    const { charName, status, charType, species, gender } = inputValues;
+    const condition = charName || status || charType || species || gender;
+
+    if (isFilterApplied && condition) {
+      dispatch(
+        getFilteredChars({
+          page: filteredCharPage,
+          name: inputValues.charName,
+          status: inputValues.status,
+          type: inputValues.charType,
+          species: inputValues.species,
+          gender: inputValues.gender,
+        })
+      );
+      console.log("я хук getFilteredChars");
+      setListViewing("char");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFilterApplied, filteredCharPage, inputValues]);
+
+  // getting filtered locations
+  useEffect(() => {
+    const { locName, locType, dimension } = inputValues;
+    const condition = locName || locType || dimension;
+    if (isFilterApplied && condition) {
+      dispatch(
+        getLocations({
+          page: locationsPage,
+          name: inputValues.locName,
+          type: inputValues.locType,
+          dimension: inputValues.dimension,
+        })
+      );
+      setListViewing("loc"); ///
+      console.log("я хук getLocations");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFilterApplied, locationsPage]);
 
   useEffect(() => {
-    if (filtredChars.data && isFilterApplied) {
-      const { data, error, loading } = filtredChars;
-      if (error) return setError(error?.message);
-      setFiltredCharPages(data.characters.info?.pages);
-      setFiltredCharData(data.characters?.results);
-      setIsLoading(loading);
+    const { epiName, epiCode } = inputValues;
+    const condition = epiName || epiCode;
+    if (isFilterApplied && condition) {
+      dispatch(
+        getEpisodes({
+          page: episodesPage,
+          name: inputValues.epiName,
+          episode: inputValues.epiCode,
+        })
+      );
+      console.log("я хук getEpisodes");
+      setListViewing("epi"); ///
     }
-  }, [filtredChars, isFilterApplied, filtredCharPage]);
-
-  useEffect(() => {
-    if (location.data && isFilterApplied) {
-      const { data, error, loading } = location;
-      if (error) return setError(error?.message);
-      setLocationPages(data.locations.info?.pages);
-      setLocationData(data.locations?.results);
-      setIsLoading(loading);
-    }
-  }, [location, isFilterApplied, locationPage]);
-
-  useEffect(() => {
-    if (episodes.data && isFilterApplied) {
-      const { data, error, loading } = episodes;
-      if (error) return setError(error?.message);
-      setEpisodesPages(data.episodes.info?.pages);
-      setEpisodesData(data.episodes?.results);
-      setIsLoading(loading);
-    }
-  }, [episodes, isFilterApplied, episodesPage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFilterApplied, episodesPage]);
 
   useEffect(() => {
     window.scroll({
       top: 400,
     });
-  }, [charactersPage, filtredCharPage, locationPage, episodesPage]);
+  }, [charactersPage, filteredCharPage, locationsPage, episodesPage]);
 
-  if (error) return <p>Something wrong</p>;
+  if (error) return <p>{error}</p>;
   return (
     <HomePage>
-      <Filter
-        setInputValues={setInputValues}
-        filtredChars={filtredChars}
-        setListViewing={setListViewing}
-        location={location}
-        episodes={episodes}
-        setIsFilterApplied={setIsFilterApplied}
-        // setCharactersPage={setCharactersPage}
-        setFiltredCharPage={setFiltredCharPage}
-        setLocationPage={setLocationPage}
-        setEpisodesPage={setEpisodesPage}
-        setFiltredCharData={setFiltredCharData}
-        setLocationData={setLocationData}
-        setEpisodesData={setEpisodesData}
-      />
-      <ListToggle
-        listViewing={listViewing}
-        setListViewing={setListViewing}
-        filtredCharData={filtredCharData}
-        locationData={locationData}
-        episodesData={episodesData}
-      />
+      <Filter setListViewing={setListViewing} setIsFilterApplied={setIsFilterApplied} />
+      <ListToggle listViewing={listViewing} setListViewing={setListViewing} />
       {listViewing === "all" && !isLoading && (
         <CharacterList
-        // charData={charData}
-        // pages={charactersPages}
-        // page={charactersPage}
-        // setPage={setCharactersPage}
+          charData={charactersData}
+          page={charactersPage}
+          pages={charactersPages}
+          setPage={setCharactersPage}
         /> // all characters
       )}
       {listViewing === "char" && !isLoading && (
         <CharacterList
-          charData={filtredCharData}
-          pages={filtredCharPages}
-          page={filtredCharPage}
-          setPage={setFiltredCharPage}
+          charData={filteredCharData}
+          page={filteredCharPage}
+          pages={filteredCharPages}
+          setPage={setFilteredCharPage}
         /> // filtred characters
       )}
       {listViewing === "loc" && !isLoading && (
         <LocationList
-          locData={locationData}
-          pages={locationPages}
-          page={locationPage}
-          setPage={setLocationPage}
+          locData={locationsData}
+          page={locationsPage}
+          pages={locationsPages}
+          setPage={setLocationsPage}
         /> // filtred locations
       )}
       {listViewing === "epi" && !isLoading && (
         <EpisodeList
           epiData={episodesData}
-          pages={episodesPages}
           page={episodesPage}
+          pages={episodesPages}
           setPage={setEpisodesPage}
         /> // filtred episodes
       )}
