@@ -7,29 +7,13 @@ import { EpisodeList } from "../../components/EpisodeList/EpisodeList";
 import { Filter } from "../../components/Filter/Filter";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { ListViewing } from "../../constants/types";
+import { selectData, selectError, selectIsLoading, selectInputValues } from "../../redux/selectors";
 import {
   getAllCharacters,
   getEpisodes,
   getFilteredChars,
   getLocations,
 } from "../../redux/operations";
-import {
-  selectCharactersPage,
-  selectFilteredCharPage,
-  selectLocationsPage,
-  selectEpisodesPage,
-  selectInputValues,
-  selectError,
-  selectIsLoading,
-  selectCharactersData,
-  selectCharactersPages,
-  selectFilteredCharData,
-  selectFilteredCharPages,
-  selectLocationsData,
-  selectLocationsPages,
-  selectEpisodesData,
-  selectEpisodesPages,
-} from "../../redux/selectors";
 import {
   setCharactersPage,
   setFilteredCharPage,
@@ -42,22 +26,7 @@ const Home: FC = () => {
   const isLoading = useAppSelector(selectIsLoading);
   const error = useAppSelector(selectError);
   const inputValues = useAppSelector(selectInputValues);
-
-  const charactersData = useAppSelector(selectCharactersData);
-  const charactersPage = useAppSelector(selectCharactersPage);
-  const charactersPages = useAppSelector(selectCharactersPages);
-
-  const filteredCharData = useAppSelector(selectFilteredCharData);
-  const filteredCharPage = useAppSelector(selectFilteredCharPage);
-  const filteredCharPages = useAppSelector(selectFilteredCharPages);
-
-  const locationsData = useAppSelector(selectLocationsData);
-  const locationsPage = useAppSelector(selectLocationsPage);
-  const locationsPages = useAppSelector(selectLocationsPages);
-
-  const episodesData = useAppSelector(selectEpisodesData);
-  const episodesPage = useAppSelector(selectEpisodesPage);
-  const episodesPages = useAppSelector(selectEpisodesPages);
+  const data = useAppSelector(selectData);
 
   const [listViewing, setListViewing] = useState<ListViewing>("all");
   const [isFilterApplied, setIsFilterApplied] = useState<boolean>(false);
@@ -65,10 +34,10 @@ const Home: FC = () => {
   // getting all characters
   useEffect(() => {
     if (!isFilterApplied) {
-      dispatch(getAllCharacters(charactersPage));
+      dispatch(getAllCharacters(data.charactersPage));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFilterApplied, charactersPage]);
+  }, [isFilterApplied, data.charactersPage]);
 
   // getting filtered episodes
   useEffect(() => {
@@ -77,7 +46,7 @@ const Home: FC = () => {
     if (isFilterApplied && condition) {
       dispatch(
         getEpisodes({
-          page: episodesPage,
+          page: data.episodesPage,
           name: inputValues.epiName,
           episode: inputValues.epiCode,
         })
@@ -85,7 +54,7 @@ const Home: FC = () => {
       setListViewing("epi");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFilterApplied, episodesPage]);
+  }, [isFilterApplied, data.episodesPage]);
 
   // getting filtered locations
   useEffect(() => {
@@ -94,7 +63,7 @@ const Home: FC = () => {
     if (isFilterApplied && condition) {
       dispatch(
         getLocations({
-          page: locationsPage,
+          page: data.locationsPage,
           name: inputValues.locName,
           type: inputValues.locType,
           dimension: inputValues.dimension,
@@ -103,7 +72,7 @@ const Home: FC = () => {
       setListViewing("loc");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFilterApplied, locationsPage]);
+  }, [isFilterApplied, data.locationsPage]);
 
   // getting filtered characters
   useEffect(() => {
@@ -113,7 +82,7 @@ const Home: FC = () => {
     if (isFilterApplied && condition) {
       dispatch(
         getFilteredChars({
-          page: filteredCharPage,
+          page: data.filteredCharPage,
           name: inputValues.charName,
           status: inputValues.status,
           type: inputValues.charType,
@@ -124,13 +93,13 @@ const Home: FC = () => {
       setListViewing("char");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFilterApplied, filteredCharPage, inputValues]);
+  }, [isFilterApplied, data.filteredCharPage, inputValues]);
 
   useEffect(() => {
     window.scroll({
       top: 400,
     });
-  }, [charactersPage, filteredCharPage, locationsPage, episodesPage]);
+  }, [data.charactersPage, data.filteredCharPage, data.locationsPage, data.episodesPage]);
 
   if (error) return <p>{error}</p>;
   return (
@@ -139,33 +108,33 @@ const Home: FC = () => {
       <ListToggle listViewing={listViewing} setListViewing={setListViewing} />
       {listViewing === "all" && !isLoading && (
         <CharacterList
-          charData={charactersData}
-          page={charactersPage}
-          pages={charactersPages}
+          charData={data.charactersData}
+          page={data.charactersPage}
+          pages={data.charactersPages}
           setPage={setCharactersPage}
         /> // all characters
       )}
       {listViewing === "char" && !isLoading && (
         <CharacterList
-          charData={filteredCharData}
-          page={filteredCharPage}
-          pages={filteredCharPages}
+          charData={data.filteredCharData}
+          page={data.filteredCharPage}
+          pages={data.filteredCharPages}
           setPage={setFilteredCharPage}
         /> // filtred characters
       )}
       {listViewing === "loc" && !isLoading && (
         <LocationList
-          locData={locationsData}
-          page={locationsPage}
-          pages={locationsPages}
+          locData={data.locationsData}
+          page={data.locationsPage}
+          pages={data.locationsPages}
           setPage={setLocationsPage}
         /> // filtred locations
       )}
       {listViewing === "epi" && !isLoading && (
         <EpisodeList
-          epiData={episodesData}
-          page={episodesPage}
-          pages={episodesPages}
+          epiData={data.episodesData}
+          page={data.episodesPage}
+          pages={data.episodesPages}
           setPage={setEpisodesPage}
         /> // filtred episodes
       )}

@@ -1,4 +1,5 @@
 import { Character } from "../../constants/types";
+import { checkStatus } from "../../helpers/helpers";
 import {
   CardItem,
   Image,
@@ -21,11 +22,6 @@ export const CharacterItem: FC<Character> = ({
   location,
   episode,
 }) => {
-  const checkStatus = () => {
-    if (status === "Alive") return "#5C4";
-    if (status === "Dead") return "#D63D2E";
-  };
-
   return (
     <CardItem>
       <Image src={image} alt="Character picture" />
@@ -34,7 +30,7 @@ export const CharacterItem: FC<Character> = ({
           <Name>{name}</Name>
         </Link>
         <Status>
-          <Indicator style={{ backgroundColor: checkStatus() }} />
+          <Indicator style={{ backgroundColor: checkStatus(status) }} />
           {status} - {species}
         </Status>
         <Label style={{ fontSize: 15 }}>Last known location:</Label>

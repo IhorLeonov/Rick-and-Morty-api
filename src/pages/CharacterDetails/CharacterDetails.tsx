@@ -13,6 +13,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { getCharacter } from "../../redux/operations";
 import { selectCharacterData, selectIsLoading } from "../../redux/selectors";
+import { checkStatus } from "../../helpers/helpers";
 
 const Character = () => {
   const { id } = useParams();
@@ -22,6 +23,12 @@ const Character = () => {
   useEffect(() => {
     if (id) dispatch(getCharacter(id));
   }, [id, dispatch]);
+
+  useEffect(() => {
+    window.scroll({
+      top: 400,
+    });
+  }, []);
 
   const characterData = useAppSelector(selectCharacterData);
 
@@ -33,7 +40,7 @@ const Character = () => {
         <Wrapper style={{ width: "100%", height: 572, paddingLeft: 42, paddingRight: 42 }}>
           <Name>{name}</Name>
           <Status>
-            <Indicator />
+            <Indicator style={{ backgroundColor: checkStatus(status) }} />
             {status} - {species}
           </Status>
           <Label style={{ fontSize: 15 }}>Last known location:</Label>
