@@ -1,17 +1,18 @@
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+// import List from "@mui/material/List";
+// import Divider from "@mui/material/Divider";
+// import ListItem from "@mui/material/ListItem";
+// import ListItemButton from "@mui/material/ListItemButton";
+// import ListItemIcon from "@mui/material/ListItemIcon";
+// import ListItemText from "@mui/material/ListItemText";
+// import InboxIcon from "@mui/icons-material/MoveToInbox";
+// import MailIcon from "@mui/icons-material/Mail";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { toggleDrawer } from "../../redux/mainSlice";
 import { selectIsDrawerOpen } from "../../redux/selectors";
+import { Title } from "./Drawer.styled";
 
 export default function TemporaryDrawer() {
   const dispatch = useAppDispatch();
@@ -32,14 +33,31 @@ export default function TemporaryDrawer() {
     <div>
       <>
         <Button onClick={handleOpen(true)}>Open</Button>
-        <Drawer anchor="right" open={isDrawerOpen} onClose={handleOpen(false)}>
+        <Drawer
+          anchor="right"
+          open={isDrawerOpen}
+          onClose={handleOpen(false)}
+          sx={{
+            ".css-1160xiw-MuiPaper-root-MuiDrawer-paper": {
+              height: 571,
+              borderRadius: "9px 0px 0px 9px",
+              top: "calc((100vh - 571px)/2)",
+              pb: 1,
+            },
+          }}
+        >
           <Box
-            sx={{ width: 419 }}
+            sx={{
+              width: 419,
+              display: "flex",
+              flexDirection: "column",
+              //   justifyContent: "space-between",
+            }}
             role="presentation"
-            onClick={handleOpen(false)}
+            // onClick={handleOpen(false)}
             onKeyDown={handleOpen(false)}
           >
-            <List>
+            {/* <List>
               {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
                 <ListItem key={text} disablePadding>
                   <ListItemButton>
@@ -48,9 +66,9 @@ export default function TemporaryDrawer() {
                   </ListItemButton>
                 </ListItem>
               ))}
-            </List>
-            <Divider />
-            <List>
+            </List> */}
+            {/* <Divider /> */}
+            {/* <List>
               {["All mail", "Trash", "Spam"].map((text, index) => (
                 <ListItem key={text} disablePadding>
                   <ListItemButton>
@@ -59,7 +77,15 @@ export default function TemporaryDrawer() {
                   </ListItemButton>
                 </ListItem>
               ))}
-            </List>
+            </List> */}
+            <Box sx={{ height: 511 }}>
+              <Title>History</Title>
+            </Box>
+            <Box sx={{ p: 1 }}>
+              <Button variant="text" sx={{ ml: 1, width: 80 }}>
+                Close
+              </Button>
+            </Box>
           </Box>
         </Drawer>
       </>
