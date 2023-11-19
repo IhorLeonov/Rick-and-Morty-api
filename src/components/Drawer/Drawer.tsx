@@ -38,12 +38,15 @@ export default function TemporaryDrawer() {
           open={isDrawerOpen}
           onClose={handleOpen(false)}
           sx={{
-            ".css-1160xiw-MuiPaper-root-MuiDrawer-paper": {
+            ".MuiDrawer-paper": {
               height: 571,
               borderRadius: "9px 0px 0px 9px",
               top: "calc((100vh - 571px)/2)",
               pb: 1,
             },
+            // ".css-1ab2xsx": {
+            //   height: 571,
+            // },
           }}
         >
           <Box
