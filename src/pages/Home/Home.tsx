@@ -6,7 +6,6 @@ import { LocationList } from "../../components/LocationList/LocationList";
 import { EpisodeList } from "../../components/EpisodeList/EpisodeList";
 import { Filter } from "../../components/Filter/Filter";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { ListViewing } from "../../constants/types";
 import { selectData, selectError, selectIsLoading, selectInputValues } from "../../redux/selectors";
 import {
   getAllCharacters,
@@ -22,14 +21,14 @@ import {
 } from "../../redux/mainSlice";
 
 const Home: FC = () => {
+  const [listViewing, setListViewing] = useState<string>("all");
+  const [isFilterApplied, setIsFilterApplied] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(selectIsLoading);
   const error = useAppSelector(selectError);
   const inputValues = useAppSelector(selectInputValues);
   const data = useAppSelector(selectData);
-
-  const [listViewing, setListViewing] = useState<ListViewing>("all");
-  const [isFilterApplied, setIsFilterApplied] = useState<boolean>(false);
 
   // getting all characters
   useEffect(() => {
@@ -105,7 +104,9 @@ const Home: FC = () => {
   return (
     <HomePage>
       <Filter setListViewing={setListViewing} setIsFilterApplied={setIsFilterApplied} />
-      <ListToggle listViewing={listViewing} setListViewing={setListViewing} />
+      {listViewing !== "all" && (
+        <ListToggle listViewing={listViewing} setListViewing={setListViewing} />
+      )}
       {listViewing === "all" && !isLoading && (
         <CharacterList
           charData={data.charactersData}

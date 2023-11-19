@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+export const Btn = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0 16px;
   min-width: 143px;
   height: 57px;
@@ -12,6 +15,6 @@ export const Button = styled.button`
   text-transform: uppercase;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.blue};
+    color: ${({ theme }) => theme.colors.blue} !important;
   }
 `;

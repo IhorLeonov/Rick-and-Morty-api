@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ListToggler, ToggleButton } from "./ListToggle.styled";
+import { ListToggler } from "./ListToggle.styled";
 import { ListToggleProps } from "../../constants/types";
 import { useAppSelector } from "../../redux/store";
 import {
@@ -7,6 +7,7 @@ import {
   selectLocationsData,
   selectEpisodesData,
 } from "../../redux/selectors";
+import { Button } from "../Button/Button";
 
 export const ListToggle: FC<ListToggleProps> = ({ listViewing, setListViewing }) => {
   const filtredCharData = useAppSelector(selectFilteredCharData);
@@ -17,6 +18,12 @@ export const ListToggle: FC<ListToggleProps> = ({ listViewing, setListViewing })
   const conditionLoc = filtredCharData.length > 0 || episodesData.length > 0;
   const conditionEpi = locationsData.length > 0 || filtredCharData.length > 0;
 
+  const buttonList = [
+    { name: "Characters", data: filtredCharData, condition: conditionChar, spec: "char" },
+    { name: "Locations", data: locationsData, condition: conditionLoc, spec: "loc" },
+    { name: "Episodes", data: episodesData, condition: conditionEpi, spec: "epi" },
+  ];
+
   const checkIsActive = (list: string) => {
     if (listViewing === list) return "#FF9800";
     return "#272B33";
@@ -24,33 +31,26 @@ export const ListToggle: FC<ListToggleProps> = ({ listViewing, setListViewing })
 
   return (
     <ListToggler>
-      {filtredCharData.length > 0 && conditionChar && (
-        <ToggleButton
-          style={{ color: checkIsActive("char") }}
-          type="button"
-          onClick={() => setListViewing("char")}
-        >
-          Characters
-        </ToggleButton>
-      )}
-      {locationsData.length > 0 && conditionLoc && (
-        <ToggleButton
-          style={{ color: checkIsActive("loc") }}
-          type="button"
-          onClick={() => setListViewing("loc")}
-        >
-          Locations
-        </ToggleButton>
-      )}
-      {episodesData.length > 0 && conditionEpi && (
-        <ToggleButton
-          style={{ color: checkIsActive("epi") }}
-          type="button"
-          onClick={() => setListViewing("epi")}
-        >
-          Episodes
-        </ToggleButton>
-      )}
+      {buttonList.map(({ data, condition, name, spec }) => {
+        return (
+          <div key={name}>
+            {data.length > 0 && condition && (
+              <Button
+                styles={{
+                  color: checkIsActive(spec),
+                  height: 42,
+                  minWidth: 126,
+                  fontWeight: 500,
+                  textTransform: "none",
+                }}
+                type={"button"}
+                onClick={() => setListViewing(spec)}
+                text={name}
+              ></Button>
+            )}
+          </div>
+        );
+      })}
     </ListToggler>
   );
 };

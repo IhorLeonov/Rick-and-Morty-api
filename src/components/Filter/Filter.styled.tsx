@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Form } from "formik";
+import { Btn } from "../Button/Button.styled";
 
 export const Title = styled.p`
   display: flex;
@@ -21,7 +22,6 @@ export const Title = styled.p`
 export const FilterBox = styled.div`
   position: relative;
   display: flex;
-  padding-bottom: 20px;
 `;
 
 export const FormikForm = styled(Form)`
@@ -32,25 +32,7 @@ export const FormikForm = styled(Form)`
   z-index: 2;
 `;
 
-export const Button = styled.button`
-  padding: 0 16px;
-  min-width: 143px;
-  height: 57px;
-
-  color: ${({ theme }) => theme.colors.darkGrey};
-  background-color: ${({ theme }) => theme.colors.white};
-  line-height: 1.5;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.blue};
-  }
-`;
-
-export const SelectBtn = styled(Button)`
-  display: flex;
-  align-items: center;
+export const SelectButton = styled(Btn)`
   justify-content: space-between;
   padding: 8px 20px 8px 12px;
   width: 213px;
@@ -66,7 +48,3 @@ export const SelectBtn = styled(Button)`
     color: ${({ theme }) => theme.colors.darkGrey};
   }
 `;
-
-export const SubmitBtn = styled(Button)``;
-
-export const FilterBtn = styled(Button)``;

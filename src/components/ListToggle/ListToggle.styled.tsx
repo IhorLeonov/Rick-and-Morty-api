@@ -2,16 +2,9 @@ import styled from "styled-components";
 
 export const ListToggler = styled.div`
   display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-`;
+  margin-top: 20px;
 
-export const ToggleButton = styled.button`
-  display: flex;
-  padding: 8px 14px;
-
-  &:hover,
-  &:focus {
-    color: ${({ theme }) => theme.colors.blue};
+  & :only-child {
+    margin-right: 20px;
   }
 `;

@@ -2,7 +2,7 @@ import { Formik } from "formik";
 import { Icon } from "../../helpers/IconSelector";
 import { CheckboxList } from "../CheckboxList/CheckboxList";
 import { InputList } from "../InputList/InputList";
-import { FilterBox, FilterBtn, FormikForm, SelectBtn, SubmitBtn, Title } from "./Filter.styled";
+import { FilterBox, FormikForm, SelectButton, Title } from "./Filter.styled";
 import { FilterProps, FormInputValues } from "../../constants/types";
 import { FC, useState } from "react";
 import { initialValues } from "../../constants/values";
@@ -18,6 +18,7 @@ import {
   resetEpisodesData,
 } from "../../redux/mainSlice";
 import { useAppDispatch } from "../../redux/store";
+import { Button } from "../Button/Button";
 
 export const Filter: FC<FilterProps> = ({ setListViewing, setIsFilterApplied }) => {
   const dispatch = useAppDispatch();
@@ -54,9 +55,11 @@ export const Filter: FC<FilterProps> = ({ setListViewing, setIsFilterApplied }) 
   return (
     <>
       <FilterBox>
-        <FilterBtn type="button" onClick={handleRemoveFilter}>
-          {isFilterOpen ? "Remove filter" : "Filter"}
-        </FilterBtn>
+        <Button
+          type={"button"}
+          text={isFilterOpen ? "Remove filter" : "Filter"}
+          onClick={handleRemoveFilter}
+        />
         <Formik
           initialValues={initialValues}
           // validationSchema={ContactSchema}
@@ -67,15 +70,15 @@ export const Filter: FC<FilterProps> = ({ setListViewing, setIsFilterApplied }) 
         >
           {isFilterOpen && (
             <FormikForm>
-              <SelectBtn type="button" onClick={handleCloseList}>
+              <SelectButton type="button" onClick={handleCloseList}>
                 Select Item <Icon name="v-icon" width={14} height={14} />
-              </SelectBtn>
+              </SelectButton>
               {isFilterListOpen && (
                 <CheckboxList filters={checkboxFilters} setFilters={setCheckboxFilters} />
               )}
               <Title>Add key words to find</Title>
               {isFilterListOpen && <InputList filters={checkboxFilters} />}
-              <SubmitBtn type="submit">Find</SubmitBtn>
+              <Button type="submit" text={"Find"} />
             </FormikForm>
           )}
         </Formik>

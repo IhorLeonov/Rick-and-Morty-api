@@ -63,11 +63,9 @@ export interface PagePaginationProps {
     | ActionCreatorWithPayload<number, "main/setEpisodesPage">;
 }
 
-export type ListViewing = "all" | "char" | "loc" | "epi";
-
 export interface ListToggleProps {
-  listViewing: ListViewing;
-  setListViewing: Dispatch<SetStateAction<ListViewing>>;
+  listViewing: string;
+  setListViewing: Dispatch<SetStateAction<string>>;
 }
 
 export interface FormInputValues {
@@ -76,14 +74,14 @@ export interface FormInputValues {
 
 export interface FilterProps {
   setIsFilterApplied: Dispatch<SetStateAction<boolean>>;
-  setListViewing: Dispatch<SetStateAction<ListViewing>>;
+  setListViewing: Dispatch<SetStateAction<string>>;
 }
 
 export interface MainState {
   isLoading: boolean;
   error: string | null;
   inputValues: FormInputValues;
-  listViewing: ListViewing;
+  listViewing: string;
   data: {
     charactersData: Character[];
     characterData: Character | null;

@@ -12,6 +12,7 @@ import {
   Indicator,
 } from "./CharacterItem.styled";
 import { FC } from "react";
+import { useLocation } from "react-router";
 
 export const CharacterItem: FC<Character> = ({
   id,
@@ -22,11 +23,13 @@ export const CharacterItem: FC<Character> = ({
   location,
   episode,
 }) => {
+  const routLocation = useLocation();
+
   return (
     <CardItem>
       <Image src={image} alt="Character picture" />
       <Wrapper>
-        <Link to={`/${id}`}>
+        <Link to={`/${id}`} state={{ from: routLocation }}>
           <Name>{name}</Name>
         </Link>
         <Status>
