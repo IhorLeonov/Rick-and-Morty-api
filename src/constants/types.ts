@@ -82,6 +82,7 @@ export interface MainState {
   error: string | null;
   inputValues: FormInputValues;
   listViewing: string;
+  isDrawerOpen: boolean;
   data: {
     charactersData: Character[];
     characterData: Character | null;

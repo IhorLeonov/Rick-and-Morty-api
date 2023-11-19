@@ -18,6 +18,7 @@ const initialState = {
   isLoading: false,
   error: null,
   listViewing: "all",
+  isDrawerOpen: false,
   inputValues: initialValues,
   data: initialDataState,
 } as MainState;
@@ -52,6 +53,9 @@ const mainSlice = createSlice({
     },
     resetEpisodesData: (state) => {
       state.data.episodesData = [];
+    },
+    toggleDrawer: (state, action: PayloadAction<boolean>) => {
+      state.isDrawerOpen = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -124,6 +128,7 @@ export const {
   resetFilteredCharData,
   resetLocationData,
   resetEpisodesData,
+  toggleDrawer,
 } = mainSlice.actions;
 
 export const mainReducer = mainSlice.reducer;

@@ -14,6 +14,7 @@ import { getCharacter } from "../../redux/operations";
 import { selectCharacterData, selectIsLoading } from "../../redux/selectors";
 import { checkStatus } from "../../helpers/helpers";
 import { BackLink } from "../../components/BackBtn/BackBtn";
+import { FAB } from "../../components/Fab/Fab";
 
 const Character = () => {
   const { id } = useParams();
@@ -37,7 +38,7 @@ const Character = () => {
   if (characterData !== null && !isLoading) {
     const { name, image, status, species, location, episode } = characterData;
     return (
-      <>
+      <section style={{ position: "relative" }}>
         <BackLink to={backLinkHref} />
         <div style={{ display: "flex", paddingTop: 20 }}>
           <Image style={{ width: 595, height: 572 }} src={image} alt="Character picture" />
@@ -63,7 +64,8 @@ const Character = () => {
             </Caption>
           </Wrapper>
         </div>
-      </>
+        <FAB styles={{ bottom: -28 }} disabled={true} />
+      </section>
     );
   }
 };

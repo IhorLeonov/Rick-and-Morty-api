@@ -19,6 +19,7 @@ import {
   setLocationsPage,
   setEpisodesPage,
 } from "../../redux/mainSlice";
+import { FAB } from "../../components/Fab/Fab";
 
 const Home: FC = () => {
   const [listViewing, setListViewing] = useState<string>("all");
@@ -139,6 +140,7 @@ const Home: FC = () => {
           setPage={setEpisodesPage}
         /> // filtred episodes
       )}
+      <FAB />
     </HomePage>
   );
 };
