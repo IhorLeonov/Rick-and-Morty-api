@@ -104,7 +104,7 @@ const Home: FC = () => {
   if (error) return <p>{error}</p>;
   return (
     <HomePage>
-      <Filter setListViewing={setListViewing} setIsFilterApplied={setIsFilterApplied} />
+      <Filter setIsFilterApplied={setIsFilterApplied} />
       {listViewing !== "all" && (
         <ListToggle listViewing={listViewing} setListViewing={setListViewing} />
       )}

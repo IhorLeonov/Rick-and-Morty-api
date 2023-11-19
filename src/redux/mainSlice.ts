@@ -20,6 +20,7 @@ const initialState = {
   listViewing: "all",
   isDrawerOpen: false,
   inputValues: initialValues,
+  historyData: [],
   data: initialDataState,
 } as MainState;
 
@@ -45,13 +46,18 @@ const mainSlice = createSlice({
     setEpisodesPage: (state, action: PayloadAction<number>) => {
       state.data.episodesPage = action.payload;
     },
-    resetFilteredCharData: (state) => {
+    setHistoryData: (state, action: PayloadAction<string[]>) => {
+      state.historyData = action.payload;
+    },
+    resetData: (state) => {
+      state.listViewing = "all";
+      state.inputValues = initialValues;
+      state.data.charactersPage = 1;
+      state.data.filteredCharPage = 1;
+      state.data.locationsPage = 1;
+      state.data.episodesPage = 1;
       state.data.filteredCharData = [];
-    },
-    resetLocationData: (state) => {
       state.data.locationsData = [];
-    },
-    resetEpisodesData: (state) => {
       state.data.episodesData = [];
     },
     toggleDrawer: (state, action: PayloadAction<boolean>) => {
@@ -125,10 +131,8 @@ export const {
   setFilteredCharPage,
   setLocationsPage,
   setEpisodesPage,
-  resetFilteredCharData,
-  resetLocationData,
-  resetEpisodesData,
   toggleDrawer,
+  resetData,
 } = mainSlice.actions;
 
 export const mainReducer = mainSlice.reducer;

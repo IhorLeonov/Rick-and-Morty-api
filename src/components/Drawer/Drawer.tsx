@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { toggleDrawer } from "../../redux/mainSlice";
 import { selectIsDrawerOpen } from "../../redux/selectors";
-import { Title } from "./Drawer.styled";
+import { Category, Title, Values } from "./Drawer.styled";
 
 export default function TemporaryDrawer() {
   const dispatch = useAppDispatch();
@@ -44,9 +44,6 @@ export default function TemporaryDrawer() {
               top: "calc((100vh - 571px)/2)",
               pb: 1,
             },
-            // ".css-1ab2xsx": {
-            //   height: 571,
-            // },
           }}
         >
           <Box
@@ -54,10 +51,8 @@ export default function TemporaryDrawer() {
               width: 419,
               display: "flex",
               flexDirection: "column",
-              //   justifyContent: "space-between",
             }}
             role="presentation"
-            // onClick={handleOpen(false)}
             onKeyDown={handleOpen(false)}
           >
             {/* <List>
@@ -81,11 +76,31 @@ export default function TemporaryDrawer() {
                 </ListItem>
               ))}
             </List> */}
-            <Box sx={{ height: 511 }}>
+            <Box
+              sx={{
+                height: 511,
+                padding: 2,
+                fontSize: 14,
+                lineheight: 1.5,
+                letterspacing: 0.1,
+                "& :nth-child(n)": {
+                  mb: 2,
+                },
+                "& :last-child": {
+                  mb: 0,
+                },
+              }}
+            >
               <Title>History</Title>
+              <Category>Character:</Category>
+              <Values>value</Values>
+              <Category>Location:</Category>
+              <Values>value</Values>
+              <Category>Episode:</Category>
+              <Values>value</Values>
             </Box>
             <Box sx={{ p: 1 }}>
-              <Button variant="text" sx={{ ml: 1, width: 80 }}>
+              <Button variant="text" sx={{ ml: 1, width: 80 }} onClick={handleOpen(false)}>
                 Close
               </Button>
             </Box>

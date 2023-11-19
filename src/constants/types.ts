@@ -74,7 +74,6 @@ export interface FormInputValues {
 
 export interface FilterProps {
   setIsFilterApplied: Dispatch<SetStateAction<boolean>>;
-  setListViewing: Dispatch<SetStateAction<string>>;
 }
 
 export interface MainState {
@@ -83,6 +82,7 @@ export interface MainState {
   inputValues: FormInputValues;
   listViewing: string;
   isDrawerOpen: boolean;
+  historyData: string[];
   data: {
     charactersData: Character[];
     characterData: Character | null;

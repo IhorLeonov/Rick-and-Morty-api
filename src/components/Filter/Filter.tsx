@@ -7,20 +7,11 @@ import { FilterProps, FormInputValues } from "../../constants/types";
 import { FC, useState } from "react";
 import { initialValues } from "../../constants/values";
 import { Backdrop } from "@mui/material";
-import {
-  setInputValues,
-  setCharactersPage,
-  setFilteredCharPage,
-  setLocationsPage,
-  setEpisodesPage,
-  resetFilteredCharData,
-  resetLocationData,
-  resetEpisodesData,
-} from "../../redux/mainSlice";
+import { setInputValues, resetData } from "../../redux/mainSlice";
 import { useAppDispatch } from "../../redux/store";
 import { Button } from "../Button/Button";
 
-export const Filter: FC<FilterProps> = ({ setListViewing, setIsFilterApplied }) => {
+export const Filter: FC<FilterProps> = ({ setIsFilterApplied }) => {
   const dispatch = useAppDispatch();
 
   const [checkboxFilters, setCheckboxFilters] = useState<string[]>([]);
@@ -32,18 +23,10 @@ export const Filter: FC<FilterProps> = ({ setListViewing, setIsFilterApplied }) 
   };
 
   const handleRemoveFilter = () => {
-    setListViewing("all");
     setCheckboxFilters([]);
     setIsFilterApplied(false);
-    setInputValues(initialValues);
     setIsFilterOpen(!isFilterOpen);
-    dispatch(setCharactersPage(1));
-    dispatch(setFilteredCharPage(1));
-    dispatch(setLocationsPage(1));
-    dispatch(setEpisodesPage(1));
-    dispatch(resetFilteredCharData());
-    dispatch(resetLocationData());
-    dispatch(resetEpisodesData());
+    dispatch(resetData());
   };
 
   const handleSubmit = (values: FormInputValues) => {
