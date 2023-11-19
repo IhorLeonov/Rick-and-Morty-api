@@ -1,6 +1,6 @@
 import { PayloadAction, isAnyOf, createSlice } from "@reduxjs/toolkit";
 import { initialValues, initialDataState } from "../constants/values";
-import { MainState, FormInputValues } from "../constants/types";
+import { MainState, FormInputValues, HistoryData } from "../constants/types";
 import {
   getAllCharacters,
   getCharacter,
@@ -17,10 +17,9 @@ const handleSameFulfilled = (state: MainState) => {
 const initialState = {
   isLoading: false,
   error: null,
-  listViewing: "all",
   isDrawerOpen: false,
   inputValues: initialValues,
-  historyData: [],
+  historyData: { characters: [], locations: [], episodes: [] },
   data: initialDataState,
 } as MainState;
 
@@ -30,9 +29,6 @@ const mainSlice = createSlice({
   reducers: {
     setInputValues: (state, action: PayloadAction<FormInputValues>) => {
       state.inputValues = action.payload;
-    },
-    setListViewing: (state, action: PayloadAction<string>) => {
-      state.listViewing = action.payload;
     },
     setCharactersPage: (state, action: PayloadAction<number>) => {
       state.data.charactersPage = action.payload;
@@ -46,11 +42,14 @@ const mainSlice = createSlice({
     setEpisodesPage: (state, action: PayloadAction<number>) => {
       state.data.episodesPage = action.payload;
     },
-    setHistoryData: (state, action: PayloadAction<string[]>) => {
-      state.historyData = action.payload;
+    setHistoryData: (state, action: PayloadAction<HistoryData>) => {
+      state.historyData = {
+        characters: [...state.historyData.characters, ...action.payload.characters],
+        locations: [...state.historyData.locations, ...action.payload.locations],
+        episodes: [...state.historyData.episodes, ...action.payload.episodes],
+      };
     },
     resetData: (state) => {
-      state.listViewing = "all";
       state.inputValues = initialValues;
       state.data.charactersPage = 1;
       state.data.filteredCharPage = 1;
@@ -126,11 +125,11 @@ const mainSlice = createSlice({
 
 export const {
   setInputValues,
-  setListViewing,
   setCharactersPage,
   setFilteredCharPage,
   setLocationsPage,
   setEpisodesPage,
+  setHistoryData,
   toggleDrawer,
   resetData,
 } = mainSlice.actions;

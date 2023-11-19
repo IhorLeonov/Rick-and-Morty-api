@@ -73,16 +73,22 @@ export interface FormInputValues {
 }
 
 export interface FilterProps {
+  setListViewing: Dispatch<SetStateAction<string>>;
   setIsFilterApplied: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface HistoryData {
+  characters: string[];
+  locations: string[];
+  episodes: string[];
 }
 
 export interface MainState {
   isLoading: boolean;
   error: string | null;
   inputValues: FormInputValues;
-  listViewing: string;
   isDrawerOpen: boolean;
-  historyData: string[];
+  historyData: HistoryData;
   data: {
     charactersData: Character[];
     characterData: Character | null;

@@ -1,22 +1,15 @@
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
-// import List from "@mui/material/List";
-// import Divider from "@mui/material/Divider";
-// import ListItem from "@mui/material/ListItem";
-// import ListItemButton from "@mui/material/ListItemButton";
-// import ListItemIcon from "@mui/material/ListItemIcon";
-// import ListItemText from "@mui/material/ListItemText";
-// import InboxIcon from "@mui/icons-material/MoveToInbox";
-// import MailIcon from "@mui/icons-material/Mail";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { toggleDrawer } from "../../redux/mainSlice";
-import { selectIsDrawerOpen } from "../../redux/selectors";
+import { selectIsDrawerOpen, selectHistoryData } from "../../redux/selectors";
 import { Category, Title, Values } from "./Drawer.styled";
 
 export default function TemporaryDrawer() {
   const dispatch = useAppDispatch();
   const isDrawerOpen = useAppSelector(selectIsDrawerOpen);
+  const historyData = useAppSelector(selectHistoryData);
 
   const handleOpen = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -55,27 +48,6 @@ export default function TemporaryDrawer() {
             role="presentation"
             onKeyDown={handleOpen(false)}
           >
-            {/* <List>
-              {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-                <ListItem key={text} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List> */}
-            {/* <Divider /> */}
-            {/* <List>
-              {["All mail", "Trash", "Spam"].map((text, index) => (
-                <ListItem key={text} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List> */}
             <Box
               sx={{
                 height: 511,
@@ -83,7 +55,8 @@ export default function TemporaryDrawer() {
                 fontSize: 14,
                 lineheight: 1.5,
                 letterspacing: 0.1,
-                "& :nth-child(n)": {
+                overflow: "scroll",
+                "& :nth-of-type(n)": {
                   mb: 2,
                 },
                 "& :last-child": {
@@ -93,11 +66,11 @@ export default function TemporaryDrawer() {
             >
               <Title>History</Title>
               <Category>Character:</Category>
-              <Values>value</Values>
+              <Values>{historyData.characters.join(", ")}</Values>
               <Category>Location:</Category>
-              <Values>value</Values>
+              <Values>{historyData.locations.join(", ")}</Values>
               <Category>Episode:</Category>
-              <Values>value</Values>
+              <Values>{historyData.episodes.join(", ")}</Values>
             </Box>
             <Box sx={{ p: 1 }}>
               <Button variant="text" sx={{ ml: 1, width: 80 }} onClick={handleOpen(false)}>

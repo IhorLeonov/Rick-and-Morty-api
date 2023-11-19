@@ -36,7 +36,6 @@ const Home: FC = () => {
     if (!isFilterApplied) {
       dispatch(getAllCharacters(data.charactersPage));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFilterApplied, data.charactersPage]);
 
   // getting filtered episodes
@@ -53,7 +52,6 @@ const Home: FC = () => {
       );
       setListViewing("epi");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFilterApplied, data.episodesPage]);
 
   // getting filtered locations
@@ -71,7 +69,6 @@ const Home: FC = () => {
       );
       setListViewing("loc");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFilterApplied, data.locationsPage]);
 
   // getting filtered characters
@@ -92,8 +89,7 @@ const Home: FC = () => {
       );
       setListViewing("char");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFilterApplied, data.filteredCharPage, inputValues]);
+  }, [isFilterApplied, data.filteredCharPage]);
 
   useEffect(() => {
     window.scroll({
@@ -104,7 +100,7 @@ const Home: FC = () => {
   if (error) return <p>{error}</p>;
   return (
     <HomePage>
-      <Filter setIsFilterApplied={setIsFilterApplied} />
+      <Filter setListViewing={setListViewing} setIsFilterApplied={setIsFilterApplied} />
       {listViewing !== "all" && (
         <ListToggle listViewing={listViewing} setListViewing={setListViewing} />
       )}

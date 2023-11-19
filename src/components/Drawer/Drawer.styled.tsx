@@ -11,6 +11,6 @@ export const Category = styled.p`
   color: ${({ theme }) => theme.colors.lightGrey};
 `;
 
-export const Values = styled.li`
+export const Values = styled.p`
   color: ${({ theme }) => theme.colors.darkGrey};
 `;
