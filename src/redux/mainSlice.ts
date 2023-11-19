@@ -1,6 +1,6 @@
 import { PayloadAction, isAnyOf, createSlice } from "@reduxjs/toolkit";
 import { initialValues, initialDataState } from "../constants/values";
-import { MainState, ListViewing, FormInputValues } from "../constants/types";
+import { MainState, FormInputValues } from "../constants/types";
 import {
   getAllCharacters,
   getCharacter,
@@ -29,7 +29,7 @@ const mainSlice = createSlice({
     setInputValues: (state, action: PayloadAction<FormInputValues>) => {
       state.inputValues = action.payload;
     },
-    setListViewing: (state, action: PayloadAction<ListViewing>) => {
+    setListViewing: (state, action: PayloadAction<string>) => {
       state.listViewing = action.payload;
     },
     setCharactersPage: (state, action: PayloadAction<number>) => {
