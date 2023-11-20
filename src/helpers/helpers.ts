@@ -24,5 +24,6 @@ export const getFilteredHistory = (values: FormInputValues): HistoryData => {
     characters: cha.filter((c) => c),
     locations: loc.filter((l) => l),
     episodes: epi.filter((e) => e),
+    actions: [],
   };
 };

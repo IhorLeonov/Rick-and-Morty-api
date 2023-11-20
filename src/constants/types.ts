@@ -81,14 +81,15 @@ export interface HistoryData {
   characters: string[];
   locations: string[];
   episodes: string[];
+  actions: string[];
 }
 
 export interface MainState {
   isLoading: boolean;
   error: string | null;
   inputValues: FormInputValues;
-  isDrawerOpen: boolean;
-  historyData: HistoryData;
+  // isDrawerOpen: boolean;
+  // historyData: HistoryData;
   data: {
     charactersData: Character[];
     characterData: Character | null;

@@ -1,15 +1,44 @@
-import { combineReducers } from "redux";
 import { mainReducer } from "./mainSlice";
+import { historyReducer } from "./historySlice";
+
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-const rootReducer = combineReducers({
-  main: mainReducer,
-});
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+
+import storage from "redux-persist/lib/storage";
+
+const historyPersistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["history"],
+};
+
+const persistedHistoryReducer = persistReducer(historyPersistConfig, historyReducer);
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    history: persistedHistoryReducer,
+    main: mainReducer,
+  },
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    });
+  },
 });
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type RootDispatch = typeof store.dispatch;

@@ -5,8 +5,9 @@ export const selectError = (state: RootState) => state.main.error;
 export const selectIsLoading = (state: RootState) => state.main.isLoading;
 export const selectInputValues = (state: RootState) => state.main.inputValues;
 export const selectCharacterData = (state: RootState) => state.main.data.characterData;
-export const selectIsDrawerOpen = (state: RootState) => state.main.isDrawerOpen;
-export const selectHistoryData = (state: RootState) => state.main.historyData;
+
+export const selectIsDrawerOpen = (state: RootState) => state.history.isDrawerOpen;
+export const selectHistoryData = (state: RootState) => state.history.historyData;
 
 export const selectCharactersData = (state: RootState) => state.main.data.charactersData;
 export const selectCharactersPage = (state: RootState) => state.main.data.charactersPage;

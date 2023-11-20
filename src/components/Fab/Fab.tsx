@@ -6,7 +6,8 @@ import { PiDownloadSimpleLight } from "react-icons/pi";
 import { LuMoreVertical } from "react-icons/lu";
 import { IoMdClose } from "react-icons/io";
 import { useAppDispatch } from "../../redux/store";
-import { toggleDrawer } from "../../redux/mainSlice";
+// import { toggleDrawer } from "../../redux/mainSlice";
+import { toggleDrawer } from "../../redux/historySlice";
 
 interface FabProps {
   styles?: object;

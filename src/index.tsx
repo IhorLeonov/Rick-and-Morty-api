@@ -7,7 +7,8 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "./constants/theme.ts";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { Provider } from "react-redux";
-import { store } from "./redux/store.ts";
+import { store, persistor } from "./redux/store.ts";
+import { PersistGate } from "redux-persist/integration/react";
 
 const client = new ApolloClient({
   uri: import.meta.env.VITE_API_URL,
@@ -19,10 +20,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Provider store={store}>
-          <ThemeProvider theme={theme}>
-            <App />
-            <GlobalStyle />
-          </ThemeProvider>
+          <PersistGate loading={null} persistor={persistor}>
+            <ThemeProvider theme={theme}>
+              <App />
+              <GlobalStyle />
+            </ThemeProvider>
+          </PersistGate>
         </Provider>
       </BrowserRouter>
     </ApolloProvider>

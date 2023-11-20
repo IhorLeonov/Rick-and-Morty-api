@@ -7,7 +7,9 @@ import { FilterProps, FormInputValues } from "../../constants/types";
 import { FC, useState } from "react";
 import { initialValues } from "../../constants/values";
 import { Backdrop } from "@mui/material";
-import { setInputValues, resetData, setHistoryData } from "../../redux/mainSlice";
+import { setInputValues, resetData } from "../../redux/mainSlice";
+import { setHistoryData } from "../../redux/historySlice";
+
 import { useAppDispatch } from "../../redux/store";
 import { Button } from "../Button/Button";
 import { getFilteredHistory } from "../../helpers/helpers";

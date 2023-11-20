@@ -11,10 +11,11 @@ import {
 } from "../../components/CharacterItem/CharacterItem.styled";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { getCharacter } from "../../redux/operations";
-import { selectCharacterData, selectIsLoading } from "../../redux/selectors";
+import { selectCharacterData, selectHistoryData, selectIsLoading } from "../../redux/selectors";
 import { checkStatus } from "../../helpers/helpers";
 import { BackLink } from "../../components/BackBtn/BackBtn";
 import { FAB } from "../../components/Fab/Fab";
+import { setHistoryData } from "../../redux/historySlice";
 
 const Character = () => {
   const { id } = useParams();
@@ -22,21 +23,31 @@ const Character = () => {
   const isLoading = useAppSelector(selectIsLoading);
   const location = useLocation();
   const backLinkHref = location.state?.from ?? "/";
+  const characterData = useAppSelector(selectCharacterData);
+  const historyData = useAppSelector(selectHistoryData);
 
   useEffect(() => {
     if (id) dispatch(getCharacter(id));
   }, [id, dispatch]);
 
   useEffect(() => {
-    window.scroll({
-      top: 400,
-    });
-  }, []);
-
-  const characterData = useAppSelector(selectCharacterData);
+    if (characterData?.name) {
+      if (!historyData.actions.includes(characterData.name)) {
+        dispatch(
+          setHistoryData({
+            characters: [],
+            locations: [],
+            episodes: [],
+            actions: [characterData.name],
+          })
+        );
+      }
+    }
+  }, [characterData, historyData.actions, dispatch]);
 
   if (characterData !== null && !isLoading) {
     const { name, image, status, species, location, episode } = characterData;
+
     return (
       <section style={{ position: "relative" }}>
         <BackLink to={backLinkHref} />
