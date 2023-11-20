@@ -1,6 +1,5 @@
 import { mainReducer } from "./mainSlice";
 import { historyReducer } from "./historySlice";
-
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
@@ -18,9 +17,9 @@ import {
 import storage from "redux-persist/lib/storage";
 
 const historyPersistConfig = {
-  key: "root",
+  key: "history",
   storage,
-  whitelist: ["history"],
+  whitelist: ["historyData"],
 };
 
 const persistedHistoryReducer = persistReducer(historyPersistConfig, historyReducer);
