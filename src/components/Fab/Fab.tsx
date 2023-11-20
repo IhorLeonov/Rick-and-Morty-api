@@ -5,18 +5,32 @@ import { CiCircleAlert } from "react-icons/ci";
 import { PiDownloadSimpleLight } from "react-icons/pi";
 import { LuMoreVertical } from "react-icons/lu";
 import { IoMdClose } from "react-icons/io";
-import { useAppDispatch } from "../../redux/store";
-// import { toggleDrawer } from "../../redux/mainSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { toggleDrawer } from "../../redux/historySlice";
+import { downloadCSV } from "../../helpers/downloadCSV";
+import { FabProps } from "../../constants/types";
+import {
+  selectCharactersData,
+  selectEpisodesData,
+  selectFilteredCharData,
+  selectLocationsData,
+} from "../../redux/selectors";
 
-interface FabProps {
-  styles?: object;
-  disabled?: boolean;
-}
-
-export const FAB: FC<FabProps> = ({ styles, disabled }) => {
+export const FAB: FC<FabProps> = ({ styles, disabled, listViewing }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+
+  const charactersData = useAppSelector(selectCharactersData);
+  const filterCharData = useAppSelector(selectFilteredCharData);
+  const locationsData = useAppSelector(selectLocationsData);
+  const episodesData = useAppSelector(selectEpisodesData);
+
+  const chooseDataList = () => {
+    if (listViewing === "all") return charactersData;
+    if (listViewing === "char") return filterCharData;
+    if (listViewing === "loc") return locationsData;
+    if (listViewing === "epi") return episodesData;
+  };
 
   const handleOpen = () => {
     dispatch(toggleDrawer(true));
@@ -48,7 +62,12 @@ export const FAB: FC<FabProps> = ({ styles, disabled }) => {
         </Fab>
       )}
       {isOpen && (
-        <Fab disabled={disabled} size="small" aria-label="download">
+        <Fab
+          disabled={disabled}
+          size="small"
+          aria-label="download"
+          onClick={() => downloadCSV(chooseDataList())}
+        >
           <PiDownloadSimpleLight size={24} />
         </Fab>
       )}

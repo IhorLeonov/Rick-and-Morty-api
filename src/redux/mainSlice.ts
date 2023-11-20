@@ -17,9 +17,7 @@ const handleSameFulfilled = (state: MainState) => {
 const initialState = {
   isLoading: false,
   error: null,
-  // isDrawerOpen: false,
   inputValues: initialValues,
-  // historyData: { characters: [], locations: [], episodes: [], actions: [] },
   data: initialDataState,
 } as MainState;
 
@@ -42,14 +40,6 @@ const mainSlice = createSlice({
     setEpisodesPage: (state, action: PayloadAction<number>) => {
       state.data.episodesPage = action.payload;
     },
-    // setHistoryData: (state, action: PayloadAction<HistoryData>) => {
-    //   state.historyData = {
-    //     characters: [...state.historyData.characters, ...action.payload.characters],
-    //     locations: [...state.historyData.locations, ...action.payload.locations],
-    //     episodes: [...state.historyData.episodes, ...action.payload.episodes],
-    //     actions: [...state.historyData.actions, ...action.payload.actions],
-    //   };
-    // },
 
     resetData: (state) => {
       state.inputValues = initialValues;
@@ -61,9 +51,6 @@ const mainSlice = createSlice({
       state.data.locationsData = [];
       state.data.episodesData = [];
     },
-    // toggleDrawer: (state, action: PayloadAction<boolean>) => {
-    //   state.isDrawerOpen = action.payload;
-    // },
   },
   extraReducers: (builder) => {
     builder
@@ -131,8 +118,6 @@ export const {
   setFilteredCharPage,
   setLocationsPage,
   setEpisodesPage,
-  // setHistoryData,
-  // toggleDrawer,
   resetData,
 } = mainSlice.actions;
 

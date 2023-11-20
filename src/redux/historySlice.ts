@@ -1,10 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { HistoryData } from "../constants/types";
-
-interface HistoryState {
-  historyData: HistoryData;
-  isDrawerOpen: boolean;
-}
+import { HistoryData, HistoryState } from "../constants/types";
 
 const initialState = {
   historyData: { characters: [], locations: [], episodes: [], actions: [] },

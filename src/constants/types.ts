@@ -84,12 +84,21 @@ export interface HistoryData {
   actions: string[];
 }
 
+export interface HistoryState {
+  historyData: HistoryData;
+  isDrawerOpen: boolean;
+}
+
+export interface FabProps {
+  styles?: object;
+  disabled?: boolean;
+  listViewing: string;
+}
+
 export interface MainState {
   isLoading: boolean;
   error: string | null;
   inputValues: FormInputValues;
-  // isDrawerOpen: boolean;
-  // historyData: HistoryData;
   data: {
     charactersData: Character[];
     characterData: Character | null;

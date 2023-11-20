@@ -2,7 +2,6 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-// import { toggleDrawer } from "../../redux/mainSlice";
 import { toggleDrawer } from "../../redux/historySlice";
 import { selectIsDrawerOpen, selectHistoryData } from "../../redux/selectors";
 import { Category, Title, Values } from "./Drawer.styled";
@@ -27,7 +26,6 @@ export default function TemporaryDrawer() {
   return (
     <div>
       <>
-        <Button onClick={handleOpen(true)}>Open</Button>
         <Drawer
           anchor="right"
           open={isDrawerOpen}

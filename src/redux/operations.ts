@@ -22,7 +22,6 @@ export const getAllCharacters = createAsyncThunk(
       return res.data;
     } catch (err) {
       const error = err as AxiosError<string>;
-      console.log("Error getAllCharacters operations:", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -37,7 +36,6 @@ export const getCharacter = createAsyncThunk("main/getCharacter", async (id: str
     return res.data;
   } catch (err) {
     const error = err as AxiosError<string>;
-    console.log("Error getCharacter operations:", error);
     return thunkAPI.rejectWithValue(error.message);
   }
 });
@@ -62,7 +60,6 @@ export const getFilteredChars = createAsyncThunk(
       return res.data;
     } catch (err) {
       const error = err as AxiosError<string>;
-      console.log("Error getFilteredChars operations:", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -86,7 +83,6 @@ export const getLocations = createAsyncThunk(
       return res.data;
     } catch (err) {
       const error = err as AxiosError<string>;
-      console.log("Error getLocations operations:", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -109,7 +105,6 @@ export const getEpisodes = createAsyncThunk(
       return res.data;
     } catch (err) {
       const error = err as AxiosError<string>;
-      console.log("Error getEpisodes operations:", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

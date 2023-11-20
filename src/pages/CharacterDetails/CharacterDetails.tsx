@@ -45,6 +45,12 @@ const Character = () => {
     }
   }, [characterData, historyData.actions, dispatch]);
 
+  useEffect(() => {
+    window.scroll({
+      top: 400,
+    });
+  }, []);
+
   if (characterData !== null && !isLoading) {
     const { name, image, status, species, location, episode } = characterData;
 

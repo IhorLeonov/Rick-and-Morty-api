@@ -136,7 +136,7 @@ const Home: FC = () => {
           setPage={setEpisodesPage}
         /> // filtred episodes
       )}
-      <FAB />
+      <FAB listViewing={listViewing} />
     </HomePage>
   );
 };
