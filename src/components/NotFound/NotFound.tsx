@@ -7,6 +7,7 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 714px;
 `;
 
 const Title = styled.h2`
@@ -14,11 +15,20 @@ const Title = styled.h2`
   font-size: 33px;
 `;
 
-export const NotFound: FC = () => {
+const StyledLink = styled(Link)`
+  margin-top: 40px;
+  &:hover {
+    color: ${({ theme }) => theme.colors.blue};
+  }
+`;
+
+const NotFound: FC = () => {
   return (
     <Box>
-      <Title>Ups! This path not found</Title>
-      <Link to={"/"}>Click to home page</Link>
+      <Title>Ups! Nothing was found!</Title>
+      <StyledLink to="/">Click - to redirect to homepage</StyledLink>
     </Box>
   );
 };
+
+export default NotFound;

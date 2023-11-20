@@ -39,12 +39,12 @@ export const FAB: FC<FabProps> = ({ styles, disabled, listViewing }) => {
   return (
     <Box
       sx={{
+        position: "absolute",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         width: 56,
         gap: "24px",
-        position: "absolute",
         bottom: 37,
         right: -28,
         "button: disabled": {

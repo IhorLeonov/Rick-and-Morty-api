@@ -68,18 +68,27 @@ const mainSlice = createSlice({
         handleSameFulfilled(state);
         state.data.filteredCharData = characters.results;
         state.data.filteredCharPages = characters.info.pages;
+        if (characters.info.pages < 1) {
+          state.error = "No data for your characters request";
+        }
       })
       .addCase(getLocations.fulfilled, (state, action) => {
         const { locations } = action.payload.data;
         handleSameFulfilled(state);
         state.data.locationsData = locations.results;
         state.data.locationsPages = locations.info.pages;
+        if (locations.info.pages < 1) {
+          state.error = "No data for your locations request";
+        }
       })
       .addCase(getEpisodes.fulfilled, (state, action) => {
         const { episodes } = action.payload.data;
         handleSameFulfilled(state);
         state.data.episodesData = episodes.results;
         state.data.episodesPages = episodes.info.pages;
+        if (episodes.info.pages < 1) {
+          state.error = "No data for your episodes request";
+        }
       })
       .addCase(getCharacter.fulfilled, (state, action) => {
         const { character } = action.payload.data;

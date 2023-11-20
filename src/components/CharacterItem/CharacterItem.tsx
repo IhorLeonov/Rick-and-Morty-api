@@ -29,7 +29,7 @@ export const CharacterItem: FC<Character> = ({
     <CardItem>
       <Image src={image} alt="Character picture" />
       <Wrapper>
-        <Link to={`/${id}`} state={{ from: routLocation }}>
+        <Link to={`/char/${id}`} state={{ from: routLocation }}>
           <Name>{name}</Name>
         </Link>
         <Status>

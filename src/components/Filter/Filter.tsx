@@ -50,7 +50,6 @@ export const Filter: FC<FilterProps> = ({ setListViewing, setIsFilterApplied }) 
         />
         <Formik
           initialValues={initialValues}
-          // validationSchema={ContactSchema}
           onSubmit={(values, actions) => {
             handleSubmit(values);
             actions.resetForm();

@@ -115,3 +115,22 @@ export interface MainState {
     episodesPages: number;
   };
 }
+
+export interface DataListsProps {
+  listViewing: string;
+  data: {
+    charactersData: Character[];
+    characterData: Character | null;
+    filteredCharData: Character[];
+    locationsData: Location[];
+    episodesData: Episode[];
+    charactersPage: number;
+    filteredCharPage: number;
+    locationsPage: number;
+    episodesPage: number;
+    charactersPages: number;
+    filteredCharPages: number;
+    locationsPages: number;
+    episodesPages: number;
+  };
+}

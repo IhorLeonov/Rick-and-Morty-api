@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../redux/store";
 
 export const PagePagination: FC<PagePaginationProps> = ({ pageQuantity, page, setPage }) => {
   const dispatch = useAppDispatch();
-  if (pageQuantity < 1) return <p>No data for your request</p>; // добавить ошибку что ничего не найдено
+  if (pageQuantity < 1) return;
 
   return (
     <Wrapper>

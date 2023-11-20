@@ -1,37 +1,23 @@
 import { FC, useEffect, useState } from "react";
-import { HomePage } from "./Home.styled";
-import { CharacterList } from "../../components/CharacterList/CharacterList";
 import { ListToggle } from "../../components/ListToggle/ListToggle";
-import { LocationList } from "../../components/LocationList/LocationList";
-import { EpisodeList } from "../../components/EpisodeList/EpisodeList";
 import { Filter } from "../../components/Filter/Filter";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { selectData, selectError, selectIsLoading, selectInputValues } from "../../redux/selectors";
+import { selectData, selectInputValues } from "../../redux/selectors";
 import {
   getAllCharacters,
   getEpisodes,
   getFilteredChars,
   getLocations,
 } from "../../redux/operations";
-import {
-  setCharactersPage,
-  setFilteredCharPage,
-  setLocationsPage,
-  setEpisodesPage,
-} from "../../redux/mainSlice";
-import { FAB } from "../../components/Fab/Fab";
-import { useNavigate } from "react-router";
+import { DataLists } from "../../components/DataLists/DataLists";
 
 const Home: FC = () => {
   const [listViewing, setListViewing] = useState<string>("all");
   const [isFilterApplied, setIsFilterApplied] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(selectIsLoading);
-  const error = useAppSelector(selectError);
   const inputValues = useAppSelector(selectInputValues);
   const data = useAppSelector(selectData);
-  const navigate = useNavigate();
 
   // getting all characters
   useEffect(() => {
@@ -102,54 +88,14 @@ const Home: FC = () => {
     });
   }, [data.charactersPage, data.filteredCharPage, data.locationsPage, data.episodesPage]);
 
-  useEffect(() => {
-    if (error) {
-      navigate("/error", { replace: true });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [error]);
-
-  if (error) return <p>{error}</p>;
   return (
-    <HomePage>
+    <>
       <Filter setListViewing={setListViewing} setIsFilterApplied={setIsFilterApplied} />
       {listViewing !== "all" && (
         <ListToggle listViewing={listViewing} setListViewing={setListViewing} />
       )}
-      {listViewing === "all" && !isLoading && (
-        <CharacterList
-          charData={data.charactersData}
-          page={data.charactersPage}
-          pages={data.charactersPages}
-          setPage={setCharactersPage}
-        /> // all characters
-      )}
-      {listViewing === "char" && !isLoading && (
-        <CharacterList
-          charData={data.filteredCharData}
-          page={data.filteredCharPage}
-          pages={data.filteredCharPages}
-          setPage={setFilteredCharPage}
-        /> // filtred characters
-      )}
-      {listViewing === "loc" && !isLoading && (
-        <LocationList
-          locData={data.locationsData}
-          page={data.locationsPage}
-          pages={data.locationsPages}
-          setPage={setLocationsPage}
-        /> // filtred locations
-      )}
-      {listViewing === "epi" && !isLoading && (
-        <EpisodeList
-          epiData={data.episodesData}
-          page={data.episodesPage}
-          pages={data.episodesPages}
-          setPage={setEpisodesPage}
-        /> // filtred episodes
-      )}
-      <FAB listViewing={listViewing} />
-    </HomePage>
+      <DataLists data={data} listViewing={listViewing} />
+    </>
   );
 };
 
