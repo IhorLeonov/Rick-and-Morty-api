@@ -5,6 +5,7 @@ import { HeaderSection } from "../Header/Header";
 import { HeroSection } from "../Hero/Hero";
 import { Wrapper, MainSection } from "./Layout.styled";
 import TemporaryDrawer from "../Drawer/Drawer";
+import Loader from "../Loader/Loader";
 
 export const Layout: FC = () => {
   return (
@@ -13,7 +14,7 @@ export const Layout: FC = () => {
       <main>
         <HeroSection />
         <MainSection>
-          <Suspense fallback={<p style={{ color: "green" }}>Loading...</p>}>
+          <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
         </MainSection>

@@ -6,4 +6,8 @@ export const HomePage = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+
+  & > ul {
+    min-height: 714px;
+  }
 `;

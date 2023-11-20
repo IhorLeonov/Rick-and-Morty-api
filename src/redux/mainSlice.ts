@@ -40,6 +40,9 @@ const mainSlice = createSlice({
     setEpisodesPage: (state, action: PayloadAction<number>) => {
       state.data.episodesPage = action.payload;
     },
+    resetError: (state) => {
+      state.error = "";
+    },
 
     resetData: (state) => {
       state.inputValues = initialValues;
@@ -105,7 +108,6 @@ const mainSlice = createSlice({
         ),
         (state, action) => {
           state.isLoading = false;
-          console.log("Error from extraReducers", action.payload);
           if (typeof action.payload === "string") state.error = action.payload;
         }
       );
@@ -118,6 +120,7 @@ export const {
   setFilteredCharPage,
   setLocationsPage,
   setEpisodesPage,
+  resetError,
   resetData,
 } = mainSlice.actions;
 

@@ -20,6 +20,7 @@ import {
   setEpisodesPage,
 } from "../../redux/mainSlice";
 import { FAB } from "../../components/Fab/Fab";
+import { useNavigate } from "react-router";
 
 const Home: FC = () => {
   const [listViewing, setListViewing] = useState<string>("all");
@@ -30,13 +31,14 @@ const Home: FC = () => {
   const error = useAppSelector(selectError);
   const inputValues = useAppSelector(selectInputValues);
   const data = useAppSelector(selectData);
+  const navigate = useNavigate();
 
   // getting all characters
   useEffect(() => {
     if (!isFilterApplied) {
       dispatch(getAllCharacters(data.charactersPage));
     }
-  }, [isFilterApplied, data.charactersPage]);
+  }, [isFilterApplied, data.charactersPage, dispatch]);
 
   // getting filtered episodes
   useEffect(() => {
@@ -52,6 +54,7 @@ const Home: FC = () => {
       );
       setListViewing("epi");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFilterApplied, data.episodesPage]);
 
   // getting filtered locations
@@ -69,6 +72,7 @@ const Home: FC = () => {
       );
       setListViewing("loc");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFilterApplied, data.locationsPage]);
 
   // getting filtered characters
@@ -89,6 +93,7 @@ const Home: FC = () => {
       );
       setListViewing("char");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFilterApplied, data.filteredCharPage]);
 
   useEffect(() => {
@@ -96,6 +101,13 @@ const Home: FC = () => {
       top: 400,
     });
   }, [data.charactersPage, data.filteredCharPage, data.locationsPage, data.episodesPage]);
+
+  useEffect(() => {
+    if (error) {
+      navigate("/error", { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error]);
 
   if (error) return <p>{error}</p>;
   return (
