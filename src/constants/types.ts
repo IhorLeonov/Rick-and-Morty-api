@@ -92,7 +92,7 @@ export interface HistoryState {
 export interface FabProps {
   styles?: object;
   disabled?: boolean;
-  listViewing: string;
+  listViewing?: string;
 }
 
 export interface MainState {
