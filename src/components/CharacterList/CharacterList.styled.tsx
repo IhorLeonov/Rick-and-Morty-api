@@ -6,4 +6,5 @@ export const List = styled.ul`
   gap: 27px;
   border-radius: 9px;
   margin-top: 20px;
+  min-height: 467px;
 `;

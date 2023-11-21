@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { FC, Suspense, useEffect } from "react";
 import { FooterSection } from "../Footer/Footer";
 import { HeaderSection } from "../Header/Header";
@@ -11,10 +11,18 @@ import { selectError } from "../../redux/selectors";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { resetError } from "../../redux/mainSlice";
+import { FAB } from "../Fab/Fab";
 
 export const Layout: FC = () => {
   const error = useAppSelector(selectError);
   const dispatch = useAppDispatch();
+  const location = useLocation();
+
+  const charFabStyles = () => {
+    if (location.pathname.includes("char")) {
+      return { bottom: 202 };
+    }
+  };
 
   useEffect(() => {
     if (error) {
@@ -44,6 +52,7 @@ export const Layout: FC = () => {
           <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
+          <FAB styles={charFabStyles()} disabled={location.pathname.includes("char")} />
         </MainSection>
       </main>
       <FooterSection />

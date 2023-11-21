@@ -14,7 +14,7 @@ import { getCharacter } from "../../redux/operations";
 import { selectCharacterData, selectHistoryData, selectIsLoading } from "../../redux/selectors";
 import { checkStatus } from "../../helpers/helpers";
 import { BackLink } from "../../components/BackBtn/BackBtn";
-import { FAB } from "../../components/Fab/Fab";
+// import { FAB } from "../../components/Fab/Fab";
 import { setHistoryData } from "../../redux/historySlice";
 
 const Character = () => {
@@ -55,9 +55,9 @@ const Character = () => {
     const { name, image, status, species, location, episode } = characterData;
 
     return (
-      <section style={{ position: "relative" }}>
+      <>
         <BackLink to={backLinkHref} />
-        <div style={{ display: "flex", paddingTop: 20 }}>
+        <div style={{ display: "flex", paddingTop: 20, height: 807 }}>
           <Image style={{ width: 595, height: 572 }} src={image} alt="Character picture" />
           <Wrapper style={{ width: "100%", height: 572, paddingLeft: 42, paddingRight: 42 }}>
             <Name>{name}</Name>
@@ -81,8 +81,7 @@ const Character = () => {
             </Caption>
           </Wrapper>
         </div>
-        <FAB styles={{ bottom: -28 }} disabled={true} />
-      </section>
+      </>
     );
   }
 };

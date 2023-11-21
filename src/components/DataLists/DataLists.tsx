@@ -12,7 +12,6 @@ import { useAppSelector } from "../../redux/store";
 import { selectIsLoading } from "../../redux/selectors";
 import { DataListsProps } from "../../constants/types";
 import { Wrapper } from "./DataLists.styled.tsx";
-import { FAB } from "../Fab/Fab.js";
 
 export const DataLists: FC<DataListsProps> = ({ data, listViewing }) => {
   const isLoading = useAppSelector(selectIsLoading);
@@ -51,7 +50,6 @@ export const DataLists: FC<DataListsProps> = ({ data, listViewing }) => {
           setPage={setEpisodesPage}
         />
       )}
-      <FAB listViewing={listViewing} />
     </Wrapper>
   );
 };
