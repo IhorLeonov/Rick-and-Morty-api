@@ -5,7 +5,6 @@ import { HeaderSection } from "../Header/Header";
 import { HeroSection } from "../Hero/Hero";
 import { Wrapper, MainSection } from "./Layout.styled";
 import TemporaryDrawer from "../Drawer/Drawer";
-import { Loader } from "../Loader/Loader";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { selectError, selectIsLoading } from "../../redux/selectors";
 import { ToastContainer, toast } from "react-toastify";
@@ -52,7 +51,7 @@ export const Layout: FC = () => {
       <main>
         <HeroSection />
         <MainSection>
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={null}>
             <Outlet />
           </Suspense>
           <FAB styles={charFabStyles()} disabled={location.pathname.includes("char")} />
