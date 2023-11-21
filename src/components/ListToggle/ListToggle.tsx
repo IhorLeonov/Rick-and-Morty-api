@@ -1,18 +1,20 @@
 import { FC } from "react";
 import { ListToggler } from "./ListToggle.styled";
 import { ListToggleProps } from "../../constants/types";
-import { useAppSelector } from "../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 import {
   selectFilteredCharData,
   selectLocationsData,
   selectEpisodesData,
 } from "../../redux/selectors";
 import { Button } from "../Button/Button";
+import { setListView } from "../../redux/mainSlice";
 
-export const ListToggle: FC<ListToggleProps> = ({ listViewing, setListViewing }) => {
+export const ListToggle: FC<ListToggleProps> = ({ listViewing }) => {
   const filtredCharData = useAppSelector(selectFilteredCharData);
   const locationsData = useAppSelector(selectLocationsData);
   const episodesData = useAppSelector(selectEpisodesData);
+  const dispatch = useAppDispatch();
 
   const conditionChar = locationsData.length > 0 || episodesData.length > 0;
   const conditionLoc = filtredCharData.length > 0 || episodesData.length > 0;
@@ -44,7 +46,7 @@ export const ListToggle: FC<ListToggleProps> = ({ listViewing, setListViewing })
                   textTransform: "none",
                 }}
                 type={"button"}
-                onClick={() => setListViewing(spec)}
+                onClick={() => dispatch(setListView(spec))}
                 text={name}
               ></Button>
             )}

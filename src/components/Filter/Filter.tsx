@@ -7,14 +7,14 @@ import { FilterProps, FormInputValues } from "../../constants/types";
 import { FC, useState } from "react";
 import { initialValues } from "../../constants/values";
 import { Backdrop } from "@mui/material";
-import { setInputValues, resetData } from "../../redux/mainSlice";
+import { setInputValues, resetData, setListView } from "../../redux/mainSlice";
 import { setHistoryData } from "../../redux/historySlice";
 
 import { useAppDispatch } from "../../redux/store";
 import { Button } from "../Button/Button";
 import { getFilteredHistory } from "../../helpers/helpers";
 
-export const Filter: FC<FilterProps> = ({ setListViewing, setIsFilterApplied }) => {
+export const Filter: FC<FilterProps> = ({ setIsFilterApplied }) => {
   const dispatch = useAppDispatch();
   const [checkboxFilters, setCheckboxFilters] = useState<string[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
@@ -25,7 +25,7 @@ export const Filter: FC<FilterProps> = ({ setListViewing, setIsFilterApplied }) 
   };
 
   const handleRemoveFilter = () => {
-    setListViewing("all");
+    dispatch(setListView("all"));
     setCheckboxFilters([]);
     setIsFilterApplied(false);
     setIsFilterOpen(!isFilterOpen);

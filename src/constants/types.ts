@@ -65,7 +65,6 @@ export interface PagePaginationProps {
 
 export interface ListToggleProps {
   listViewing: string;
-  setListViewing: Dispatch<SetStateAction<string>>;
 }
 
 export interface FormInputValues {
@@ -73,7 +72,6 @@ export interface FormInputValues {
 }
 
 export interface FilterProps {
-  setListViewing: Dispatch<SetStateAction<string>>;
   setIsFilterApplied: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -90,15 +88,16 @@ export interface HistoryState {
 }
 
 export interface FabProps {
-  styles?: object;
-  disabled?: boolean;
-  listViewing?: string;
+  styles: { bottom: number } | undefined;
+  disabled: boolean;
+  listViewing: string;
 }
 
 export interface MainState {
   isLoading: boolean;
   error: string | null;
   inputValues: FormInputValues;
+  listView: string;
   data: {
     charactersData: Character[];
     characterData: Character | null;

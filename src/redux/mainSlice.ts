@@ -18,6 +18,7 @@ const initialState = {
   isLoading: false,
   error: null,
   inputValues: initialValues,
+  listView: "all",
   data: initialDataState,
 } as MainState;
 
@@ -39,6 +40,9 @@ const mainSlice = createSlice({
     },
     setEpisodesPage: (state, action: PayloadAction<number>) => {
       state.data.episodesPage = action.payload;
+    },
+    setListView: (state, action: PayloadAction<string>) => {
+      state.listView = action.payload;
     },
     resetError: (state) => {
       state.error = "";
@@ -129,6 +133,7 @@ export const {
   setFilteredCharPage,
   setLocationsPage,
   setEpisodesPage,
+  setListView,
   resetError,
   resetData,
 } = mainSlice.actions;

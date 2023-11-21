@@ -5,7 +5,9 @@ import { Header } from "./Header.styled";
 export const HeaderSection: FC = () => {
   return (
     <Header>
-      <img src={logo} alt="Logo" style={{ marginLeft: 27 }} />
+      <a href="https://rickandmortyapi.com/" target="_blank" rel="noreferrer">
+        <img src={logo} alt="Logo" style={{ marginLeft: 27 }} />
+      </a>
     </Header>
   );
 };

@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { ListToggle } from "../../components/ListToggle/ListToggle";
 import { Filter } from "../../components/Filter/Filter";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { selectData, selectInputValues } from "../../redux/selectors";
+import { selectData, selectInputValues, selectListView } from "../../redux/selectors";
 import {
   getAllCharacters,
   getEpisodes,
@@ -10,14 +10,15 @@ import {
   getLocations,
 } from "../../redux/operations";
 import { DataLists } from "../../components/DataLists/DataLists";
+import { setListView } from "../../redux/mainSlice";
 
 const Home: FC = () => {
-  const [listViewing, setListViewing] = useState<string>("all");
   const [isFilterApplied, setIsFilterApplied] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
   const inputValues = useAppSelector(selectInputValues);
   const data = useAppSelector(selectData);
+  const listView = useAppSelector(selectListView);
 
   // getting all characters
   useEffect(() => {
@@ -38,7 +39,7 @@ const Home: FC = () => {
           episode: inputValues.epiCode,
         })
       );
-      setListViewing("epi");
+      dispatch(setListView("epi"));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFilterApplied, data.episodesPage]);
@@ -56,7 +57,7 @@ const Home: FC = () => {
           dimension: inputValues.dimension,
         })
       );
-      setListViewing("loc");
+      dispatch(setListView("loc"));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFilterApplied, data.locationsPage]);
@@ -77,7 +78,7 @@ const Home: FC = () => {
           gender: inputValues.gender,
         })
       );
-      setListViewing("char");
+      dispatch(setListView("char"));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFilterApplied, data.filteredCharPage]);
@@ -90,11 +91,9 @@ const Home: FC = () => {
 
   return (
     <>
-      <Filter setListViewing={setListViewing} setIsFilterApplied={setIsFilterApplied} />
-      {listViewing !== "all" && (
-        <ListToggle listViewing={listViewing} setListViewing={setListViewing} />
-      )}
-      <DataLists data={data} listViewing={listViewing} />
+      <Filter setIsFilterApplied={setIsFilterApplied} />
+      {listView !== "all" && <ListToggle listViewing={listView} />}
+      <DataLists data={data} listViewing={listView} />
     </>
   );
 };

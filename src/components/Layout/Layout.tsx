@@ -6,7 +6,7 @@ import { HeroSection } from "../Hero/Hero";
 import { Wrapper, MainSection } from "./Layout.styled";
 import TemporaryDrawer from "../Drawer/Drawer";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { selectError, selectIsLoading } from "../../redux/selectors";
+import { selectError, selectIsLoading, selectListView } from "../../redux/selectors";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { resetError } from "../../redux/mainSlice";
@@ -19,6 +19,7 @@ export const Layout: FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const isLoading = useSelector(selectIsLoading);
+  const listView = useSelector(selectListView);
 
   const charFabStyles = () => {
     if (location.pathname.includes("char")) {
@@ -54,7 +55,11 @@ export const Layout: FC = () => {
           <Suspense fallback={null}>
             <Outlet />
           </Suspense>
-          <FAB styles={charFabStyles()} disabled={location.pathname.includes("char")} />
+          <FAB
+            styles={charFabStyles()}
+            disabled={location.pathname.includes("char")}
+            listViewing={listView}
+          />
         </MainSection>
       </main>
       <FooterSection />
