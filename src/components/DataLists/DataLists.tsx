@@ -19,7 +19,6 @@ export const DataLists: FC<DataListsProps> = ({ data, listViewing }) => {
 
   return (
     <Wrapper>
-      <FAB listViewing={listViewing} />
       {listViewing === "all" && !isLoading && (
         <CharacterList
           charData={data.charactersData}
@@ -52,6 +51,7 @@ export const DataLists: FC<DataListsProps> = ({ data, listViewing }) => {
           setPage={setEpisodesPage}
         />
       )}
+      <FAB listViewing={listViewing} />
     </Wrapper>
   );
 };
