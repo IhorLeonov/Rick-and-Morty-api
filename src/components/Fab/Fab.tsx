@@ -44,11 +44,8 @@ export const FAB: FC<FabProps> = ({ styles, disabled, listViewing }) => {
         flexDirection: "column",
         alignItems: "center",
         gap: "24px",
-        // bottom: 37,
-        // right: -28,
         bottom: 56,
         right: 78,
-        // bottom: 224,
         "button: disabled": {
           backgroundColor: "#ccc",
           opacity: 0.4,

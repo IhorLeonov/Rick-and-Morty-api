@@ -5,18 +5,21 @@ import { HeaderSection } from "../Header/Header";
 import { HeroSection } from "../Hero/Hero";
 import { Wrapper, MainSection } from "./Layout.styled";
 import TemporaryDrawer from "../Drawer/Drawer";
-import Loader from "../Loader/Loader";
+import { Loader } from "../Loader/Loader";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { selectError } from "../../redux/selectors";
+import { selectError, selectIsLoading } from "../../redux/selectors";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { resetError } from "../../redux/mainSlice";
 import { FAB } from "../Fab/Fab";
+import { Spinner } from "../Spinner/Spinner";
+import { useSelector } from "react-redux";
 
 export const Layout: FC = () => {
   const error = useAppSelector(selectError);
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const isLoading = useSelector(selectIsLoading);
 
   const charFabStyles = () => {
     if (location.pathname.includes("char")) {
@@ -58,6 +61,7 @@ export const Layout: FC = () => {
       <FooterSection />
       <TemporaryDrawer />
       <ToastContainer />
+      {isLoading && <Spinner />}
     </Wrapper>
   );
 };

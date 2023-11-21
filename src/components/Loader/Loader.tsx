@@ -1,38 +1,23 @@
-import styled, { keyframes } from "styled-components";
-import img from "../../assets/images/spinner.png";
+import { FC } from "react";
+import { LoaderBox } from "./Loader.styled.tsx";
+import { RotatingLines } from "react-loader-spinner";
 
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
-
-const StyledImg = styled.img`
-  animation: 1.5s ${rotate} linear infinite;
-  width: 175px;
-  height: 175px;
-`;
-
-const Box = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-const Title = styled.h2`
-  color: greenyellow;
-  font-size: 30px;
-`;
-
-export default function Loader() {
-  return (
-    <Box>
-      <StyledImg src={img} alt="spinner" />
-      <Title>Loading...</Title>
-    </Box>
-  );
+interface LoaderProps {
+  style?: object;
+  width?: string;
+  color?: string;
 }
+
+export const Loader: FC<LoaderProps> = ({ style, width, color = "yellowgreen" }) => {
+  return (
+    <LoaderBox style={style}>
+      <RotatingLines
+        strokeColor={color}
+        strokeWidth="5"
+        animationDuration="0.75"
+        width={width}
+        visible={true}
+      />
+    </LoaderBox>
+  );
+};
