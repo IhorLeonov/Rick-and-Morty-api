@@ -1,6 +1,6 @@
 ## Overview
 
-This app provides you opportunities using The Rick and Morty API to view data about characters, locations, and episodes of this cartoon.
+This app provides you opportunities using The Rick and Morty API to view and filter data with keywords about characters, locations, and episodes of this cartoon.
 
 ## Technologies
 
