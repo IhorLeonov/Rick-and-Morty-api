@@ -23,6 +23,7 @@ export const Caption = styled.p`
 
 export const LogoImg = styled.img`
   width: 50px;
+  height: 50px;
   margin-bottom: 56px;
   border-radius: 50%;
   box-shadow: 0px 0px 70px 0px rgba(255, 255, 255, 0.8);
