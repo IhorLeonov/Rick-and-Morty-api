@@ -27,7 +27,7 @@ export const CharacterItem: FC<Character> = ({
 
   return (
     <CardItem>
-      <Image src={image} alt="Character picture" />
+      <Image src={image} loading="lazy" alt="Character picture" />
       <Wrapper>
         <Link to={`/char/${id}`} state={{ from: routLocation }}>
           <Name>{name}</Name>
