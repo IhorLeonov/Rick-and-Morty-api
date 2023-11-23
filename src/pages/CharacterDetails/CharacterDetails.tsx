@@ -14,7 +14,6 @@ import { getCharacter } from "../../redux/operations";
 import { selectCharacterData, selectHistoryData, selectIsLoading } from "../../redux/selectors";
 import { checkStatus } from "../../helpers/helpers";
 import { BackLink } from "../../components/BackBtn/BackBtn";
-// import { FAB } from "../../components/Fab/Fab";
 import { setHistoryData } from "../../redux/historySlice";
 
 const Character = () => {

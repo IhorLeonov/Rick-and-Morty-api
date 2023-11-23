@@ -12,7 +12,7 @@ export default function TemporaryDrawer() {
   const isDrawerOpen = useAppSelector(selectIsDrawerOpen);
   const historyData = useAppSelector(selectHistoryData);
 
-  const handleOpen = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+  const handleOpenDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
       event.type === "keydown" &&
       ((event as React.KeyboardEvent).key === "Tab" ||
@@ -29,7 +29,7 @@ export default function TemporaryDrawer() {
         <Drawer
           anchor="right"
           open={isDrawerOpen}
-          onClose={handleOpen(false)}
+          onClose={handleOpenDrawer(false)}
           sx={{
             ".MuiDrawer-paper": {
               height: 571,
@@ -46,7 +46,7 @@ export default function TemporaryDrawer() {
               flexDirection: "column",
             }}
             role="presentation"
-            onKeyDown={handleOpen(false)}
+            onKeyDown={handleOpenDrawer(false)}
           >
             <Box
               sx={{
@@ -86,7 +86,7 @@ export default function TemporaryDrawer() {
               )}
             </Box>
             <Box sx={{ p: 1 }}>
-              <Button variant="text" sx={{ ml: 1, width: 80 }} onClick={handleOpen(false)}>
+              <Button variant="text" sx={{ ml: 1, width: 80 }} onClick={handleOpenDrawer(false)}>
                 Close
               </Button>
             </Box>

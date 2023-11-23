@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { ListToggler } from "./ListToggle.styled";
-import { ListToggleProps } from "../../constants/types";
+import { ListToggleProps, ButtonListType } from "../../constants/types";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import {
   selectFilteredCharData,
@@ -20,7 +20,7 @@ export const ListToggle: FC<ListToggleProps> = ({ listViewing }) => {
   const conditionLoc = filtredCharData.length > 0 || episodesData.length > 0;
   const conditionEpi = locationsData.length > 0 || filtredCharData.length > 0;
 
-  const buttonList = [
+  const buttonList: ButtonListType[] = [
     { name: "Characters", data: filtredCharData, condition: conditionChar, spec: "char" },
     { name: "Locations", data: locationsData, condition: conditionLoc, spec: "loc" },
     { name: "Episodes", data: episodesData, condition: conditionEpi, spec: "epi" },

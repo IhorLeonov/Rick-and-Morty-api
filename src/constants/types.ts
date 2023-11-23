@@ -93,43 +93,40 @@ export interface FabProps {
   listViewing: string;
 }
 
+export interface MainStateData {
+  characterData: Character | null;
+  charactersData: Character[];
+  filteredCharData: Character[];
+  locationsData: Location[];
+  episodesData: Episode[];
+  charactersPage: number;
+  filteredCharPage: number;
+  locationsPage: number;
+  episodesPage: number;
+  charactersPages: number;
+  filteredCharPages: number;
+  locationsPages: number;
+  episodesPages: number;
+}
+
+export type ListViewType = "all" | "char" | "loc" | "epi";
+
 export interface MainState {
   isLoading: boolean;
   error: string | null;
   inputValues: FormInputValues;
-  listView: string;
-  data: {
-    charactersData: Character[];
-    characterData: Character | null;
-    filteredCharData: Character[];
-    locationsData: Location[];
-    episodesData: Episode[];
-    charactersPage: number;
-    filteredCharPage: number;
-    locationsPage: number;
-    episodesPage: number;
-    charactersPages: number;
-    filteredCharPages: number;
-    locationsPages: number;
-    episodesPages: number;
-  };
+  listView: ListViewType;
+  data: MainStateData;
 }
 
 export interface DataListsProps {
   listViewing: string;
-  data: {
-    charactersData: Character[];
-    characterData: Character | null;
-    filteredCharData: Character[];
-    locationsData: Location[];
-    episodesData: Episode[];
-    charactersPage: number;
-    filteredCharPage: number;
-    locationsPage: number;
-    episodesPage: number;
-    charactersPages: number;
-    filteredCharPages: number;
-    locationsPages: number;
-    episodesPages: number;
-  };
+  data: MainStateData;
+}
+
+export interface ButtonListType {
+  name: "Characters" | "Locations" | "Episodes";
+  data: Character[] | Location[] | Episode[];
+  condition: boolean;
+  spec: ListViewType;
 }
