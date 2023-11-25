@@ -21,7 +21,7 @@ This app provides you opportunities using The Rick and Morty API to view and fil
   
 ## Start development server:
 
-- git clone [https://rickandmortyapi.com](https://rickandmortyapi.com)
+- git clone [https://github.com/IhorLeonov/Rick-and-Morty-api](https://github.com/IhorLeonov/Rick-and-Morty-api)
 
 - npm install
 
