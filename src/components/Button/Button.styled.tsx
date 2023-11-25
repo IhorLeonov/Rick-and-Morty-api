@@ -14,7 +14,8 @@ export const Btn = styled.button`
   letter-spacing: 0.5px;
   text-transform: uppercase;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: ${({ theme }) => theme.colors.blue} !important;
   }
 `;

@@ -7,12 +7,12 @@ export const List = styled.div`
   display: flex;
   flex-direction: column;
 
-  :last-child {
+  & :last-child {
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
   }
 
-  :first-child {
+  & :first-child {
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
   }

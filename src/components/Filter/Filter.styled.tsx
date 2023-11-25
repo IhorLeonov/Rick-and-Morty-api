@@ -41,7 +41,8 @@ export const SelectButton = styled(Btn)`
   border-bottom: 1px solid black;
   text-transform: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     svg {
       fill: ${({ theme }) => theme.colors.blue};
     }

@@ -23,7 +23,8 @@ export const Wrapper = styled.div`
 `;
 
 export const Link = styled(RouterLink)`
-  &:hover h2 {
+  &:hover h2,
+  &:focus h2 {
     color: ${({ theme }) => theme.colors.orange};
   }
 `;

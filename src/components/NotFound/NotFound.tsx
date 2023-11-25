@@ -17,7 +17,8 @@ const Title = styled.h2`
 
 const StyledLink = styled(Link)`
   margin-top: 40px;
-  &:hover {
+  &:hover,
+  &:focus {
     color: ${({ theme }) => theme.colors.blue};
   }
 `;
