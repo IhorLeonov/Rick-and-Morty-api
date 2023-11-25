@@ -8,7 +8,7 @@ interface BackLinkProps {
 export const BackLink = ({ to }: BackLinkProps) => {
   return (
     <Link to={to}>
-      <Button styles={{ fontWeight: 500 }} text="Back" />
+      <Button style={{ fontWeight: 500 }}>Back</Button>
     </Link>
   );
 };

@@ -1,5 +1,16 @@
-import { Dispatch, SetStateAction } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  ReactNode,
+} from "react";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+
+export interface ButtonProps
+  extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+  children: ReactNode;
+}
 
 export interface Character {
   id?: string;

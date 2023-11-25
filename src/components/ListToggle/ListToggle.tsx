@@ -38,17 +38,18 @@ export const ListToggle: FC<ListToggleProps> = ({ listViewing }) => {
           <div key={name}>
             {data.length > 0 && condition && (
               <Button
-                styles={{
+                style={{
                   color: checkIsActive(spec),
                   height: 42,
                   minWidth: 126,
                   fontWeight: 500,
                   textTransform: "none",
                 }}
-                type={"button"}
+                type="button"
                 onClick={() => dispatch(setListView(spec))}
-                text={name}
-              ></Button>
+              >
+                {name}
+              </Button>
             )}
           </div>
         );

@@ -43,11 +43,9 @@ export const Filter: FC<FilterProps> = ({ setIsFilterApplied }) => {
   return (
     <>
       <FilterBox>
-        <Button
-          type={"button"}
-          text={isFilterOpen ? "Remove filter" : "Filter"}
-          onClick={handleRemoveFilter}
-        />
+        <Button type="button" onClick={handleRemoveFilter}>
+          {isFilterOpen ? "Remove filter" : "Filter"}
+        </Button>
         <Formik
           initialValues={initialValues}
           onSubmit={(values, actions) => {
@@ -65,7 +63,7 @@ export const Filter: FC<FilterProps> = ({ setIsFilterApplied }) => {
               )}
               <Title>Add key words to find</Title>
               {isFilterListOpen && <InputList filters={checkboxFilters} />}
-              <Button type="submit" text={"Find"} />
+              <Button type="submit">Find</Button>
             </FormikForm>
           )}
         </Formik>
