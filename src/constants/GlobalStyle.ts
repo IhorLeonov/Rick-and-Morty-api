@@ -59,8 +59,6 @@ html {
 }
 
 body {
-  max-width: 1440px;
-  min-height: 100vh;
   font-family: Roboto;
   font-weight: 400;
 }

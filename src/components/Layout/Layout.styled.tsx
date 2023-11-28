@@ -2,12 +2,14 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   width: 1440px;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export const MainSection = styled.section`
   position: relative;
-  display: flex;
-  flex-direction: column;
   padding: 24px 106px 15px 107px;
   min-height: 668px;
 
