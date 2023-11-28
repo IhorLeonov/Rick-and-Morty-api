@@ -1,6 +1,6 @@
-import { Footer, Link, Caption, LinkBox, Year, LogoImg } from "./Footer.styled";
+import { Footer, Link, Caption, LinkBox, Year } from "./Footer.styled";
 import { Icon } from "../../helpers/IconSelector";
-import logoImg from "../../assets/images/logo-incode.png";
+// import logoImg from "../../assets/images/logo-incode.png";
 import { FC } from "react";
 
 export const FooterSection: FC = () => {
