@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.grey};
   border-bottom-right-radius: 9px;
   border-top-right-radius: 9px;
-  overflow: scroll;
+  /* overflow: scroll; */
 `;
 
 export const Link = styled(RouterLink)`
