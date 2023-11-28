@@ -7,7 +7,7 @@ export const FooterSection: FC = () => {
   return (
     <Footer>
       <Caption>performed as part of a test case for the company</Caption>
-      <LogoImg src={logoImg} alt="Incode logo" />
+      {/* <LogoImg src={logoImg} alt="Incode logo" /> */}
       <LinkBox>
         <Link
           href="https://github.com/IhorLeonov/Rick-and-Morty-api"
