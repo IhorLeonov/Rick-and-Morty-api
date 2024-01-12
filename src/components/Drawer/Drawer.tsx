@@ -25,74 +25,72 @@ export default function TemporaryDrawer() {
 
   return (
     <div>
-      <>
-        <Drawer
-          anchor="right"
-          open={isDrawerOpen}
-          onClose={handleOpenDrawer(false)}
+      <Drawer
+        anchor="right"
+        open={isDrawerOpen}
+        onClose={handleOpenDrawer(false)}
+        sx={{
+          ".MuiDrawer-paper": {
+            height: 571,
+            borderRadius: "9px 0px 0px 9px",
+            top: "calc((100vh - 571px)/2)",
+            pb: 1,
+          },
+        }}
+      >
+        <Box
           sx={{
-            ".MuiDrawer-paper": {
-              height: 571,
-              borderRadius: "9px 0px 0px 9px",
-              top: "calc((100vh - 571px)/2)",
-              pb: 1,
-            },
+            width: 419,
+            display: "flex",
+            flexDirection: "column",
           }}
+          role="presentation"
+          onKeyDown={handleOpenDrawer(false)}
         >
           <Box
             sx={{
-              width: 419,
-              display: "flex",
-              flexDirection: "column",
+              height: 511,
+              padding: 2,
+              fontSize: 14,
+              lineheight: 1.5,
+              letterspacing: 0.1,
+              overflow: "scroll",
+              "& :nth-of-type(n)": {
+                mb: 2,
+              },
+              "& :last-child": {
+                mb: 0,
+              },
             }}
-            role="presentation"
-            onKeyDown={handleOpenDrawer(false)}
           >
-            <Box
-              sx={{
-                height: 511,
-                padding: 2,
-                fontSize: 14,
-                lineheight: 1.5,
-                letterspacing: 0.1,
-                overflow: "scroll",
-                "& :nth-of-type(n)": {
-                  mb: 2,
-                },
-                "& :last-child": {
-                  mb: 0,
-                },
-              }}
-            >
-              <Title>History</Title>
-              <Divider />
-              <Category>Character:</Category>
-              <Values>{historyData?.characters.join(", ")}</Values>
-              <Category>Location:</Category>
-              <Values>{historyData?.locations.join(", ")}</Values>
-              <Category>Episode:</Category>
-              <Values>{historyData?.episodes.join(", ")}</Values>
+            <Title>History</Title>
+            <Divider />
+            <Category>Character:</Category>
+            <Values>{historyData?.characters.join(", ")}</Values>
+            <Category>Location:</Category>
+            <Values>{historyData?.locations.join(", ")}</Values>
+            <Category>Episode:</Category>
+            <Values>{historyData?.episodes.join(", ")}</Values>
 
-              {historyData.actions.length > 0 && (
-                <>
-                  <Divider />
-                  <Values>
-                    Передивився інформацію що до:{" "}
-                    <span style={{ fontWeight: 500, fontStyle: "italic" }}>
-                      {historyData.actions.join(", ")}
-                    </span>
-                  </Values>
-                </>
-              )}
-            </Box>
-            <Box sx={{ p: 1 }}>
-              <Button variant="text" sx={{ ml: 1, width: 80 }} onClick={handleOpenDrawer(false)}>
-                Close
-              </Button>
-            </Box>
+            {historyData.actions.length > 0 && (
+              <>
+                <Divider />
+                <Values>
+                  Передивився інформацію що до:{" "}
+                  <span style={{ fontWeight: 500, fontStyle: "italic" }}>
+                    {historyData.actions.join(", ")}
+                  </span>
+                </Values>
+              </>
+            )}
           </Box>
-        </Drawer>
-      </>
+          <Box sx={{ p: 1 }}>
+            <Button variant="text" sx={{ ml: 1, width: 80 }} onClick={handleOpenDrawer(false)}>
+              Close
+            </Button>
+          </Box>
+        </Box>
+      </Drawer>
     </div>
   );
 }
