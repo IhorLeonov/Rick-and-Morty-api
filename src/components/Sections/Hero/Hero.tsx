@@ -1,8 +1,7 @@
 import { Hero, Title, Image } from "./Hero.styled";
-import bgImage from "../../assets/icons/rick-and-morty.svg";
-import { FC } from "react";
+import bgImage from "../../../assets/icons/rick-and-morty.svg";
 
-export const HeroSection: FC = () => {
+export const HeroSection = () => {
   return (
     <Hero>
       <Title>The Rick and Morty API</Title>

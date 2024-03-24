@@ -1,10 +1,9 @@
-import { FC } from "react";
 import { Wrapper } from "./PagePagination.styled";
 import { Pagination } from "@mui/material";
 import { PagePaginationProps } from "../../constants/types";
 import { useAppDispatch } from "../../redux/store";
 
-export const PagePagination: FC<PagePaginationProps> = ({ pageQuantity, page, setPage }) => {
+export const PagePagination = ({ pageQuantity, page, setPage }: PagePaginationProps) => {
   const dispatch = useAppDispatch();
   if (pageQuantity < 1) return;
 

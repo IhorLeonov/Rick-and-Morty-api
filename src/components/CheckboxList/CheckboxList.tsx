@@ -1,9 +1,9 @@
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { FilterList, FilterItem } from "./CheckboxList.styled";
-import { FC, ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import { CheckboxListProps } from "../../constants/types";
 
-export const CheckboxList: FC<CheckboxListProps> = ({ filters, setFilters }) => {
+export const CheckboxList = ({ filters, setFilters }: CheckboxListProps) => {
   const filterList = ["Character", "Location", "Episodes"];
 
   const handleFilterChange = (event: ChangeEvent<HTMLInputElement>) => {

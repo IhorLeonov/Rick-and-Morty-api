@@ -19,7 +19,6 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.grey};
   border-bottom-right-radius: 9px;
   border-top-right-radius: 9px;
-  /* overflow: scroll; */
 `;
 
 export const Link = styled(RouterLink)`
@@ -57,6 +56,7 @@ export const Label = styled.p`
   color: ${({ theme }) => theme.colors.lightGrey};
   font-weight: 500;
   line-height: 1.7;
+  font-size: 15px;
 `;
 
 export const Caption = styled.p`

@@ -102,6 +102,8 @@ export const getEpisodes = createAsyncThunk(
         query: GET_EPISODES,
         variables: { page, name, episode: episode },
       });
+      console.log(res.data);
+
       return res.data;
     } catch (err) {
       const error = err as AxiosError<string>;

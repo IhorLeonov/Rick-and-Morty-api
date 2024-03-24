@@ -1,13 +1,12 @@
 import { Footer, Link, Caption, LinkBox, Year } from "./Footer.styled";
-import { Icon } from "../../helpers/IconSelector";
+import { Icon } from "../../../helpers/IconSelector";
 // import logoImg from "../../assets/images/logo-incode.png";
-import { FC } from "react";
 
-export const FooterSection: FC = () => {
+export const FooterSection = () => {
   return (
     <Footer>
       <Caption>performed as part of a test case for the company</Caption>
-      {/* <LogoImg src={logoImg} alt="Incode logo" /> */}
+      {/* <LogoImg src={logoImg} alt="logo" /> */}
       <LinkBox>
         <Link
           href="https://github.com/IhorLeonov/Rick-and-Morty-api"

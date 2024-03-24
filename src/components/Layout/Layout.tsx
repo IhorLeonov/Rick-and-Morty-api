@@ -1,8 +1,8 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { FC, Suspense, useEffect } from "react";
-import { FooterSection } from "../Footer/Footer";
-import { HeaderSection } from "../Header/Header";
-import { HeroSection } from "../Hero/Hero";
+import { Suspense, useEffect } from "react";
+import { FooterSection } from "../Sections/Footer/Footer";
+import { HeaderSection } from "../Sections/Header/Header";
+import { HeroSection } from "../Sections/Hero/Hero";
 import { Wrapper, MainSection } from "./Layout.styled";
 import TemporaryDrawer from "../Drawer/Drawer";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
@@ -11,10 +11,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { resetError } from "../../redux/mainSlice";
 import { FAB } from "../Fab/Fab";
-import { Spinner } from "../Spinner/Spinner";
+import { Loader } from "../Loader/Loader";
 import { useSelector } from "react-redux";
 
-export const Layout: FC = () => {
+export const Layout = () => {
   const error = useAppSelector(selectError);
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -44,7 +44,7 @@ export const Layout: FC = () => {
     return () => {
       dispatch(resetError());
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
 
   return (
@@ -66,7 +66,7 @@ export const Layout: FC = () => {
       <FooterSection />
       <TemporaryDrawer />
       <ToastContainer />
-      {isLoading && <Spinner />}
+      {isLoading && <Loader />}
     </Wrapper>
   );
 };

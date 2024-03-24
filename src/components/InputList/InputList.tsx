@@ -1,8 +1,7 @@
-import { FC } from "react";
 import { Input, List } from "./InputList.styled";
 import { InputListProps } from "../../constants/types";
 
-export const InputList: FC<InputListProps> = ({ filters }) => {
+export const InputList = ({ filters }: InputListProps) => {
   const character = filters.includes("Character");
   const location = filters.includes("Location");
   const episodes = filters.includes("Episodes");

@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { CharacterList } from "../CharacterList/CharacterList";
 import { LocationList } from "../LocationList/LocationList";
 import { EpisodeList } from "../EpisodeList/EpisodeList";
@@ -13,7 +12,7 @@ import { selectIsLoading } from "../../redux/selectors";
 import { DataListsProps } from "../../constants/types";
 import { Wrapper } from "./DataLists.styled.tsx";
 
-export const DataLists: FC<DataListsProps> = ({ data, listViewing }) => {
+export const DataLists = ({ data, listViewing }: DataListsProps) => {
   const isLoading = useAppSelector(selectIsLoading);
 
   return (

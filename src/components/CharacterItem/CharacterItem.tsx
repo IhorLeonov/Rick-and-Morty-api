@@ -11,10 +11,10 @@ import {
   Caption,
   Indicator,
 } from "./CharacterItem.styled";
-import { FC } from "react";
+
 import { useLocation } from "react-router";
 
-export const CharacterItem: FC<Character> = ({
+export const CharacterItem = ({
   id,
   name,
   image,
@@ -22,7 +22,7 @@ export const CharacterItem: FC<Character> = ({
   species,
   location,
   episode,
-}) => {
+}: Character) => {
   const routLocation = useLocation();
 
   return (
@@ -36,7 +36,7 @@ export const CharacterItem: FC<Character> = ({
           <Indicator style={{ backgroundColor: checkStatus(status) }} />
           {status} - {species}
         </Status>
-        <Label style={{ fontSize: 15 }}>Last known location:</Label>
+        <Label>Last known location:</Label>
         <Caption>{location.name}</Caption>
         <Label>First seen in:</Label>
         <Caption>{episode[0].name}</Caption>

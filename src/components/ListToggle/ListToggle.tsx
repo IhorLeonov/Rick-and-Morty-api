@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { ListToggler } from "./ListToggle.styled";
 import { ListToggleProps, ButtonListType } from "../../constants/types";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
@@ -10,7 +9,7 @@ import {
 import { Button } from "../Button/Button";
 import { setListView } from "../../redux/mainSlice";
 
-export const ListToggle: FC<ListToggleProps> = ({ listViewing }) => {
+export const ListToggle = ({ listViewing }: ListToggleProps) => {
   const filtredCharData = useAppSelector(selectFilteredCharData);
   const locationsData = useAppSelector(selectLocationsData);
   const episodesData = useAppSelector(selectEpisodesData);

@@ -33,10 +33,10 @@ const Title = styled.h2`
   font-size: 30px;
 `;
 
-export const Spinner = () => {
+export const Loader = () => {
   return (
     <Box>
-      <StyledImg src={img} alt="spinner" />
+      <StyledImg src={img} alt="loader" />
       <Title>Loading...</Title>
     </Box>
   );

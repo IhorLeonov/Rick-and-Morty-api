@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { FC, useState } from "react";
+import { useState } from "react";
 import Fab from "@mui/material/Fab";
 import { CiCircleAlert } from "react-icons/ci";
 import { PiDownloadSimpleLight } from "react-icons/pi";
@@ -16,7 +16,7 @@ import {
   selectLocationsData,
 } from "../../redux/selectors";
 
-export const FAB: FC<FabProps> = ({ styles, disabled, listViewing }) => {
+export const FAB = ({ styles, disabled, listViewing }: FabProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 

@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { CardListProps } from "../../constants/types";
 import { PagePagination } from "../PagePagination/PagePagination";
 import {
@@ -12,7 +11,7 @@ import {
 import { List } from "../CharacterList/CharacterList.styled";
 import image from "../../assets/images/episode-img.png";
 
-export const EpisodeList: FC<CardListProps> = ({ epiData, pages, page, setPage }) => {
+export const EpisodeList = ({ epiData, pages, page, setPage }: CardListProps) => {
   return (
     <>
       <List>

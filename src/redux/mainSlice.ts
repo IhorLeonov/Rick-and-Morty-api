@@ -14,6 +14,13 @@ const handleSameFulfilled = (state: MainState) => {
   state.error = null;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const setErrorMessage = (filterObj: any, filterName: string, state: MainState) => {
+  if (filterObj.info.pages < 1) {
+    state.error = `No data for your ${filterName} request`;
+  }
+};
+
 const initialState = {
   isLoading: false,
   error: null,
@@ -64,35 +71,33 @@ const mainSlice = createSlice({
       .addCase(getAllCharacters.fulfilled, (state, action) => {
         const { characters } = action.payload.data;
         handleSameFulfilled(state);
+
         state.data.charactersData = characters.results;
         state.data.charactersPages = characters.info.pages;
       })
       .addCase(getFilteredChars.fulfilled, (state, action) => {
         const { characters } = action.payload.data;
         handleSameFulfilled(state);
+
         state.data.filteredCharData = characters.results;
         state.data.filteredCharPages = characters.info.pages;
-        if (characters.info.pages < 1) {
-          state.error = "No data for your characters request";
-        }
+        setErrorMessage(characters, "characters", state);
       })
       .addCase(getLocations.fulfilled, (state, action) => {
         const { locations } = action.payload.data;
         handleSameFulfilled(state);
+
         state.data.locationsData = locations.results;
         state.data.locationsPages = locations.info.pages;
-        if (locations.info.pages < 1) {
-          state.error = "No data for your locations request";
-        }
+        setErrorMessage(locations, "locations", state);
       })
       .addCase(getEpisodes.fulfilled, (state, action) => {
         const { episodes } = action.payload.data;
         handleSameFulfilled(state);
+
         state.data.episodesData = episodes.results;
         state.data.episodesPages = episodes.info.pages;
-        if (episodes.info.pages < 1) {
-          state.error = "No data for your episodes request";
-        }
+        setErrorMessage(episodes, "episodes", state);
       })
       .addCase(getCharacter.fulfilled, (state, action) => {
         const { character } = action.payload.data;

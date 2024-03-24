@@ -1,16 +1,5 @@
-import {
-  Dispatch,
-  SetStateAction,
-  ButtonHTMLAttributes,
-  DetailedHTMLProps,
-  ReactNode,
-} from "react";
+import { Dispatch, SetStateAction } from "react";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
-
-export interface ButtonProps
-  extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  children: ReactNode;
-}
 
 export interface Character {
   id?: string;
@@ -106,14 +95,17 @@ export interface FabProps {
 
 export interface MainStateData {
   characterData: Character | null;
+
   charactersData: Character[];
   filteredCharData: Character[];
   locationsData: Location[];
   episodesData: Episode[];
+
   charactersPage: number;
   filteredCharPage: number;
   locationsPage: number;
   episodesPage: number;
+
   charactersPages: number;
   filteredCharPages: number;
   locationsPages: number;

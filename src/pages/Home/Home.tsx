@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ListToggle } from "../../components/ListToggle/ListToggle";
 import { Filter } from "../../components/Filter/Filter";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
@@ -12,13 +12,15 @@ import {
 import { DataLists } from "../../components/DataLists/DataLists";
 import { setListView } from "../../redux/mainSlice";
 
-const Home: FC = () => {
+const Home = () => {
   const [isFilterApplied, setIsFilterApplied] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
   const inputValues = useAppSelector(selectInputValues);
   const data = useAppSelector(selectData);
   const listView = useAppSelector(selectListView);
+
+  console.log("inputValues in Home", inputValues);
 
   // getting all characters
   useEffect(() => {

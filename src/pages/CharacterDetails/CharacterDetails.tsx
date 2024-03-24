@@ -13,8 +13,9 @@ import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { getCharacter } from "../../redux/operations";
 import { selectCharacterData, selectHistoryData, selectIsLoading } from "../../redux/selectors";
 import { checkStatus } from "../../helpers/helpers";
-import { BackLink } from "../../components/BackBtn/BackBtn";
 import { setHistoryData } from "../../redux/historySlice";
+import { Button } from "../../components/Button/Button";
+import { Link } from "react-router-dom";
 
 const Character = () => {
   const { id } = useParams();
@@ -55,7 +56,9 @@ const Character = () => {
 
     return (
       <>
-        <BackLink to={backLinkHref} />
+        <Link to={backLinkHref}>
+          <Button style={{ fontWeight: 500 }}>Back</Button>
+        </Link>
         <div style={{ display: "flex", paddingTop: 20, height: 807 }}>
           <Image style={{ width: 595, height: 572 }} src={image} alt="Character picture" />
           <Wrapper style={{ width: "100%", height: 572, paddingLeft: 42, paddingRight: 42 }}>

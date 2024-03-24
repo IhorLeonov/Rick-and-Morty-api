@@ -4,7 +4,7 @@ import { CheckboxList } from "../CheckboxList/CheckboxList";
 import { InputList } from "../InputList/InputList";
 import { FilterBox, FormikForm, SelectButton, Title } from "./Filter.styled";
 import { FilterProps, FormInputValues } from "../../constants/types";
-import { FC, useState } from "react";
+import { useState } from "react";
 import { initialValues } from "../../constants/values";
 import { Backdrop } from "@mui/material";
 import { setInputValues, resetData, setListView } from "../../redux/mainSlice";
@@ -14,7 +14,7 @@ import { useAppDispatch } from "../../redux/store";
 import { Button } from "../Button/Button";
 import { getFilteredHistory } from "../../helpers/helpers";
 
-export const Filter: FC<FilterProps> = ({ setIsFilterApplied }) => {
+export const Filter = ({ setIsFilterApplied }: FilterProps) => {
   const dispatch = useAppDispatch();
   const [checkboxFilters, setCheckboxFilters] = useState<string[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
@@ -32,12 +32,18 @@ export const Filter: FC<FilterProps> = ({ setIsFilterApplied }) => {
     dispatch(resetData());
   };
 
+  const resetFilter = () => {}; // !!!!!!!!!
+
   const handleSubmit = (values: FormInputValues) => {
     const history = getFilteredHistory(values);
+    console.log("values on Submit", values);
+
     dispatch(setHistoryData(history));
     dispatch(setInputValues(values));
     setIsFilterListOpen(false);
     setIsFilterApplied(true);
+
+    resetFilter();
   };
 
   return (
@@ -46,6 +52,7 @@ export const Filter: FC<FilterProps> = ({ setIsFilterApplied }) => {
         <Button type="button" onClick={handleRemoveFilter}>
           {isFilterOpen ? "Remove filter" : "Filter"}
         </Button>
+
         <Formik
           initialValues={initialValues}
           onSubmit={(values, actions) => {
@@ -58,6 +65,7 @@ export const Filter: FC<FilterProps> = ({ setIsFilterApplied }) => {
               <SelectButton type="button" onClick={handleCloseList}>
                 Select Item <Icon name="v-icon" width={14} height={14} />
               </SelectButton>
+
               {isFilterListOpen && (
                 <CheckboxList filters={checkboxFilters} setFilters={setCheckboxFilters} />
               )}
@@ -68,6 +76,7 @@ export const Filter: FC<FilterProps> = ({ setIsFilterApplied }) => {
           )}
         </Formik>
       </FilterBox>
+
       <Backdrop sx={{ zIndex: 1 }} open={isFilterListOpen} onClick={handleCloseList} />
     </>
   );
